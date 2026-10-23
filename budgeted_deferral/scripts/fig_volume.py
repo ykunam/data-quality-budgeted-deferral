@@ -5,7 +5,7 @@ import numpy as np, pandas as pd, matplotlib.pyplot as plt
 from dqd.style import setup, PAL, INK2
 setup()
 d = pd.read_csv("results/e6_volume.csv.gz")
-M = [("confidence", "Confidence", PAL[3]), ("l2d_ce", "L2D-CE", PAL[1]), ("sh_quality", "Single-head (draft)", PAL[6]),
+M = [("confidence", "Confidence", PAL[3]), ("l2d_ce", "L2D-CE", PAL[1]), ("l2d_ova", "L2D-OvA", PAL[4]),
      ("2h_prob", "Two-head, prob. only", PAL[2]), ("2h_quality", "Two-head, quality-aware", PAL[0])]
 fig, axs = plt.subplots(1, 2, figsize=(6.4, 2.5), sharey=True)
 for ax, ds, ttl in zip(axs, ["default", "hmeq"], ["(a) Default of credit-card clients", "(b) HMEQ (external, natural missingness)"]):
