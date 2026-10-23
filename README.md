@@ -6,6 +6,21 @@ Reproducibility package for **Data-Quality-Aware Knowledge-Based Systems for AI 
 
 Repository: https://github.com/ykunam/data-quality-budgeted-deferral (private author-review stage). Public archival deposit remains outstanding.
 
+## Revision v2 (October 2026)
+
+A substantially revised manuscript and a new, self-contained experiment package responding to eight improvement
+suggestions (published-method comparisons, decoupled reviewer models, domain-valid corruption, an external dataset,
+rule alternatives, managerial backlog outcomes, corrected statistics, refit cost sensitivity).
+
+- `manuscript_v2/`: revised manuscript (`manuscript_v2.tex`, `.pdf`, `.docx`), highlights, and `revision_notes.md`
+  mapping each suggestion to the change and the evidence. The revision is a full-length article; the v1 short
+  communication below is kept unchanged for reference.
+- `budgeted_deferral/`: code, seed-level results, tables, figures and tests for v2 (see its README).
+  It reimplements the v1 protocol (same splits logic, corruption, representation and hyperparameters) and extends it.
+  Under the original protocol it reproduces the v1 pattern; see manuscript Section 5.1.
+
+The v1 files (`experiment.py`, `results/`, `manuscript.tex`) are unchanged.
+
 ## Compact layout
 
 Two Python files: `experiment.py` implements loading, split isolation, training, corruption, routing, evaluation and reporting; `test_experiment.py` checks the scientific invariants. `manuscript.tex` is the editable manuscript. `results/` contains the numerical evidence and the two figures. There is no web app, package scaffold, notebook, or GPU dependency.
