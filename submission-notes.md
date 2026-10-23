@@ -1,270 +1,502 @@
-# Editorial compliance and reproducibility audit
+# Reference, compliance and scientific audit
 
-Editorial and reproducibility audit
+Reference, compliance and scientific audit
 
 Knowledge-Based Systems | Short Communication | 23 October 2026
 
-Recommendation: MAJOR REVISIONS before submission. The manuscript is materially clearer and locally reproducible, but the evidence does not yet establish a strong methodological advance or real managerial effectiveness. Formatting corrections do not resolve the scientific and administrative blockers below.
+Recommendation: MAJOR REVISIONS before submission. This revision strengthens the literature foundation and citation precision. It does not change the experiment, establish greater method novelty, or convert simulated reviewer evidence into human evidence.
 
-Delivered revision
+What changed
 
-The edited manuscript is 10 pages, with exactly two figures and two editable tables. Double spacing now extends to captions, table text, and references. The editable LaTeX source and separate vector artwork are included in the updated compact project. The original uploaded PDF and all 16 original tracked files were preserved before editing. The requested private GitHub repository now holds the reviewed project.
+The manuscript now cites 33 sources: 21 journal articles, seven conference papers, two preprints, and three datasets. The 21 journal articles comprise two MDPI, six IEEE, and thirteen Elsevier articles. All 21 journals/papers in that selected set have a source-matched journal record showing SJR 2025 best quartile Q1. The 21 articles span 17 journals; journal ratings are not ratings of individual papers.
 
-Scientific and editorial improvements applied
+New citations support specific statements about governance, human oversight, rejection/calibration, data management, explainability, credit decision support and organizational implications. Essential original technical/data citations remain. The former Si banking-governance reference was replaced by closer governance sources within the requested publisher set; this is not a finding that the former paper was invalid.
 
-• Clarified the gap as a fixed-batch integration and evaluation question; retained the distinction from selective prediction, learned deferral, training-query budgets, and queue control.
+Verification limits that must remain visible
 
-• Defined the asymmetric loss, expected reviewer loss and single review fee; specified quality denominators, training bounds, feature imputation/scaling/clipping, label coding, baseline scores and estimator defaults.
+Q1 here means the journal’s 2025 SJR best quartile across its assigned subject categories, using SCImago records derived from Scopus data. It does not mean Q1 in every category, in the paper’s publication year, or in JCR. Search-indexed SCImago records supplied the year/rating; live journal-rank pages returned HTTP 403. Category-specific quartile histories and authenticated Scopus source profiles were not independently inspected. No stronger ranking certification is claimed.
 
-• Retained conditional allocation exactness only when mandatory demand is feasible, and separated overload holding guarantees from cost optimality.
+Publication metadata were checked against Crossref publisher deposits and publisher/final-issue records. Accessible abstracts, publisher records and author-hosted sources were used for scope checks. Full texts of all 33 sources were not read end-to-end. No exhaustive plagiarism, retraction-database or literature-search certification is claimed.
 
-• Explained the small, mixed routing gains, the competitive simple baselines, actual review usage and the cost of held cases.
+Unchanged evidence
 
-• Added the simulator’s dependence on the proposed quality inputs as an explicit limitation. Reduced repetition and sharpened the managerial interpretation without changing experimental numbers.
-
-Key unchanged evidence
-
-| Primary comparison / quantity | Verified value |
+| Quantity | Verified value |
 | --- | --- |
-| Quality-aware / feature-aware mean cost | 0.6055 / 0.6067 |
-| Feature minus quality cost difference | 0.0012; descriptive interval [−0.0022, 0.0046] |
-| Confidence / cost-risk mean cost | 0.6028 / 0.6051 |
-| Proposed actual review / hold fractions | 19.85% / 11.80% across primary conditions |
+| Primary quality-aware / feature-aware costs | 0.6055 / 0.6067 |
+| Paired feature minus quality difference | 0.0012; descriptive interval [−0.0022, 0.0046] |
+| Confidence / cost-risk costs | 0.6028 / 0.6051 |
+| Proposed primary review / hold | 19.85% / 11.80% |
+| Integrity checks | 16 invariant tests; 44 numerical/source checks passed |
 
-Primary = equal weighting of three datasets and four non-clean conditions, quality-dependent simulated reviewer, 20% maximum capacity. Intervals describe overlapping repeated splits; they are not independent population inference.
+Primary comparison: three datasets, four non-clean conditions, quality-dependent simulated reviewer, 20% maximum capacity; all final seeds 2–21 retained. Split intervals are descriptive because observations are reused.
 
-1  Authority and reference-document analysis
+1  Template analysis and compliance checklist
 
 
-The complete supplied official KBS guide (20 PDF pages; printed 23 October 2026) is the primary authority. The supplied Thota DOCX is an example of presentation only. No official manuscript-template source file was supplied. Its described acceptance status was not independently authenticated.
+The complete supplied official 20-page KBS guide controls. The supplied Thota DOCX informs presentation only: operational problem, explicit rules/objective, matched experiments, ablation, sensitivity and limitations. It is a Letter document with 0.75-inch margins, Normal Times New Roman 12 pt, five Word tables including equation/algorithm constructs, three labeled research tables, one inline image and 35 references. Its stated acceptance was not independently verified. No official template source file was supplied.
 
-| Element | Official guide / editorial application | Accepted DOCX observation |
+| Guide requirement / authority | Status | Verified application |
 | --- | --- | --- |
-| Article structure | Numbered sections; logical scientific sequence. No mandatory literal IMRaD heading set found. | Abstract; keywords; Introduction; Proposed framework; Experimental Design; Results and Discussion; Limitations; Conclusion; declarations; references. |
-| Layout | Editable .tex or .doc/.docx. Word single column; LaTeX double column permitted. Elsevier LaTeX template encouraged, not mandatory (p.9). | Letter page, 0.75-inch margins; Normal style Times New Roman 12 pt; no explicit global double-spacing value in Normal style. |
-| Mechanism and evidence | Explain model, objective, assumptions, comparisons and inferential limits. Applied to present code, not transferred from reference. | Explicit rule model and algorithm; matched baselines, ablation, tradeoff, sensitivity and limitations. |
-| Tables and figures | Editable tables, numbered captions/citations, no vertical rules or shading; separate artwork (pp.11–12). | Five Word tables, including equation/algorithm constructs; three labeled research tables; one inline image. Counts are not journal limits. |
-| End matter | Data statement; applicable author, funding, conflict and AI-use declarations; verified references. | Data Availability, Competing Interest, GenAI, Funding, CRediT and 35 references. |
-| Originality | No transfer of reference wording, domain findings, data, figures or contributions. | UAV/quantum-inspired scenario is unrelated to this credit-benchmark study; none of its numerical evidence is used. |
+| Short Communication: ≤10 double-spaced pages including tables/figures (p.3) | PASS | Final manuscript 10 pages including references; 11 pt body, double-spaced text/captions/table text/references; 0.75-inch margins. Guide does not prescribe font size or margins. Repeat after final declarations. |
+| Editable source; LaTeX template encouraged (p.9) | PASS | Editable manuscript.tex and results/tables.tex; PDF is a reading copy. The article class is a permitted editable LaTeX layout, not a claim of using an official .cls template. |
+| Title and author details (p.10) | Pending | Requested title retained. Name, affiliation, postal address and correspondence require author confirmation. |
+| Abstract ≤250 words; 1–7 keywords (p.10) | PASS | 169 abstract words under recorded counting; six keywords; no abstract citations. |
+| Highlights encouraged, 3–5 × ≤85 characters (p.10) | PASS | Five editable bullets; 78 / 75 / 59 / 76 / 75 characters excluding markers. |
+| Editable numbered equations/tables (p.11) | PASS | Three numbered display equations; exactly two editable tables; no vertical rules or shading; consecutive labels/citations. |
+| Separate artwork and captions (pp.11–12) | PASS | Exactly two empirical vector PDFs with embedded fonts and meaningful captions; graphics unchanged and numerically verified. |
+| Numbered scientific sections (p.14) | PASS | Introduction → Method → Experimental protocol → Results/discussion → Limitations → Conclusion → end matter → references. |
+| Actual references; numeric brackets in first-use order (pp.16–18) | PASS | 33 unique cited entries; no missing/unused keys; all 21 new journal entries have verified DOIs; preprints/data explicitly identified. |
 
-Applied structure
+No separate Short Communication word count, reference count, or numerical figure/table restriction was located in the supplied guide. The requested two-figure/two-table count is an author constraint, not an inferred journal limit.
 
-Title and author details → abstract → six keywords → 1 Introduction → 2 Method → 3 Experimental protocol → 4 Results and discussion → 5 Limitations → 6 Conclusion → availability → pending author declarations → AI-use statement → references. The sequence preserves a focused Short Communication and the actual study design.
-
-Verification boundary
-
-Direct access to the live ScienceDirect guide returned HTTP 403. Official search indexing corroborated the Short Communication page limit, but the live submission portal was not inspected. This report applies the supplied guide and flags portal-only fields as unverified. It does not infer current requirements from the accepted paper.
-
-Authoritative guide: https://www.sciencedirect.com/journal/knowledge-based-systems/publish/guide-for-authors
-
-2  Journal compliance checklist: manuscript
+2  Scientific and editorial assessment
 
 
-PASS = checked in the revised files. PENDING = verified requirement with an unfinished item. NOT SPECIFIED = no such restriction found in the supplied guide; not a guarantee about the live portal. Sources refer to the printed guide’s page numbers.
+Stronger literature narrative, bounded contribution
 
-| Requirement / authority | Status | Evidence and remaining action |
-| --- | --- | --- |
-| Scope: AI systems, decision support, data-driven optimization (p.2) | Scope match | Rule-conditioned deferral supports prediction and capacity-constrained decisions. Editorial significance remains uncertain; scope fit is not acceptance. |
-| Short Communication: ≤10 double-line-spaced pages including figures/tables (p.3) | PASS | Final PDF: 10 pages total, including end matter and references. Double-spaced text/captions/references and table rows. Recheck after author declarations are finalized. |
-| Separate word/reference/figure/table count limits | NOT SPECIFIED | No separate numerical limits located in the supplied guide. Exactly two figures and two tables meet the author’s requested count; that count is not attributed to KBS. |
-| Editable submission source (p.9) | PASS | manuscript.tex and results/tables.tex included. PDF is the reading copy, not the only source. Separate figure PDFs are provided. |
-| Title and author/correspondence details (p.10) | PENDING | Title retained. Name, affiliation, postal address and email present but require human confirmation before publication. |
-| Abstract ≤250 words; 1–7 keywords (p.10) | PASS | 169 words under the recorded tokenization; six English keywords. Abstract is self-contained and has no citations. |
-| Numbered section sequence (p.14) | PASS | Six numbered sections; all figures, tables and equations have labels and in-text references. |
-| Editable mathematical notation (p.11) | PASS | Three numbered display equations plus inline definitions. Decision threshold, dimensions, costs, constraints and gain target cross-checked against implementation. |
-| Table presentation (p.11) | PASS | Exactly two editable LaTeX tables; consecutive captions; no vertical rules or shading. Numeric precision and percentage denominators specified. |
-| Figure presentation (pp.11–12) | PASS | Two separate vector PDFs with embedded TrueType fonts, sequential captions and citations; vector output has no raster DPI requirement. All final manuscript pages visually checked. |
+The introduction now connects organizational/data governance to the narrower fixed-batch allocation question, explicitly recognizes rejection/deferral prior art, and relates the study to existing KBS credit decision support. Citations appear at supported claims; neither publisher reputation nor reference count is offered as evidence of novelty. The experiment remains an integration/comparative study.
 
-Spacing correction
+Methods and equations checked against implementation
 
-The original draft used single-spacing environments for tables and references and compact captions. These exceptions were removed or revised. The 10-page result therefore reflects the supplied double-line-spacing instruction more closely than the original nine-page reading copy.
+The 1/6 threshold follows from costs FN=5, FP=1. Expected reviewer loss is (1+4y)e(q), with the 0.05 fee once; holding costs 1.5. Quality fractions use all predictors as denominator, with missing values excluded from out-of-range flags. Bounds, median imputation, scaling, clipping, gain inputs, stable ordering, calibration partitions and estimator maxima/defaults match code. Label-dependent fitting/evaluation is separated from label-free routing.
 
-3  Journal compliance checklist: submission materials
+For feasible mandatory load, top positive optional gains minimize estimated cost. The gain-error bound is conditional, not a learned-model consistency guarantee. Under overload the implementation attains the minimum necessary hold count, but automation-to-review gain ranking does not guarantee minimum review-versus-hold cost. This caveat is retained; no theorem or experimental conclusion was strengthened.
 
+Results and business interpretation
 
-| Material / authority | Status | Verification or required action |
-| --- | --- | --- |
-| Highlights encouraged: 3–5 bullets, ≤85 characters each (p.10) | PASS | Separate editable highlights.txt: five bullets, 78 / 75 / 59 / 76 / 75 characters excluding bullet markers. Wording preserves negative comparisons. |
-| Graphical abstract | NOT SPECIFIED | No graphical-abstract requirement located in the supplied KBS guide. No third image was added. Confirm whether the live portal requests one; generic Elsevier guidance does not establish a KBS requirement. |
-| Research-data deposit, citation and linking: Option C (p.13) | PENDING | All generated metrics and software are in the package, but no appropriate public archival deposit/link is verified. Original UCI DOIs do not archive this study’s generated evidence. |
-| Data availability statement (p.13) | PENDING | Transparent draft statement is present. Replace the missing code/archive wording with actual versioned links after deposit; do not claim an unavailable archive exists. |
-| Funding declaration (pp.5–6) | PENDING | Actual funding and sponsor involvement have not been confirmed. No unsupported “no funding” assertion was inserted. |
-| Competing interests / declarations tool (pp.5–6) | PENDING | Author must supply truthful details and produce the requested separate declaration document using Elsevier’s declarations tool. Not supplied or certified in this draft. |
-| Author contributions and human responsibility (pp.14–15) | PENDING | Author must confirm actual contributions, affiliation, correspondence, institutional approval, originality and exclusive submission. AI is not an author. |
-| AI-use disclosure and figure provenance (pp.6–7, 12) | Draft present | Actual assistance is disclosed; figures derive from executable analysis rather than generated artwork. Author review/adoption remains explicitly unconfirmed; finalize truthful declaration after review. |
-| Supplementary / reproducibility materials (pp.12–13) | Available locally | Compact source/results ZIP contains 16 project files. Code, results, manifest and audit sample are present. Upload classification and public accessibility remain unverified. |
-| Remote GitHub repository / code release | Private repo created | Owner ykunam and private visibility verified. Repository: github.com/ykunam/data-quality-budgeted-deferral. The compact reviewed project is uploaded; public release and archival identifier remain outstanding. |
-| Submission-system fields / permissions (p.18) | UNVERIFIED | No journal submission performed. Live portal article-type selection, generated forms and author attestations must be checked at submission. |
+The approximately 0.20% relative cost reduction versus feature-aware gain is small; its descriptive split interval crosses zero. Confidence/cost-risk baselines are competitive or better. Under severe corruption, holding reaches about 47%. Zero rule violations follow from construction and do not prove fair, lawful or appropriate policy. References on human–AI symbiosis and AI capability establish context; no causal organizational benefit, financial return or actual managerial behavior is inferred.
 
-No cover-letter, graphical-abstract, or reference-count requirement has been invented. Any submission-specific request shown by the portal takes precedence over absence from the supplied artifact.
+Unresolved scientific issues
 
-4  Scientific and implementation consistency
+A stronger journal submission still needs a demonstrated methodological advance or narrower venue positioning; direct published-method comparisons; realistic/domain-valid corruption; reviewer evidence or defensible external validation; and policy/cost sensitivity with retraining. The quality-dependent simulator uses the same quality fractions supplied to the proposed model and full expected reviewer-loss targets, potentially favoring the representation. Reused benchmark observations are not independent replication.
+
+Primary metadata corrections
+
+Chai et al.: final issue is IEEE TKDE 35(5), 4646–4667 (2023), rather than the Crossref early-access placeholder 1–1 (2022). Lu et al.: final issue is IEEE TKDE 31(12), 2346–2363 (2019), despite the 2018 DOI/early-access record. Artelt et al.: the cited journal version is Neurocomputing 558, 126722 (2023), not the similarly named 2022 ESANN paper. Papagiannidis is the first author of the governance review, not Mikalef.
+
+3  Verification of two figures and two tables
 
 
-Method and notation
-
-The automated threshold 1/6 follows from false-negative cost 5 and false-positive cost 1. Automated loss is (1+4y) times the error indicator; simulated reviewer loss is (1+4y)e(q), plus the review fee 0.05 once. Holding incurs 1.5 per record. The manuscript now exposes these definitions and the service-first constraint that makes the feasible allocation argument valid.
-
-Quality uses missing and out-of-bound fractions over all predictors. Bounds use training 1st/99th percentiles and a range floor of one. Feature-aware gain uses training-median imputation, centering/scaling and clipping; the base predictor handles missing values directly. HGB iteration settings are maximum counts, with scikit-learn defaults including automatic early stopping. Labels are absent from routing inputs.
-
-What the conditional property establishes
-
-When mandatory demand fits the budget, top-positive optional gains minimize estimated cost under the stated constraints. The elementary excess-cost bound assumes uniformly bounded gain error; it is not a fitted-model guarantee. When overloaded, the code holds the minimum necessary number of mandatory cases; ranking them by automation-to-review gain is not asserted to minimize review-versus-hold cost. Exhaustive small-problem tests check the feasible allocation property.
-
-Numerical and reproducibility audit
-
-| Check | Outcome |
+| Item | Source and completed verification |
 | --- | --- |
-| Data provenance | All three cached UCI releases match pinned SHA-256 values and manifest dimensions; default ID excluded; German numeric release distinguished from the 20-attribute original. |
-| Split / result integrity | 36,000 unique, balanced rows: 3 datasets × 20 seeds × 5 conditions × 3 profiles × 4 budgets × 10 methods. These are repeated measurements, not 36,000 independent experiments. |
-| Capacity / governance | All constrained rows respect capacity and have zero forbidden automation; held fractions match mandatory overflow. A label-free audit batch contains no prohibited mandatory automation. |
-| Testing / unchanged outputs | 16 scientific invariant tests passed. Source code, dependency pins, manifest, CSVs, tables and figure files match their pre-edit hashes. Primary summaries independently recomputed to rounding precision. |
-| Reproducibility limit | Pinned versions, commands, data hashes and all seeds are recorded. Local verification is not independent replication, external validation, or a guarantee across hardware/software versions. |
+| Figure 1 | Five constrained methods × four capacities = 20 means; three datasets/four non-clean conditions, quality-dependent simulated reviewer. CSV regeneration reproduces the existing PNG pixel-for-pixel. Vector PDF and embedded font verified; band = mean ±1.96 seed-level standard errors, not population uncertainty. |
+| Figure 2 | All 15 condition/profile combinations at 20% capacity, averaged across three datasets. Positive feature minus quality difference favors quality gain. Paired split-seed t intervals and exact regenerated artwork checked; no favorable subset selection. |
+| Table 1 | All 40 numeric entries (ten methods × four columns) independently recomputed from metrics.csv at displayed precision. Macro weighting and unconstrained diagnostic rows accurately described. |
+| Table 2 | All 32 outcome entries (eight rows × four columns) independently recomputed. Quality Off means probability-only gain. Review/hold/violation are percentages of all records. The 2×2 quality/rule ablation is correctly labeled. |
 
-Novelty and interpretive assessment
+Source and numerical integrity
 
-The defensible contribution is an auditable integration and comparative stress test. Explicit rules are a small knowledge base; their zero violation rate is guaranteed by construction. The quality-aware cost reduction against feature-aware gain is about 0.20%, its descriptive interval crosses zero, and simpler baselines can be better. A methodological novelty claim still requires stronger comparison with related published methods and a clearer demonstrated advance.
+The 36,000 unique result rows cover the full 3×20×5×3×4×10 design; they are not independent experiments. All constrained rows respect review capacity and prohibit mandatory automation. Holds equal required overflow; completed fraction equals one minus hold. The cached datasets match pinned hashes and dimensions. All code, tests, dependency pins, result CSVs, manifest, tables and figure files are byte-identical to the pre-edit backup.
 
-The simulated reviewer uses the proposed quality fractions and full expected losses, favoring that representation. This is not human evidence. Generic corruption and illustrative costs limit external validity.
+Primary difference = 0.0011996809; interval [−0.0021582877, 0.0045576494]. Proposed review = 19.8527%; hold = 11.8046%. Fixed-route severe-shift hold-cost sensitivity remains 0.5606 / 1.0304 / 1.7350 at penalties 0.5 / 1.5 / 3.0. This is accounting sensitivity, not retrained optimization.
 
-5  Verification of two figures and two tables
+Repeated verification
+
+After substantive narration, citation and layout edits, the source/numerical audit was repeated: 44 checks passed. The 16 scientific-invariant tests passed. Bibliography order/count, DOI coverage, two-figure/two-table counts, abstract/keywords/highlights, ten-page limit, final rendering and source/output hashes were rechecked. No refitting was needed because the experiment implementation did not change.
+
+Code SHA-256: 395ccbfe631ef9d26c8efefad4f613301e91db4186be01093b6e6ca7eb67e641Metrics SHA-256: ddbe872e5b57eb56049f68b54d8a7a13b12ca59f73e053b4d6687bc246a7d405
+
+4  Citation verification: 1–6
 
 
-All four items are generated from results/metrics.csv. No experimental value, row selection, or figure artwork was changed during editing. Captions and interpretation were edited. Publication figures remain separate, scalable PDF files.
+[1] Journal article — SJR 2025 best Q1
 
-| Item | Scientific content and verification |
+R. Abraham, J. Schneider, J. vom Brocke, Data governance: A conceptual framework, structured review, and research agenda, Int. J. Inf. Manag. 49 (2019) 424–438. doi:10.1016/j.ijinfomgt.2019.07.008.
+
+
+Defines data governance and its organizational framework; supports the introductory governance context, not an empirical claim about this router.
+
+Metadata: Rene Abraham; Johannes Schneider; Jan vom Brocke. International Journal of Information Management; DOI 10.1016/j.ijinfomgt.2019.07.008. Checked against publisher-deposited Crossref record.
+
+[2] Journal article — SJR 2025 best Q1
+
+M. Janssen, P. Brous, E. Estevez, L.S. Barbosa, T. Janowski, Data governance: Organizing data for trustworthy Artificial Intelligence, Gov. Inf. Q. 37 (2020) 101493. doi:10.1016/j.giq.2020.101493.
+
+
+Connects data governance with trustworthy AI; motivates explicit data controls without validating the proposed thresholds.
+
+Metadata: Marijn Janssen; Paul Brous; Elsa Estevez; Luis S. Barbosa; Tomasz Janowski. Government Information Quarterly; DOI 10.1016/j.giq.2020.101493. Checked against publisher-deposited Crossref record.
+
+[3] Journal article — SJR 2025 best Q1
+
+E. Papagiannidis, P. Mikalef, K. Conboy, Responsible artificial intelligence governance: A review and research framework, J. Strateg. Inf. Syst. 34 (2025) 101885. doi:10.1016/j.jsis.2024.101885.
+
+
+Reviews responsible AI governance practices; supports the organizational framing and distinguishes broad governance from one routing mechanism.
+
+Metadata: Emmanouil Papagiannidis; Patrick Mikalef; Kieran Conboy. The Journal of Strategic Information Systems; DOI 10.1016/j.jsis.2024.101885. Checked against publisher-deposited Crossref record.
+
+[4] Journal article — SJR 2025 best Q1
+
+B.W. Wirtz, J.C. Weyerer, I. Kehl, Governance of artificial intelligence: A risk and guideline-based integrative framework, Gov. Inf. Q. 39 (2022) 101685. doi:10.1016/j.giq.2022.101685.
+
+
+Supplies risk/guideline governance context; no statutory requirement or effectiveness claim is transferred to the illustrative rules.
+
+Metadata: Bernd W. Wirtz; Jan C. Weyerer; Ines Kehl. Government Information Quarterly; DOI 10.1016/j.giq.2022.101685. Checked against publisher-deposited Crossref record.
+
+[5] Journal article — SJR 2025 best Q1
+
+G. Sklavos, G. Theodossiou, Z. Papanikolaou, C. Karelakis, K. Ragazou, Environmental, Social, and Governance-Based Artificial Intelligence Governance: Digitalizing Firms&#x27; Leadership and Human Resources Management, Sustainability 16 (2024) 7154. doi:10.3390/su16167154.
+
+
+Supports the broader leadership/ESG dimension of corporate AI governance; not evidence of cost reduction or reviewer accuracy.
+
+Metadata: George Sklavos; George Theodossiou; Zacharias Papanikolaou; Christos Karelakis; Konstantina Ragazou. Sustainability; DOI 10.3390/su16167154. Checked against publisher-deposited Crossref record.
+
+[6] Journal article — SJR 2025 best Q1
+
+B. Green, The flaws of policies requiring human oversight of government algorithms, Comput. Law Secur. Rev. 45 (2022) 105681. doi:10.1016/j.clsr.2022.105681.
+
+
+Supports caution that a human-oversight requirement alone does not ensure effective governance.
+
+Metadata: Ben Green. Computer Law &amp; Security Review; DOI 10.1016/j.clsr.2022.105681. Checked against publisher-deposited Crossref record.
+
+4  Citation verification: 7–12
+
+
+[7] Journal article — SJR 2025 best Q1
+
+C. Chow, On optimum recognition error and reject tradeoff, IEEE Trans. Inf. Theory 16 (1970) 41–46. doi:10.1109/tit.1970.1054406.
+
+
+Foundational error/rejection tradeoff; the manuscript&#x27;s asymmetric threshold is derived from its own stated costs.
+
+Metadata: C. Chow. IEEE Transactions on Information Theory; DOI 10.1109/tit.1970.1054406. Checked against publisher-deposited Crossref record.
+
+[8] Journal article — SJR 2025 best Q1
+
+X.Y. Zhang, G.S. Xie, X. Li, T. Mei, C.L. Liu, A Survey on Learning to Reject, Proc. IEEE 111 (2023) 185–215. doi:10.1109/jproc.2023.3238024.
+
+
+Surveys learning to reject, confidence and calibration; establishes substantial prior art rather than a novelty claim.
+
+Metadata: Xu-Yao Zhang; Guo-Sen Xie; Xiuli Li; Tao Mei; Cheng-Lin Liu. Proceedings of the IEEE; DOI 10.1109/jproc.2023.3238024. Checked against publisher-deposited Crossref record.
+
+[9] Conference paper — no journal quartile
+
+Y. Geifman, R. El-Yaniv, SelectiveNet: A deep neural network with an integrated reject option, in: Proc. ICML, PMLR 97 (2019) 2151–2159. https://proceedings.mlr.press/v97/geifman19a.html.
+
+
+Foundational selective-prediction architecture; contextual citation, not a claimed implemented comparator.
+
+[10] Conference paper — no journal quartile
+
+H. Mozannar, D. Sontag, Consistent estimators for learning to defer to an expert, in: Proc. ICML, PMLR 119 (2020) 7076–7087. https://proceedings.mlr.press/v119/mozannar20b.html.
+
+
+Learning to defer to a downstream expert; retains the original primary technical reference.
+
+[11] Conference paper — no journal quartile
+
+R. Verma, D. Barrejon, E. Nalisnick, Learning to defer to multiple experts: Consistent surrogate losses, confidence calibration, and conformal ensembles, in: Proc. AISTATS, PMLR 206 (2023) 11415–11434. https://proceedings.mlr.press/v206/verma23a.html.
+
+
+Multiple-expert consistency/calibration context; no conformal guarantee is claimed for the current code.
+
+[12] Conference paper — no journal quartile
+
+Z. Wei, Y. Cao, L. Feng, Exploiting human-AI dependence for learning to defer, in: Proc. ICML, PMLR 235 (2024) 52484–52499. https://proceedings.mlr.press/v235/wei24a.html.
+
+
+Human–AI dependence in learned deferral; motivates dependence concerns, not measured human behavior here.
+
+4  Citation verification: 13–18
+
+
+[13] Journal article — SJR 2025 best Q1
+
+J. Mena, O. Pujol, J. Vitria, Uncertainty-Based Rejection Wrappers for Black-Box Classifiers, IEEE Access 8 (2020) 101721–101746. doi:10.1109/access.2020.2996495.
+
+
+Black-box rejection wrappers; directly relevant related rejection methodology, not reimplemented in the experiment.
+
+Metadata: Jose Mena; Oriol Pujol; Jordi Vitria. IEEE Access; DOI 10.1109/access.2020.2996495. Checked against publisher-deposited Crossref record.
+
+[14] Journal article — SJR 2025 best Q1
+
+M. Abdar, F. Pourpanah, S. Hussain, et al., A review of uncertainty quantification in deep learning: Techniques, applications and challenges, Inf. Fusion 76 (2021) 243–297. doi:10.1016/j.inffus.2021.05.008.
+
+
+Reviews deep-learning uncertainty quantification; provides background, not validation of this model&#x27;s calibration or gains.
+
+Metadata: Moloud Abdar; Farhad Pourpanah; Sadiq Hussain; Dana Rezazadegan; Li Liu; Mohammad Ghavamzadeh; Paul Fieguth; Xiaochun Cao; Abbas Khosravi; U. Rajendra Acharya; Vladimir Makarenkov; Saeid Nahavandi. Information Fusion; DOI 10.1016/j.inffus.2021.05.008. Checked against publisher-deposited Crossref record.
+
+[15] Conference paper — no journal quartile
+
+S. Liu, Y. Cao, Q. Zhang, L. Feng, B. An, Mitigating underfitting in learning to defer with consistent losses, in: Proc. AISTATS, PMLR 238 (2024) 4816–4824. https://proceedings.mlr.press/v238/liu24h.html.
+
+
+Consistent-loss and underfitting work in learning to defer; not an implemented published baseline.
+
+[16] Conference paper — no journal quartile
+
+A. Mao, M. Mohri, Y. Zhong, Mastering multiple-expert routing: Realizable H-consistency and strong guarantees for learning to defer, in: Proc. ICML, PMLR 267 (2025) 43035–43066. https://proceedings.mlr.press/v267/mao25c.html.
+
+
+Multiple-expert routing and learning guarantees; none of its statistical guarantees is assigned to our regressor.
+
+[17] Conference paper — no journal quartile
+
+A. Farinhas, N.M. Guerreiro, S. Agrawal, R. Rei, A. Martins, Translate smart, not hard: Cascaded translation systems with quality-aware deferral, in: Proc. EMNLP (2025) 26742–26756. https://doi.org/10.18653/v1/2025.emnlp-main.1358.
+
+
+Earlier quality-aware translation cascades; translation-output quality differs from input missingness/range checks.
+
+[18] Preprint — no journal quartile
+
+G. DeSalvo, C. Mohri, M. Mohri, Y. Zhong, Budgeted multiple-expert deferral, arXiv preprint (2025). https://doi.org/10.48550/arXiv.2510.26706.
+
+
+Training-time expert-query budgets; explicitly differentiated from fixed deployment-batch capacity.
+
+4  Citation verification: 19–24
+
+
+[19] Preprint — no journal quartile
+
+V. Saketos, W. Reveillard, A. Proutiere, S. Dalleiger, M. Xiao, To defer or not to defer? Online learning with LLMs and congested experts, arXiv preprint (2026). https://doi.org/10.48550/arXiv.2610.15128.
+
+
+Online capacity/queue-aware deferral; the present implementation has no queue dynamics.
+
+[20] Journal article — SJR 2025 best Q1
+
+S. Tariq, M. Baruwal Chhetri, S. Nepal, C. Paris, A²C: A modular multi-stage collaborative decision framework for human–AI teams, Expert Syst. Appl. 282 (2025) 127318. doi:10.1016/j.eswa.2025.127318.
+
+
+Multi-stage human–AI collaborative decisions; relevant published alternative framework, not a reproduced baseline.
+
+Metadata: Shahroz Tariq; Mohan Baruwal Chhetri; Surya Nepal; Cecile Paris. Expert Systems with Applications; DOI 10.1016/j.eswa.2025.127318. Checked against publisher-deposited Crossref record.
+
+[21] Journal article — SJR 2025 best Q1
+
+M.A. Onari, M.J. Rezaee, M. Saberi, M.S. Nobile, An explainable data-driven decision support framework for strategic customer development, Knowl.-Based Syst. 295 (2024) 111761. doi:10.1016/j.knosys.2024.111761.
+
+
+KBS credit/customer decision support with explanations and counterfactuals; supports business context, not human deferral performance.
+
+Metadata: Mohsen Abbaspour Onari; Mustafa Jahangoshai Rezaee; Morteza Saberi; Marco S. Nobile. Knowledge-Based Systems; DOI 10.1016/j.knosys.2024.111761. Checked against publisher-deposited Crossref record.
+
+[22] Journal article — SJR 2025 best Q1
+
+C. Chai, J. Wang, Y. Luo, Z. Niu, G. Li, Data Management for Machine Learning: A Survey, IEEE Trans. Knowl. Data Eng. 35 (2023) 4646–4667. doi:10.1109/tkde.2022.3148237.
+
+
+Data preparation and management across the ML pipeline; motivates quality measurement, not the chosen numerical policy thresholds.
+
+Metadata: Chengliang Chai; Jiayi Wang; Yuyu Luo; Zeping Niu; Guoliang Li. IEEE Transactions on Knowledge and Data Engineering; DOI 10.1109/tkde.2022.3148237. Checked against publisher-deposited Crossref record and final IEEE issue record.
+
+https://www.computer.org/csdl/journal/tk/2023/05
+
+[23] Journal article — SJR 2025 best Q1
+
+L. Zhang, D. Jeong, S. Lee, Data Quality Management in the Internet of Things, Sensors 21 (2021) 5834. doi:10.3390/s21175834.
+
+
+Application-dependent data-quality dimensions and assessment; background motivation only, with IoT-to-credit transfer not empirically validated.
+
+Metadata: Lina Zhang; Dongwon Jeong; Sukhoon Lee. Sensors; DOI 10.3390/s21175834. Checked against publisher-deposited Crossref record.
+
+[24] Journal article — SJR 2025 best Q1
+
+A. Barredo Arrieta, N. Díaz-Rodríguez, J. Del Ser, et al., Explainable Artificial Intelligence (XAI): Concepts, taxonomies, opportunities and challenges toward responsible AI, Inf. Fusion 58 (2020) 82–115. doi:10.1016/j.inffus.2019.12.012.
+
+
+XAI concepts/taxonomies motivate distinguishing an audit trace from a full explanation of model behavior.
+
+Metadata: Alejandro Barredo Arrieta; Natalia Díaz-Rodríguez; Javier Del Ser; Adrien Bennetot; Siham Tabik; Alberto Barbado; Salvador Garcia; Sergio Gil-Lopez; Daniel Molina; Richard Benjamins; Raja Chatila; Francisco Herrera. Information Fusion; DOI 10.1016/j.inffus.2019.12.012. Checked against publisher-deposited Crossref record.
+
+4  Citation verification: 25–30
+
+
+[25] Journal article — SJR 2025 best Q1
+
+A. Adadi, M. Berrada, Peeking Inside the Black-Box: A Survey on Explainable Artificial Intelligence (XAI), IEEE Access 6 (2018) 52138–52160. doi:10.1109/access.2018.2870052.
+
+
+XAI transparency background; supports the limits of a label-free routing log rather than proving interpretability.
+
+Metadata: Amina Adadi; Mohammed Berrada. IEEE Access; DOI 10.1109/access.2018.2870052. Checked against publisher-deposited Crossref record.
+
+[26] Journal article — SJR 2025 best Q1
+
+A. Artelt, R. Visser, B. Hammer, “I do not know! but why?” — Local model-agnostic example-based explanations of reject, Neurocomputing 558 (2023) 126722. doi:10.1016/j.neucom.2023.126722.
+
+
+Rejection-specific explanation methods demonstrate that explaining rejection requires additional work beyond logging an action.
+
+Metadata: André Artelt; Roel Visser; Barbara Hammer. Neurocomputing; DOI 10.1016/j.neucom.2023.126722. Checked against publisher-deposited Crossref record.
+
+[27] Journal article — SJR 2025 best Q1
+
+S. Lessmann, B. Baesens, H.V. Seow, L.C. Thomas, Benchmarking state-of-the-art classification algorithms for credit scoring: An update of research, Eur. J. Oper. Res. 247 (2015) 124–136. doi:10.1016/j.ejor.2015.05.030.
+
+
+Credit-scoring benchmarking background; does not establish production suitability of these old benchmark datasets.
+
+Metadata: Stefan Lessmann; Bart Baesens; Hsin-Vonn Seow; Lyn C. Thomas. European Journal of Operational Research; DOI 10.1016/j.ejor.2015.05.030. Checked against publisher-deposited Crossref record.
+
+[28] Dataset — quartile not applicable
+
+[dataset] H. Hofmann, Statlog (German Credit Data), UCI Machine Learning Repository (1994). https://doi.org/10.24432/C5NC77.
+
+
+Original UCI provenance for the released German numeric credit file; required data citation, with no journal quartile.
+
+[29] Dataset — quartile not applicable
+
+[dataset] R. Quinlan, Statlog (Australian Credit Approval), UCI Machine Learning Repository (1987). https://doi.org/10.24432/C59012.
+
+
+Original UCI provenance for Australian Credit Approval; required data citation, with no journal quartile.
+
+[30] Dataset — quartile not applicable
+
+[dataset] I. Yeh, Default of Credit Card Clients, UCI Machine Learning Repository (2009). https://doi.org/10.24432/C55S3H.
+
+
+Original UCI credit-card-default provenance; retains UCI&#x27;s recommended 2009 citation year, distinct from its displayed 2016 donation date.
+
+4  Citation verification: 31–33
+
+
+[31] Journal article — SJR 2025 best Q1
+
+J. Lu, A. Liu, F. Dong, et al., Learning under Concept Drift: A Review, IEEE Trans. Knowl. Data Eng. 31 (2019) 2346–2363. doi:10.1109/tkde.2018.2876857.
+
+
+Concept-drift detection, understanding and adaptation context; the current stress condition is only corruption-severity shift.
+
+Metadata: Jie Lu; Anjin Liu; Fan Dong; Feng Gu; Joao Gama; Guangquan Zhang. IEEE Transactions on Knowledge and Data Engineering; DOI 10.1109/tkde.2018.2876857. Checked against publisher-deposited Crossref record and final IEEE issue record.
+
+https://www.computer.org/csdl/journal/tk/2019/12/08496795/14tNJpmuJlG
+
+[32] Journal article — SJR 2025 best Q1
+
+M.H. Jarrahi, Artificial intelligence and the future of work: Human-AI symbiosis in organizational decision making, Bus. Horiz. 61 (2018) 577–586. doi:10.1016/j.bushor.2018.03.007.
+
+
+Human–AI symbiosis in organizational decisions; explicitly distinguishes broader complementarity from this simulation.
+
+Metadata: Mohammad Hossein Jarrahi. Business Horizons; DOI 10.1016/j.bushor.2018.03.007. Checked against publisher-deposited Crossref record.
+
+[33] Journal article — SJR 2025 best Q1
+
+P. Mikalef, M. Gupta, Artificial intelligence capability: Conceptualization, measurement calibration, and empirical study on its impact on organizational creativity and firm performance, Inf. Manag. 58 (2021) 103434. doi:10.1016/j.im.2021.103434.
+
+
+Organizational AI capability and performance constructs; the current routing experiment does not test those constructs or benefits.
+
+Metadata: Patrick Mikalef; Manjul Gupta. Information &amp; Management; DOI 10.1016/j.im.2021.103434. Checked against publisher-deposited Crossref record.
+
+5  Journal ranking evidence: MDPI and IEEE
+
+
+Ranking basis: SCImago Journal Rank (SJR), 2025, best quartile. Q1 is attached to the journal/metric/year, not the article. Evidence below was retrieved from search-indexed primary SCImago records on 23 October 2026; direct live profile pages returned 403. This confirms indexed best-quartile evidence, not every category-specific quartile or current authenticated Scopus status.
+
+MDPI — 2 articles
+
+Sensors — refs [23]; SJR 2025 0.802; best Q1.
+
+https://www.scimagojr.com/journalsearch.php?clean=0&amp;q=130124&amp;tip=sid
+
+Sustainability — refs [5]; SJR 2025 0.750; best Q1.
+
+https://www.scimagojr.com/journalsearch.php?clean=0&amp;q=21100240100&amp;tip=sid
+
+IEEE — 6 articles
+
+IEEE Transactions on Information Theory — refs [7]; SJR 2025 1.323; best Q1.
+
+https://www.scimagojr.com/journalsearch.php?clean=0&amp;q=15107&amp;tip=sid
+
+Proceedings of the IEEE — refs [8]; SJR 2025 5.561; best Q1.
+
+https://www.scimagojr.com/journalsearch.php?clean=0&amp;q=17915&amp;tip=sid
+
+IEEE Transactions on Knowledge and Data Engineering — refs [22, 31]; SJR 2025 3.025; best Q1.
+
+https://www.scimagojr.com/journalsearch.php?clean=0&amp;q=17362&amp;tip=sid
+
+IEEE Access — refs [25, 13]; SJR 2025 0.884; best Q1.
+
+https://www.scimagojr.com/journalsearch.php?clean=0&amp;q=21100374601&amp;tip=sid
+
+Category-specific caution
+
+The ranking set was not restricted to one AI category. For example, a multidisciplinary journal’s best Q1 can arise in another assigned field. No claim that all 17 journals are Q1 in Artificial Intelligence is made. MDPI’s publisher statistics distinguish CiteScore from JCR; Sustainability’s publisher record reports CiteScore Q1 while its JCR Environmental Studies category is Q2. These metrics must not be conflated.
+
+https://www.mdpi.com/journal/sustainability/stats
+
+6  Journal ranking evidence: Elsevier
+
+
+Thirteen articles in eleven Elsevier journals. ScienceDirect is the hosting platform; Crossref/publisher records establish Elsevier publication. Same SJR 2025 best-quartile/access limits apply.
+
+International Journal of Information Management — refs [1]; SJR 2025 5.899; best Q1.
+
+https://www.scimagojr.com/journalsearch.php?clean=0&amp;q=15631&amp;tip=sid
+
+Government Information Quarterly — refs [2, 4]; SJR 2025 3.575; best Q1.
+
+https://www.scimagojr.com/journalsearch.php?clean=0&amp;q=14735&amp;tip=sid
+
+The Journal of Strategic Information Systems — refs [3]; SJR 2025 4.030; best Q1.
+
+https://www.scimagojr.com/journalsearch.php?clean=0&amp;q=12396&amp;tip=sid
+
+Computer Law &amp; Security Review — refs [6]; SJR 2025 1.052; best Q1.
+
+https://www.scimagojr.com/journalsearch.php?clean=0&amp;q=28888&amp;tip=sid
+
+Information Fusion — refs [24, 14]; SJR 2025 4.197; best Q1.
+
+https://www.scimagojr.com/journalsearch.php?clean=0&amp;q=26099&amp;tip=sid
+
+Information &amp; Management — refs [33]; SJR 2025 2.220; best Q1.
+
+https://www.scimagojr.com/journalsearch.php?clean=0&amp;q=12303&amp;tip=sid
+
+Business Horizons — refs [32]; SJR 2025 2.744; best Q1.
+
+https://www.scimagojr.com/journalsearch.php?clean=0&amp;q=20209&amp;tip=sid
+
+European Journal of Operational Research — refs [27]; SJR 2025 2.373; best Q1.
+
+https://www.scimagojr.com/journalsearch.php?clean=0&amp;q=22489&amp;tip=sid
+
+Neurocomputing — refs [26]; SJR 2025 1.465; best Q1.
+
+https://www.scimagojr.com/journalsearch.php?clean=0&amp;q=24807&amp;tip=sid
+
+Expert Systems with Applications — refs [20]; SJR 2025 1.939; best Q1.
+
+https://www.scimagojr.com/journalsearch.php?clean=0&amp;q=24201&amp;tip=sid
+
+Knowledge-Based Systems — refs [21]; SJR 2025 1.753; best Q1.
+
+https://www.scimagojr.com/journalsearch.php?clean=0&amp;q=24772&amp;tip=sid
+
+7  Submission materials and unresolved items
+
+
+| Component | Status and required action |
 | --- | --- |
-| Figure 1 — capacity versus cost | Five constrained methods × four capacities = 20 plotted means. Equal dataset/non-clean-condition weighting; quality-dependent reviewer. Bands are ±1.96 standard errors of 20 seed averages. Regeneration from the saved CSV reproduces the existing PNG pixel-for-pixel. Separate PDF is vector artwork with embedded font; axis units and maximum-capacity wording verified. |
-| Figure 2 — paired differences | Fifteen condition/profile combinations at 20% capacity, averaged across three datasets. Positive feature-aware-minus-quality-aware cost favors quality gain. Paired split-seed t intervals reproduced; regeneration is pixel-exact. All five conditions, including clean and severe shift, are shown; no favorable subset selected. |
-| Table 1 — baseline costs | Ten methods × four numeric columns = 40 values. Every cell independently recomputed from CSV and checked at four decimals. Macro equally weights three datasets and four non-clean conditions. Automation-only/no-rule rows are labeled non-compliant diagnostics, not comparable governed policies. |
-| Table 2 — factorial ablation | Eight rows × four outcome columns = 32 values. All costs and review/hold/violation percentages verified at displayed precision. Quality Off is probability-only gain, not feature-aware gain. The 2×2 design crosses quality conditioning with rule enforcement. All rates use all records as denominator. |
+| Editable manuscript / artwork / highlights | Available: manuscript.tex, generated editable tables, separate Figure_1.pdf/Figure_2.pdf and highlights.txt. Exactly 16 repository files retained, with one results folder. |
+| Graphical abstract | No explicit requirement located in supplied KBS guide. None added. Verify the live submission portal; generic Elsevier guidance is not proof of a KBS requirement. |
+| Data availability / Option C (p.13) | Pending: private GitHub author-review project exists, but public versioned access and appropriate archival deposit/persistent identifier remain outstanding. UCI DOIs do not archive generated study evidence. |
+| Funding / competing interests | Pending: human author must confirm actual information and generate the required separate declaration document. No unverified “no funding/no conflicts” statement inserted. |
+| Authorship / contributions / approval | Pending: confirm name, affiliation, contact details, CRediT roles where applicable, institutional approval, originality and exclusive submission. |
+| AI use / integrity | Draft AI-use disclosure retained and figure provenance disclosed. Human review and responsibility are not falsely certified. No text, data, results or figures copied from the supplied presentation example. |
+| Live portal / final page count | Unverified: article-type selection, portal forms and any additional requirements. Recheck after declarations and archive citations; manuscript currently occupies all ten pages. |
 
-Traceability of main narrative values
+Practical handoff
 
-Primary cost difference = 0.0011996809; interval = [−0.0021582877, 0.0045576494]. Proposed cost = 0.6054895942; feature-aware = 0.6066892751. Actual proposed primary review = 19.8527%; hold = 11.8046%. Severe-shift hold ≈47.0%. Fixed-route hold-penalty sensitivity: 0.5606 at 0.5, 1.0304 at 1.5, 1.7350 at 3.0. These are expected normalized costs, not measured money or human behavior.
+Working project: https://github.com/ykunam/data-quality-budgeted-deferral (private). Changes are confined to the editable manuscript/PDF, README and submission notes. Experimental code/results are unchanged. KBS_Before_Reference_Expansion_Backup.zip preserves all 16 pre-edit files. The revised manuscript and this report replace the existing deliverables; no reference-management folder or new project scaffold was introduced.
 
-Presentation checks and limitations
+Final recommendation: MAJOR REVISIONS
 
-Tables use editable text and horizontal rules without shading. All artwork is readable at manuscript size; Figure 2 uses larger width to preserve 15 labels. Both PDFs embed DejaVu Sans. Captions state the averaging, capacity, interval and simulator assumptions. Both figures are explanatory plots derived from code, not AI-generated visual evidence.
-
-Repeated split intervals are descriptive. Observations and development datasets are reused; nominal “95%” intervals do not justify population significance. Full recalibration, reviewer learning, fairness, external replication and retrained policy/cost sensitivity were not conducted and are not implied.
-
-6  Reference and citation verification: 1–7
-
-
-Primary publication records were reopened on 23 October 2026. Authors, title, year, venue, volume/pages and identifier were checked against those records; citation claims were assessed at the scope supported by accessible abstracts. This is not a full re-derivation of every cited paper. All 13 bibliography entries are cited, with no missing keys, and follow first-appearance order.
-
-[1] Verified metadata and citation purpose
-
-Geifman &amp; El-Yaniv (2019). SelectiveNet. PMLR 97:2151–2159. Supports selective prediction / reject option.
-
-https://proceedings.mlr.press/v97/geifman19a.html
-
-[2] Verified metadata and citation purpose
-
-Mozannar &amp; Sontag (2020). Consistent Estimators for Learning to Defer to an Expert. PMLR 119:7076–7087. Supports learned routing to a downstream expert.
-
-https://proceedings.mlr.press/v119/mozannar20b.html
-
-[3] Verified metadata and citation purpose
-
-Verma, Barrejon &amp; Nalisnick (2023). Learning to Defer to Multiple Experts. PMLR 206:11415–11434. Supports calibration, consistency and multiple-expert deferral context.
-
-https://proceedings.mlr.press/v206/verma23a.html
-
-[4] Verified metadata and citation purpose
-
-Wei, Cao &amp; Feng (2024). Exploiting Human-AI Dependence for Learning to Defer. PMLR 235:52484–52499. Supports dependence-aware deferral; not an implemented baseline here.
-
-https://proceedings.mlr.press/v235/wei24a.html
-
-[5] Verified metadata and citation purpose
-
-Liu, Cao, Zhang, Feng &amp; An (2024). Mitigating Underfitting in Learning to Defer with Consistent Losses. PMLR 238:4816–4824. Supports consistent-loss / underfitting context.
-
-https://proceedings.mlr.press/v238/liu24h.html
-
-[6] Verified metadata and citation purpose
-
-Mao, Mohri &amp; Zhong (2025). Mastering Multiple-Expert Routing. PMLR 267:43035–43066. Supports multiple-expert learning guarantees; no transfer of its guarantees to our regressor.
-
-https://proceedings.mlr.press/v267/mao25c.html
-
-[7] Verified metadata and citation purpose
-
-Farinhas, Guerreiro, Agrawal, Rei &amp; Martins (2025). Translate Smart, not Hard. EMNLP:26742–26756. DOI 10.18653/v1/2025.emnlp-main.1358. Supports earlier quality-aware translation cascades; distinguishes translation quality from input missingness/range checks.
-
-https://aclanthology.org/2025.emnlp-main.1358/
-
-7  Reference and citation verification: 8–13
-
-
-[8] Verified metadata and citation purpose
-
-DeSalvo, C. Mohri, M. Mohri &amp; Zhong (2025). Budgeted Multiple-Expert Deferral. arXiv:2510.26706, v1. DOI 10.48550/arXiv.2510.26706. Verified as a preprint. Its budget concerns expert querying during training; it is not cited as the same deployment-batch constraint.
-
-https://arxiv.org/abs/2510.26706
-
-[9] Verified metadata and citation purpose
-
-Saketos, Reveillard, Proutiere, Dalleiger &amp; Xiao (2026). To Defer or Not to Defer? Online Learning with LLMs and Congested Experts. arXiv:2610.15128, v1. DOI 10.48550/arXiv.2610.15128. Verified as a preprint submitted 10 October 2026. Supports congestion-aware online setting; our code has no queue dynamics.
-
-https://arxiv.org/abs/2610.15128
-
-[10] Verified metadata and citation purpose
-
-Si (2026). Governing data trust in digital lending ecosystems. Journal of Banking Regulation 27, article 69. DOI 10.1057/s41261-026-00364-8. Publisher metadata/abstract verified; published 21 October 2026. Full subscription text was not accessed. Used only for claim-specific evidentiary controls, not empirical validation of this study.
-
-https://link.springer.com/article/10.1057/s41261-026-00364-8
-
-[11] Verified metadata and citation purpose
-
-Hofmann (1994). Statlog (German Credit Data). UCI. DOI 10.24432/C5NC77. Dataset citation verified. UCI distinguishes the original 20 attributes from the expanded numeric release used here (24 predictors).
-
-https://archive.ics.uci.edu/dataset/144/statlog+german+credit+data
-
-[12] Verified metadata and citation purpose
-
-Quinlan (1987). Statlog (Australian Credit Approval). UCI. DOI 10.24432/C59012. Dataset citation and 690×14 dimensions verified. Released numeric data have no NaNs in the loaded file; this does not mean the source task had no missing-data handling.
-
-https://archive.ics.uci.edu/dataset/143/statlog+australian+credit+approval
-
-[13] Verified metadata and citation purpose
-
-Yeh (2009). Default of Credit Card Clients. UCI. DOI 10.24432/C55S3H. UCI’s recommended citation year is 2009; the current donation date shown is 2016. The manuscript retains the recommended citation, not an inferred donation year.
-
-https://archive.ics.uci.edu/dataset/350/default+of+credit+card+clients
-
-Bibliography uses consistent numbered brackets and includes persistent identifiers or publisher URLs. Preprints are clearly marked. Reference [10] now explicitly identifies 69 as an article number. No cited algorithm is described as experimentally reproduced when only a component comparator was run. No exhaustive literature or plagiarism certification is claimed.
-
-8  Final audit and unresolved issues
-
-
-Reverification after substantive corrections
-
-The methods, gap, results interpretation, limitations, captions and spacing were corrected and then checked again. The recorded numerical/source audit passed 44 checks, including all displayed table values and both figure regenerations. The 16 existing invariant tests passed. LaTeX was compiled twice to resolve citations; the final PDF is 10 pages with exactly two figure and two table environments, six keywords and 13 references. All final pages were rendered and inspected for overlap, clipping and readability.
-
-Unresolved scientific issues — required for a stronger submission
-
-• Novelty and comparison. The exact allocator is elementary conditional selection; the two-rule knowledge base and compact representation alone do not establish a strong new KBS contribution. Compare a suitable published learned-deferral baseline or narrow the contribution and reconsider journal positioning.
-
-• Reviewer evidence and realism. Obtain defensible reviewer evidence or external validation. The constructed reviewer-quality relationship and full expected-loss targets are favorable assumptions. Domain-valid corruption and validation outside reused benchmark observations remain absent.
-
-• Policy robustness. Validate review thresholds, costs and staffing assumptions. The existing hold-cost check keeps routes fixed; it is not a retrained policy sensitivity study. There is no causal business-impact estimate or calibrated risk guarantee under shift.
-
-Unresolved submission items — complete before upload
-
-• Confirm all author details, actual contribution roles, funding and competing interests; produce the requested declaration file. Replace author-review placeholders with truthful final statements after human verification.
-
-• The requested private repository has been created under ykunam and populated with the reviewed project. Make an appropriate versioned release and archive generated evidence, then add public access and a persistent identifier. A private repository is not an archival data deposit.
-
-• Check current portal requirements, including any graphical abstract or additional forms. Recompile and re-audit the page limit after final author declarations and repository references; the current draft already occupies all ten allowed pages.
-
-Preservation and compact handoff
-
-Backup: KBS_Pre_Editing_Backup_2026-10-23.zip contains the original uploaded PDF and the original 16-file project. Revised package: KBS_Budgeted_Human_Deferral_Package.zip retains 16 project files and one results folder. The editorial report is delivered separately; no extra report/scaffolding folders were added to the repository. Scientific code and outputs were preserved; only manuscript, README and submission notes were edited.
-
-Experiment SHA-256: 395ccbfe631ef9d26c8efefad4f613301e91db4186be01093b6e6ca7eb67e641Metrics SHA-256: ddbe872e5b57eb56049f68b54d8a7a13b12ca59f73e053b4d6687bc246a7d405
-
-Final recommendation: MAJOR REVISIONS. The revised files support careful author review and further scientific development. They must not be described as fully submission-ready or as guaranteed Q1 acceptance. The private ykunam repository was created and populated; no public release or journal submission was performed.
+The reference base and presentation are stronger, but citations cannot compensate for an insufficiently demonstrated methodological contribution, simulated reviewer evidence or missing external validation. Complete the scientific work and author/deposit requirements above before submission. No acceptance guarantee or complete compliance certification is made. No journal submission has been performed.
 

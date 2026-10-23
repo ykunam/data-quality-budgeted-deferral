@@ -51,6 +51,12 @@ An internet connection is needed once to download official UCI files. A cached r
 
 Original data: [German](https://doi.org/10.24432/C5NC77), [Australian](https://doi.org/10.24432/C59012), [Default](https://doi.org/10.24432/C55S3H), distributed by UCI under CC BY 4.0. Cite the original dataset creators. Raw data are downloaded to the chosen cache and are not redistributed in this repository.
 
+## Literature and journal compliance revision
+
+The manuscript cites 33 sources: 21 journal articles (2 MDPI, 6 IEEE, 13 Elsevier), 7 conference papers, 2 clearly marked preprints and 3 original datasets. The selected journal set has indexed SCImago SJR 2025 **best-quartile Q1** evidence; this is not a claim of Q1 in every subject category or publication year. Direct rank-profile access was blocked and authenticated Scopus/category histories were not independently inspected. Metadata, final IEEE pagination and claim-specific citation purposes are documented in `submission-notes.md`.
+
+The manuscript is 10 double-spaced pages including references, with an 11 pt body and 0.75-inch margins. The supplied KBS guide does not prescribe font size/margins. It retains exactly two figures and two editable tables. Source code and experimental outputs were not changed by the literature revision. The recommendation remains **Major Revisions**: additional citations do not establish novelty, human-review validity or submission readiness.
+
 ## Submission status
 
 Read `submission-notes.md` for guide compliance and remaining author decisions. The manuscript must be reviewed and adopted by its human author; AI assistance is disclosed. Verify the final funding, conflict-of-interest, authorship and correspondence details. The private author-review repository is linked above. Add a public versioned release and archival deposit before journal submission. No journal submission has been performed.
