@@ -5,7 +5,7 @@ Knowledge-Based Systems | Short Communication | audit date 23 October 2026
 **Manuscript:** `manuscript.tex` / `manuscript.pdf` — *When does data quality help human deferral? Governance-constrained review allocation in knowledge-based decision systems*.
 **Recommendation: MINOR REVISIONS (author-side items only).** The scientific content, figures, tables and references were checked against the code and results. The items in Section 6 must be completed by the author before submission.
 
-The v1 short communication is preserved as git tag `v1-short-communication` (commit `a343665`). The extended full-length version of this revision is in `manuscript_v2/`, for reference or as supplementary material.
+The v1 short communication is preserved in the git history at commit `a343665` (on `main`). The extended full-length version of this revision is in `manuscript_v2/`, for reference or as supplementary material.
 
 ## 1. Journal requirement checklist
 
