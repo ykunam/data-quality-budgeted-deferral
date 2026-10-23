@@ -2,6 +2,7 @@
 import os, sys
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
 os.chdir(os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
+import numpy as np
 import pandas as pd
 from dqd import core as C, stats as ST
 
@@ -33,8 +34,7 @@ t1 = ("\\begin{tabular}{lccccc}\\toprule\n"
 def rel(sub, a, b):
     s = sub[sub.method.isin([a, b])].groupby(["seed", "method"]).cost.mean().unstack(); d = s[b] - s[a]
     m, lo, hi, p = ST.corrected_t(d)
-    txt = f"{100 * m / s[b].mean():+.2f} ({int((d > 0).sum())})"
-    return f"\\textbf{{{txt}}}" if p < 0.05 else txt
+    return 100 * m / s[b].mean(), int((d > 0).sum()), p
 orig = df[df.dataset.isin(["german", "australian", "default"]) & (df.capacity == 0.2)]
 R = [("Informative missingness (B)", orig[orig.condition == "informative"]),
      ("Stale records (B)", orig[orig.condition == "stale"]),
@@ -42,7 +42,18 @@ R = [("Informative missingness (B)", orig[orig.condition == "informative"]),
      ("Visible defects (A), quality-coupled reviewer", orig[orig.condition.isin(C.FAMILY_A) & (orig.reviewer == "quality")]),
      ("Visible defects (A), four decoupled reviewers", orig[orig.condition.isin(C.FAMILY_A) & (orig.reviewer != "quality")]),
      ("HMEQ, natural missingness (external)", nat)]
-lines = [f"{lab} & {rel(s,'2h_qA','2h_prob')} & {rel(s,'2h_qH','2h_prob')} & {rel(s,'2h_quality','2h_prob')} \\\\" for lab, s in R]
+VARIANTS = ["2h_qA", "2h_qH", "2h_quality"]
+cells = [[rel(sub, v, "2h_prob") for v in VARIANTS] for _, sub in R]
+# Holm adjustment over the whole table (18 comparisons = one family)
+padj = ST.holm([c[2] for row in cells for c in row]).reshape(len(R), len(VARIANTS))
+def fmt(c, pa):
+    txt = f"{c[0]:+.2f} ({c[1]})"
+    return f"\\textbf{{{txt}}}" if pa < 0.05 else (txt + "$^{\\dagger}$" if c[2] < 0.05 else txt)
+lines = [f"{lab} & " + " & ".join(fmt(c, pa) for c, pa in zip(row, prow)) + " \\\\"
+         for (lab, _), row, prow in zip(R, cells, padj)]
+pd.DataFrame([dict(condition=lab, variant=v, rel=c[0], wins=c[1], p=c[2], p_holm=pa)
+              for (lab, _), row, prow in zip(R, cells, padj) for v, c, pa in zip(VARIANTS, row, prow)]
+             ).to_csv("results/tables/sc_table2_holm.csv", index=False)
 t2 = ("\\begin{tabular}{lccc}\\toprule\n"
       "Condition & Automation head only & Reviewer head only & Both heads (proposed) \\\\\\midrule\n" + "\n".join(lines) +
       "\n\\bottomrule\\end{tabular}")

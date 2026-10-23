@@ -29,8 +29,36 @@ def arrivals(P, R, reviewer, costs=C.Costs(), n_day=100, T=40, rules=S.Rules(), 
         lh_hat = R["2h_quality_H"].predict(D["reps"]["quality"])
         days.append((cond, dict(y=D["y"], la=D["la"], yh=D["yh"], e=e, g=la_hat - lh_hat - costs.review,
                                 lh_hat=lh_hat, m=rules(D["u"], D["v"]), age=np.zeros(n_day, int),
-                                wrong=rng.random(n_day))))
+                                arr=np.full(n_day, day), wrong=rng.random(n_day))))
     return days
+
+
+def km_quantile(dur, event, q):
+    """Kaplan-Meier time by which a fraction q of cases is resolved; inf if not reached (censoring)."""
+    order = np.lexsort((-event, dur)); dur, event = dur[order], event[order]
+    surv, n_at_risk = 1.0, len(dur)
+    for t in np.unique(dur):
+        at = dur == t; d = event[at].sum()
+        if n_at_risk > 0 and d > 0:
+            surv *= 1 - d / n_at_risk
+        if 1 - surv >= q - 1e-12:
+            return float(t)
+        n_at_risk -= at.sum()
+    return float("inf")
+
+
+def cohort_metrics(ev, T, sla=2):
+    """Arrival-cohort service measures for mandatory records, counting unresolved cases.
+    SLA attainment uses only cohorts that could be observed for the full SLA window."""
+    arr, dur, res = ev[:, 0], ev[:, 1], ev[:, 2].astype(bool)
+    elig = arr <= T - 1 - sla
+    met = res & (dur <= sla)
+    return dict(mand_arrivals=int(len(ev)),
+                cohort_sla2=float(met[elig].mean()) if elig.any() else float("nan"),
+                cohort_resolved7=float((res & (dur <= 7))[arr <= T - 8].mean()) if (arr <= T - 8).any() else float("nan"),
+                cohort_unresolved=float((~res).mean()) if len(ev) else 0.0,
+                km_median=km_quantile(dur, res.astype(int), 0.5),
+                km_p95=km_quantile(dur, res.astype(int), 0.95))
 
 
 def simulate(days, cap, order, costs=C.Costs(), n_day=100, wait_cost=0.25):
@@ -40,6 +68,7 @@ def simulate(days, cap, order, costs=C.Costs(), n_day=100, wait_cost=0.25):
     log = []
     tot = dict(auto=0.0, review=0.0, fee=0.0, wait=0.0, arrivals=0, completed=0, overrides=0, reviewed=0)
     waits = []
+    events = []                                      # (arrival day, duration, resolved?) for every mandatory record
     for day, (cond, new) in enumerate(days):
         tot["arrivals"] += len(new["y"])
         cur = new if backlog is None else {k: np.concatenate([backlog[k], new[k]]) for k in new}
@@ -61,6 +90,8 @@ def simulate(days, cap, order, costs=C.Costs(), n_day=100, wait_cost=0.25):
         rev_dec = np.where(cur["wrong"] < cur["e"], 1 - cur["y"], cur["y"])
         tot["overrides"] += (r & (rev_dec != cur["yh"])).sum(); tot["reviewed"] += r.sum()
         waits += list(cur["age"][r & cur["m"]])
+        rm = r & cur["m"]
+        events += [(a_, d_, 1) for a_, d_ in zip(cur["arr"][rm], cur["age"][rm])]
         log.append(dict(day=day, cond=cond, backlog_in=0 if backlog is None else len(backlog["y"]),
                         mand_new=int(new["m"].sum()), reviewed=int(r.sum()), held=int(h.sum()), auto=int(a.sum())))
         backlog = {k: v[h] for k, v in cur.items()}
@@ -68,13 +99,17 @@ def simulate(days, cap, order, costs=C.Costs(), n_day=100, wait_cost=0.25):
     left = len(backlog["y"])
     unresolved = left * costs.hold
     waits = np.array(waits) if waits else np.array([0])
+    events += [(a_, d_, 0) for a_, d_ in zip(backlog["arr"], backlog["age"])]   # censored at horizon
+    coh = cohort_metrics(np.array(events, float).reshape(-1, 3), T)
     total_cost = tot["auto"] + tot["review"] + tot["fee"] + tot["wait"] + unresolved
     out = dict(cost_per_arrival=total_cost / tot["arrivals"],
                cost_per_completed=(total_cost - unresolved) / max(tot["completed"], 1),
                completed_frac=tot["completed"] / tot["arrivals"],
                unresolved_end=left, unresolved_frac=left / tot["arrivals"],
-               wait_mean=waits.mean(), wait_p95=np.quantile(waits, 0.95), wait_max=waits.max(),
-               sla2=(waits <= 2).mean(),
+               # conditional on resolution (resolved mandatory cases only)
+               wait_mean_resolved=waits.mean(), wait_p95_resolved=np.quantile(waits, 0.95),
+               wait_max_resolved=waits.max(), sla2_resolved=(waits <= 2).mean(),
+               **coh,
                override_rate=tot["overrides"] / max(tot["reviewed"], 1),
                util=tot["reviewed"] / (B * T) if B else 0.0,
                peak_backlog=max(l["backlog_in"] for l in log),
