@@ -157,14 +157,14 @@ defects invisible to validation checks, and five simulated reviewer
 models, over 20 corrected repeated splits. Pooled, the proposed router
 was the best learning-based method but 1.2\% costlier than Chow's
 cost-risk rule. Learned routing overtook that rule only with roughly
-1,800 or more training records, and with 6,000 it beat every comparator
-on all splits. Quality information reduced cost mainly when missingness
-was informative about outcomes (1.2--3.5\%), by improving estimates of
-automated rather than reviewer error. In a 40-day simulation with a
-deterioration episode, staffing determined backlog and service
-completion far more than routing did. Quality-triggered rules blocked
-most visibly degraded records but missed three-quarters of records with
-invisible defects.
+1,800 or more training records, and with 6,000 it beat Chow's rule and
+L2D-CE on all 20 splits. Quality information reduced cost mainly when
+missingness was informative about outcomes (1.2--3.5\%), by improving
+estimates of automated rather than reviewer error. In a 40-day
+simulation with a deterioration episode, staffing determined backlog and
+service completion far more than routing did. Quality-triggered rules
+blocked most visibly degraded records but missed three-quarters of
+records with invisible defects.
 
 \textbf{Keywords:} Knowledge-based systems; Learning to defer; Data
 quality; AI governance; Human--AI collaboration; Review capacity;
@@ -1116,14 +1116,16 @@ Confidence & −0.0060 & {[}−0.0140, 0.0020{]} & −1.13\% & 4 & 0.13 &
 
 Per dataset, the picture is consistent with a sample-size explanation
 (Table 7). On the default dataset, whose gain-fitting partition contains
-about 6,000 records, the proposed router beat every comparator on all 20
-splits: Chow by 1.10\%, confidence by 1.37\%, L2D-CE by 1.29\% and
-probability-only two-head by 1.45\% (all corrected p ≤ 0.003). On German
-(about 200 gain-fitting records) and Australian credit (about 140), it
-lost to Chow by 1.96\% and 3.20\%. Across all datasets and reviewer
-models, the learned methods' disadvantage relative to Chow grows with
-capacity (Fig. 2). This is expected: at higher capacity more marginal
-records must be ranked, and noisy gain estimates matter more there.
+about 6,000 records, the proposed router beat Chow by 1.10\%, confidence
+by 1.37\%, L2D-CE by 1.29\% and probability-only two-head by 1.45\% on
+all 20 splits (all corrected p ≤ 0.003), and differential triage on 19
+of 20; against L2D-OvA and the earlier single-head design it won 15 of
+20 splits (not significant). On German (about 200 gain-fitting records)
+and Australian credit (about 140), it lost to Chow by 1.96\% and 3.20\%.
+Across all datasets and reviewer models, the learned methods'
+disadvantage relative to Chow grows with capacity (Fig. 2). This is
+expected: at higher capacity more marginal records must be ranked, and
+noisy gain estimates matter more there.
 
 \begin{longtable}[]{@{}
   >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.2000}}
@@ -1841,10 +1843,10 @@ Holding information, rules and costs fixed, every learned router,
 including the published L2D surrogates, was worse than Chow's cost-risk
 rule when trained on a few hundred records. The proposed router overtook
 Chow at roughly 1,800 gain-fitting records (about 2,900 logged review
-decisions) and beat every comparator on all splits at 6,000. The pooled
-comparison in Table 5, in which two of three datasets are small,
-therefore understates what a learned router achieves at operational data
-volumes and overstates it for small portfolios.
+decisions) and at 6,000 beat Chow, confidence and L2D-CE on all 20
+splits. The pooled comparison in Table 5, in which two of three datasets
+are small, therefore understates what a learned router achieves at
+operational data volumes and overstates it for small portfolios.
 
 Third, \textbf{capacity, not ranking, decides service completion under
 deterioration.} When mandatory demand exceeded capacity, the backlog was
@@ -1984,17 +1986,18 @@ system's allocator solves the governance-constrained routing problem
 exactly in both feasible and overloaded regimes, and its two-head
 estimator learns from incomplete review logs. It did not, however,
 outperform simple cost-aware routing in the pooled comparison dominated
-by small datasets. Its value is conditional. It outperformed all
-comparators when trained on several thousand records, and quality
-information improved it chiefly when missingness was informative about
-outcomes, through better estimates of automated error rather than of
-reviewer error. Under severe data deterioration, staffing determined
-backlog and service completion far more than any routing choice, and
-quality-triggered rules protected only against the defects they could
-observe. For knowledge-based decision systems used in AI governance, the
-practical message is to make the rule layer, the estimation layer and
-the capacity layer separately visible, to measure each, and to reserve
-learned routing for settings with sufficient review history.
+by small datasets. Its value is conditional. It outperformed cost-aware
+heuristics and the published L2D surrogates when trained on several
+thousand records, and quality information improved it chiefly when
+missingness was informative about outcomes, through better estimates of
+automated error rather than of reviewer error. Under severe data
+deterioration, staffing determined backlog and service completion far
+more than any routing choice, and quality-triggered rules protected only
+against the defects they could observe. For knowledge-based decision
+systems used in AI governance, the practical message is to make the rule
+layer, the estimation layer and the capacity layer separately visible,
+to measure each, and to reserve learned routing for settings with
+sufficient review history.
 
 \hypertarget{data-and-code-availability}{%
 \section{Data and code availability}\label{data-and-code-availability}}

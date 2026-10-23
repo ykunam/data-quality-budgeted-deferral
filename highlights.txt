@@ -1,5 +1,5 @@
-- Explicit data-quality rules restrict automated decisions under review budgets.
-- A compact gain model routes cases using probability and observable quality.
-- Mandatory cases are held when review capacity is exhausted.
-- Three credit benchmarks test costs, capacity, and simulated reviewer errors.
-- Quality signals do not guarantee improvement over simpler routing policies.
+- Exact sorting solves governance-constrained review allocation in both regimes.
+- Backlog depends on staffing, not on how mandatory cases are prioritized.
+- Learned deferral beat cost-aware heuristics only with thousands of review logs.
+- Quality inputs helped most when missingness was informative about outcomes.
+- Quality-triggered rules missed three-quarters of records with invisible defects.

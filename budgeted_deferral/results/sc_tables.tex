@@ -1,0 +1,26 @@
+\newcommand{\TableOne}{%
+\begin{tabular}{lccccc}\toprule
+Method & German & Australian & Default & Macro & HMEQ (natural) \\\midrule
+Automation only (rules ignored)$^a$ & 0.6254 & 0.4046 & 0.6291 & 0.5530 & 0.2583 \\
+Random & 0.6327 & 0.4752 & 0.6012 & 0.5697 & 0.2700 \\
+Confidence & 0.6045 & \textbf{0.4139} & 0.5700 & 0.5295 & \textbf{0.1847} \\
+Chow cost risk \cite{chow} & \textbf{0.5987} & 0.4204 & 0.5684 & \textbf{0.5291} & 0.2288 \\
+Quality only & 0.6514 & 0.4807 & 0.5901 & 0.5741 & 0.2960 \\
+Single-head gain (earlier version) & 0.6123 & 0.4329 & 0.5634 & 0.5362 & 0.2065 \\
+L2D-CE \cite{mozannar} & 0.6219 & 0.4469 & 0.5695 & 0.5461 & 0.2182 \\
+L2D-OvA \cite{verma} & 0.6202 & 0.4407 & 0.5654 & 0.5421 & 0.2118 \\
+Differential triage \cite{raghu} & 0.6108 & 0.4352 & 0.5657 & 0.5372 & 0.2082 \\
+Two-head, probability only & 0.6100 & 0.4338 & 0.5705 & 0.5381 & 0.2163 \\
+Two-head, quality-aware (proposed) & 0.6104 & 0.4338 & \textbf{0.5622} & 0.5355 & 0.2053 \\
+Oracle (uses labels)$^b$ & 0.4724 & 0.2904 & 0.3692 & 0.3773 & 0.0624 \\
+\bottomrule\end{tabular}}
+\newcommand{\TableTwo}{%
+\begin{tabular}{lccc}\toprule
+Condition & Automation head only & Reviewer head only & Both heads (proposed) \\\midrule
+Informative missingness (B) & \textbf{+2.83 (20)} & -0.28 (7) & \textbf{+2.29 (18)} \\
+Stale records (B) & +0.98 (13) & +0.04 (10) & +0.91 (14) \\
+Inconsistent codes (B) & +0.15 (10) & -0.23 (7) & -0.08 (10) \\
+Visible defects (A), quality-coupled reviewer & +0.07 (13) & +0.70 (16) & +0.65 (16) \\
+Visible defects (A), four decoupled reviewers & +0.18 (11) & -0.24 (5) & -0.07 (10) \\
+HMEQ, natural missingness (external) & \textbf{+4.53 (17)} & +0.95 (14) & \textbf{+5.12 (19)} \\
+\bottomrule\end{tabular}}
