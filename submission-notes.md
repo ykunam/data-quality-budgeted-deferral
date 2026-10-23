@@ -1,88 +1,80 @@
-# Submission-readiness audit — Short Communication (revision v2)
+# Submission-readiness audit — Short Communication (revision v2, after review of PR #2)
 
-Knowledge-Based Systems | Short Communication | audit date 23 October 2026
+Knowledge-Based Systems | Short Communication | 23 October 2026
+**Authority:** the official *Guide for Authors — Knowledge-Based Systems* (ScienceDirect, retrieved 23 October 2026, supplied by the author). The accepted KNOSYS paper (Thota) was used only as a model of presentation: an explicit contribution list, a paragraph separating the work from the closest method, ablations and an honest limitations section. No text, figures or results were taken from it.
 
-**Manuscript:** `manuscript.tex` / `manuscript.pdf` — *When does data quality help human deferral? Governance-constrained review allocation in knowledge-based decision systems*.
-**Recommendation: MINOR REVISIONS (author-side items only).** The scientific content, figures, tables and references were checked against the code and results. The items in Section 6 must be completed by the author before submission.
+**Recommendation: MINOR REVISIONS before submission.** All six review findings were addressed in code, results, tables and text, and every quoted number was recomputed from the final result files. What remains is author-side administration (Section 6). Two caveats:
+- The proposed estimator is not superior pooled. The paper's contribution rests on the exact governance-constrained allocator, the conditions analysis and the staffing results.
+- The corrected baseline and service metrics have not yet been independently re-reviewed. Please re-review PR #2 before merging.
 
-The v1 short communication is preserved in the git history at commit `a343665` (on `main`). The extended full-length version of this revision is in `manuscript_v2/`, for reference or as supplementary material.
+The v1 manuscript is preserved in git history at commit `a343665`.
 
-## 1. Journal requirement checklist
+## 1. Response to the PR #2 review
 
-The official KBS Guide for Authors was not supplied in this session. Requirements marked "from v1 audit" restate the page-referenced rules recorded in the previous version of this file, and should be re-checked against the current guide before submission.
+| # | Finding | Resolution | Evidence |
+|---|---|---|---|
+| 1 | OvA ignores the review fee | OvA is now trained as published (unweighted, calibrated heads). Routing uses a cost-sensitive plug-in rule: expected automation loss − expected review loss − c_R. All OvA-dependent experiments were rerun: main grid, data volume, log completeness, rules, cost refits. | `dqd/core.py::fit_l2d_ova`; `tests/test_baselines.py`: score shifts by exactly 100 when the fee goes 0→100, and no record is deferred at fee 100. **Outcome changed:** OvA is now the strongest learned router pooled (0.5312 vs 0.5355, n.s.) and on default data. The manuscript no longer calls the proposed router the best learned method. |
+| 2 | "Overtook Chow at 1,800" unsupported | Reworded to "approximately competitive at 1,800 (+0.1%, 10/20, p = 0.85) and cheaper only at 6,000". Explicitly "not a deployment threshold". Highlight 3 and the managerial advice reworded. | Rerun `e6_volume.csv.gz`. |
+| 3 | Table 2 lacks Holm adjustment | Holm applied over the table's 18 cells (declared family); bold = adjusted p < 0.05 (none). Unadjusted p < 0.05 is marked †. The analysis is labeled exploratory in the text, table note, abstract and highlights. Holm families declared in the protocol: pooled (8), per-dataset (9), data-volume (7), Table 2 (18). | `results/tables/sc_table2_holm.csv`. |
+| 4 | Service metrics exclude unresolved cases | Added arrival-cohort measures counting cases unresolved at day 40 as unmet, plus Kaplan–Meier resolution-time quantiles with censoring. The old measures are kept, labeled "conditional on resolution". Fig. 2(b–c) now plots cohort measures. | `dqd/dynamic.py::cohort_metrics`; `tests/test_service_metrics.py` reproduces the reviewer's case (conditional SLA 100% while ~half are unresolved → cohort SLA < 60%, KM p95 = ∞). At 20% capacity, cohort two-day resolution is 36% vs 48% conditional, 21.7% unresolved. |
+| 5 | Audit overstated readiness | This document replaces the earlier audit. The recommendation is now conditional on re-review and on the author-side items. | — |
+| 6 | Oracle described as an upper bound | Now "an optimistic lower bound on attainable cost, not deployable" (Table 1 note). | `manuscript.tex`, Table 1. |
 
-| Requirement (source) | Status | Evidence |
+## 2. Guide-for-Authors checklist (official guide)
+
+| Requirement (guide section) | Status | Evidence / action |
 |---|---|---|
-| Short Communication ≤ 10 double-spaced pages including tables and figures (v1 audit, guide p. 3) | PASS | 10 pages (pdflatex, US Letter, 11 pt Times, 0.75 in margins). Text, captions and references are double-spaced; table rows use 1.55× stretch because `setspace` single-spaces float bodies (same convention as v1, now widened). |
-| Abstract ≤ 250 words, no citations (v1 audit, p. 10) | PASS | 187 words, no citations. |
-| 1–7 keywords (v1 audit, p. 10) | PASS | 6 keywords. |
-| Highlights 3–5 bullets, ≤ 85 characters each (v1 audit, p. 10) | PASS | `highlights.txt`: 5 bullets, 72–80 characters. |
-| Editable source (v1 audit, p. 9) | PASS | `manuscript.tex`; tables generated as editable LaTeX (`budgeted_deferral/results/sc_tables.tex`). |
-| Numbered sections in standard order (v1 audit, p. 14) | PASS | Introduction → Method → Experimental protocol → Results and discussion → Limitations → Conclusion → declarations → references. |
-| Numbered equations; consecutive table and figure numbering, all cited in text (v1 audit, p. 11) | PASS | 1 numbered display equation; Tables 1–2 and Figs 1–2 each cited before they appear. |
-| Vector artwork with embedded fonts (v1 audit, pp. 11–12) | PASS | `fig3_volume.pdf`, `fig5_backlog.pdf` are vector PDFs with embedded fonts; the manuscript PDF embeds all 15 fonts. |
-| Numbered references in order of first citation (v1 audit, pp. 16–18) | PASS | 35 entries, ordered by first citation programmatically; no missing or unused keys. |
-| Data statement, AI-use declaration (journal policy) | PASS | Both present. |
-| Competing interests, funding, CRediT (journal policy) | **PENDING** | Placeholders — author must complete. |
-| Graphical abstract (optional at KBS per v1 audit) | NOT PROVIDED | Optional; not created. |
-| Author's own constraint: exactly two figures and two tables | PASS | Fig. 1 (data volume), Fig. 2 (backlog); Table 1 (main comparison), Table 2 (where quality helps). |
+| Short communication ≤ 10 double-line-spaced pages including tables and figures (Article types) | PASS | 10 pages (US Letter, 11 pt Times, 0.75 in margins, double-spaced text, captions and references; table rows at 1.5×). |
+| Editable source; `.tex` accepted; PDF not a source file (Manuscript formatting) | PASS | Upload `manuscript.tex`, `budgeted_deferral/results/sc_tables.tex` and the figure PDFs. Use of the Elsevier LaTeX template is *encouraged*, not required; the article class is used. |
+| Title page: title, author, lettered affiliation with full postal address and country, corresponding author with e-mail (Title page) | PASS (confirm) | Present. Author to confirm affiliation and e-mail. |
+| Abstract ≤ 250 words, stand-alone, states purpose, procedures, main findings with statistical significance, conclusions; no references (Abstract) | PASS | 229 words; reports p-values and the Holm result; no citations. |
+| 1–7 keywords (Keywords) | PASS | 6. |
+| Highlights: separate editable file with "highlights" in the name; 3–5 bullets ≤ 85 characters (Highlights) | PASS | `highlights.txt`: 5 bullets, 72–80 characters. |
+| Equations as editable text (Math) | PASS | LaTeX math; 1 numbered display equation. |
+| Tables editable, cited, numbered consecutively, captions, **notes below the table body**, no vertical rules or shading (Tables) | PASS | Tables 1–2 generated as LaTeX (booktabs); notes moved below the table body in this revision. |
+| Artwork: cited, numbered, captioned (brief title + description); **each figure as a separate file named logically, e.g. Figure_1** (Figures) | PASS (upload step) | Both figures are cited and captioned with a title sentence. At upload, submit `budgeted_deferral/figs/fig3_volume.pdf` as **Figure_1.pdf** and `fig5_backlog.pdf` as **Figure_2.pdf**. These are vector PDFs with embedded fonts, programmatically generated from results; the GenAI declaration covers AI-assisted analysis code. |
+| Numbered sections and subsections; abstract unnumbered (Article structure) | PASS | 1–6 with 2.1/2.2. |
+| References: every cited item listed and vice versa; real sources; DOIs where available; any consistent style (References) | PASS | 35 entries; all cited in order of first appearance; all verified to exist (Section 4); DOIs given for all DOI-bearing items. |
+| Data statement (Research data) | PASS (pending DOI) | Repository URL given; archival DOI to be added. |
+| Funding statement; sentence required if none (Funding sources) | PENDING | Placeholder with the guide's wording; author to confirm. |
+| CRediT statement (Author contributions) | PENDING | Draft roles; author to confirm. |
+| Competing interests via the declarations tool; Word file uploaded (Declaration of competing interests) | PENDING | Not in the manuscript text, per the guide. Complete the tool at submission ("I have nothing to declare" if applicable). |
+| GenAI declaration in a section directly before the references, using the guide's statement (Declaration of generative AI use) | PASS (confirm) | Present before the references; bracketed sentence to be confirmed by the author. |
+| Acknowledgements directly before references, if any (Acknowledgements) | N/A | None. |
 
-## 2. Scientific and editorial improvements (v1 → v2)
+## 3. Figures and tables — verification
 
-1. **Research question** reframed from "does quality help?" to "under what conditions does it help?", matching the mixed evidence.
-2. **Method:** Proposition 1 gives exact allocation in both regimes and corrects v1's overload ordering. Proposition 2 shows that backlog is invariant to prioritization. Both are tested by brute force (`budgeted_deferral/tests/test_propositions.py`).
-3. **Estimator:** a two-head design (automation loss / reviewer loss) trained on noisy, incomplete review logs replaces the optimistic expected-loss targets.
-4. **Baselines:** published L2D surrogates (Mozannar & Sontag; Verma & Nalisnick), differential triage (Raghu et al.) and Chow's rule, under matched information, rules, costs and capacity.
-5. **Reviewer models:** five instead of three, four of which do not depend on the router's quality signals.
-6. **Data quality:** domain-valid, partly invisible defects (informative missingness, stale records, inconsistent codes), plus HMEQ as an external dataset with natural missingness.
-7. **Statistics:** corrected resampled t-test with Holm adjustment, plus win counts. Cost sensitivity now refits every method.
-8. **Managerial outcomes:** a 40-day backlog simulation reporting workload, backlog, tail waiting time, two-day resolution and override rate.
-9. **Writing:** contributions and non-claims stated explicitly. Negative and inconclusive results are reported (pooled loss to Chow's rule; H1, H3 and H4 inconclusive).
-
-## 3. Verification of the two figures and two tables
-
-| Item | Source of numbers | Check |
+| Item | Source | Check |
 |---|---|---|
-| Table 1 (cost by method × dataset, HMEQ natural) | `budgeted_deferral/scripts/make_sc_tables.py` reading `results/static_logs.csv.gz` | Generated programmatically; bolding is computed. |
-| Table 2 (quality value by head) | same script; corrected resampled t-test for bolding | Generated programmatically. |
-| Fig. 1 (data volume) | `results/e6_volume.csv.gz` via `scripts/fig_volume.py` | Re-rendered and inspected. |
-| Fig. 2 (backlog) | `results/dynamic*.csv.gz` via `scripts/fig_dynamic.py` | Re-rendered and inspected; fluid-model overlay matches the simulation. |
-| Numbers quoted in text | 57 checks recomputed from the result files | 49 passed directly. 5 flags were artefacts of the checking script; rechecked against rule-compliant methods, the claim holds. 3 flags exposed one overstated sentence, now corrected: on default data the router beat Chow, confidence, L2D-CE and the probability-only ablation on 20/20 splits, but L2D-OvA and the single-head design only 15/20 (n.s.) and differential triage 19/20. |
-| Reproducibility | fixed seeds | Re-running a split reproduces the stored result to all digits. |
+| Table 1 (cost by method × dataset; HMEQ natural) | `scripts/make_sc_tables.py` ← `results/static_logs.csv.gz` (rerun) | Generated; bold computed as lowest deployable cost per column; notes below table. |
+| Table 2 (quality value by head) | same script; Holm over 18 cells | Generated; no cell significant after adjustment; † marks unadjusted p < 0.05. |
+| Fig. 1 (data volume, default and HMEQ) | `results/e6_volume.csv.gz` (rerun) via `scripts/fig_volume.py` | Now includes the corrected OvA; inspected. |
+| Fig. 2 (backlog, cohort resolution) | `results/dynamic*.csv.gz` (rerun) via `scripts/fig_dynamic.py` | Panels (b)–(c) use cohort measures; inspected. |
+| Every number quoted in the text | 77 checks recomputed from the final result files | 74 passed directly. 3 flags were corrected in the text: FIFO two-day cohort resolution is 40% (not 41%), and the cost-refit sentence now reads "confidence cheapest in all seven settings; best learned router within 0.7% of Chow". |
+| Tests | `python -m unittest discover -s budgeted_deferral/tests` | 8/8 pass (propositions, baseline fee sensitivity, cohort metrics). |
 
-## 4. Reference and citation verification
+## 4. Reference verification
 
-35 references: **22 journal articles from Elsevier (15), IEEE (6) and MDPI (1)**, 7 conference papers or preprints required for the compared methods and closest prior art, 2 statistical method papers, and 4 datasets.
+35 references: **22 journal articles from Elsevier (15), IEEE (6) and MDPI (1)**; 7 conference, journal or preprint papers for the compared methods and closest prior art (PMLR ×2, arXiv ×2, TMLR, AAAI, EMNLP); 2 statistical method papers; 4 datasets.
 
-| Group | References | Verification |
-|---|---|---|
-| Elsevier journals (15) | Abraham 2019 IJIM; Janssen 2020 GIQ; Papagiannidis 2025 JSIS; Wirtz 2022 GIQ; Green 2022 CLSR; Abdar 2021 Inf. Fusion; Mohammed 2025 Inf. Syst.; Wu 2022 FGCS; Tariq 2025 ESWA; Onari 2024 KBS; Barredo Arrieta 2020 Inf. Fusion; Artelt 2023 Neurocomputing; Lessmann 2015 EJOR; Jarrahi 2018 Bus. Horiz.; Mikalef 2021 I&M | Metadata and DOIs: 13 carried over from the v1 Crossref audit; Mohammed 2025 and Wu 2022 newly verified against institutional repository records. |
-| IEEE journals (6) | Chow 1970 TIT; Zhang 2023 Proc. IEEE; Mena 2020 Access; Chai 2023 TKDE; Adadi 2018 Access; Lu 2019 TKDE | Carried over from the v1 audit. |
-| MDPI journal (1) | Zhang 2021 Sensors | Carried over from the v1 audit. |
-| Methods and prior art (7) | Mozannar & Sontag 2020 (PMLR 119); Verma & Nalisnick 2022 (PMLR 162, pp. 22184–22202); Raghu et al. 2019 (arXiv); Alves et al. 2024 (TMLR); Hemmer et al. 2023 (AAAI 37); Farinhas et al. 2025 (EMNLP); Saketos et al. 2026 (arXiv) | Verified against the proceedings or arXiv pages. These are not MDPI/IEEE/Elsevier journals, but they are the methods implemented and the closest prior art, so they cannot be dropped without misrepresenting novelty. |
-| Statistics (2) | Nadeau & Bengio 2003 (Mach. Learn.); Holm 1979 (Scand. J. Stat.) | Verified. |
-| Datasets (4) | UCI German, Australian, Default; HMEQ (Baesens et al. 2016) | DOIs and checksums recorded. |
+- **Existence:** every reference was located in this session through publisher, repository, institutional or index records (e.g., RePEc for IJIM, Bus. Horiz. and EJOR; repository records for GIQ, JSIS, Inf. Fusion, Neurocomputing and Sensors; DOI search for Proc. IEEE; proceedings pages for the PMLR, AAAI and EMNLP papers; arXiv for both preprints).
+- **Correction made:** Abbaspour Onari et al. (2024, *Knowledge-Based Systems* 295, 111761). Both surnames were wrong in v1, now corrected from a co-author's publication list.
+- **Not re-fetched:** volume, page and DOI fields for the other v1-audited entries could not be re-fetched from Crossref here (blocked). They are retained from the v1 Crossref audit and are consistent with the records found.
+- **Q1 status:** for the 20 retained journals it comes from the v1 audit (SJR 2025 best quartile via search-indexed SCImago records). For the two added journals (*Information Systems*, *Future Generation Computer Systems*) it comes from Journal Metrics (OpenAlex-based, 2026). SCImago could not be reached from this environment, so SJR quartiles were not re-verified this session. "Q1" means the journal's best quartile, not every category.
+- **Placement:** each citation supports the sentence it appears in. Methods cited in Table 1 are the methods implemented.
 
-**Q1 status — limits that must stay visible.**
-- **20 retained journal articles:** Q1 status comes from the v1 audit (SJR 2025 best quartile, from search-indexed SCImago records). It was not re-verified in this session because SCImago and Crossref pages could not be reached from the working environment.
-- **Information Systems and FGCS (new):** shown as Q1 by Journal Metrics (OpenAlex-based, 2026 release). Their SJR quartile was not directly confirmed.
-- **Scope of the label:** "Q1" means best quartile of the journal, not of every subject category or of the paper.
+## 5. Scientific and editorial changes in this revision
 
-**Citation placement:** each citation supports the sentence it appears in. Prior-art citations are framed as not establishing novelty. Methods cited in Table 1 are the methods actually implemented.
+- Results reframed to match the corrected evidence. Cost-aware heuristics lead pooled. OvA and the two-head estimator are the strongest learned routers and are statistically tied. Both beat Chow on all 20 splits with about 6,000 training records. The two-head router is the most data-efficient at 200–600 records (Holm p < 0.005).
+- The quality mechanism is reported as exploratory, in line with the multiplicity correction.
+- Service results now count unresolved cases. The staffing conclusion strengthens: at 20% capacity, 21.7% of mandatory cases are never resolved.
+- Introduction strengthened: why the problem matters, an explicit gap statement, and how the study differs structurally from learning-to-defer work.
+- Language edited for consistency (US spelling, minus signs, terminology "two-head router/estimator"), with redundancy removed to keep 10 pages.
 
-## 5. Experimental consistency (manuscript ↔ code ↔ data)
+## 6. Unresolved items (author-side, before submission)
 
-- Protocol settings in the text match `budgeted_deferral/dqd/` and the v1 `experiment.py`: splits, quality bounds, rules, costs, corruption, representation and hyperparameters.
-- German and Australian file checksums match the v1 manifest. The default dataset comes from an identical-content mirror, so its checksum differs from v1's zip archive.
-- L2D baselines are adaptations: shared classifier, cost weights, and a one-hidden-layer NumPy network. This is stated in the text.
-
-## 6. Unresolved items (must be addressed before submission)
-
-1. **Declarations:** funding, competing interests and CRediT statement are placeholders. Also confirm the author's affiliation and e-mail.
-2. **Archival release:** create a versioned GitHub release, deposit it on Zenodo, and add the DOI to the Data availability statement. The repository must be public at submission.
-3. **Author guide re-check:** confirm the page, abstract, highlights and reference rules against the current KBS Guide for Authors. It was not available in this session.
-4. **Q1 confirmation:** if Q1 status matters for your institution, confirm SJR quartiles directly on SCImago for the two new journals and spot-check the carried-over set.
-5. **Scientific limitations (disclosed, not blocking):** simulated reviewers, older benchmarks, stylized defects, illustrative thresholds and costs, and three of four hypotheses inconclusive.
-6. **Optional:** a graphical abstract.
-
-**Final recommendation: MINOR REVISIONS.** These are author-side administrative items. No further experiments are required for a Short Communication.
+1. Funding and CRediT statements, the declarations-tool upload, the GenAI sentence in brackets, and affiliation/e-mail confirmation.
+2. Make the repository public; create a release and Zenodo DOI; add the DOI to the Data statement.
+3. Upload figures as `Figure_1.pdf` / `Figure_2.pdf` and highlights as a separate file.
+4. Optional: confirm SJR quartiles on SCImago for the two new journals.
+5. **Scientific risk (disclosed, not blocking):** simulated reviewers; old benchmarks; stylized defects; illustrative thresholds and costs; three of four hypotheses inconclusive; modest methodological novelty. An editor may still judge the contribution insufficient for KBS.

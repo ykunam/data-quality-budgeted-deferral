@@ -1,5 +1,5 @@
 - Exact sorting solves governance-constrained review allocation in both regimes.
 - Backlog depends on staffing, not on how mandatory cases are prioritized.
-- Learned deferral beat cost-aware heuristics only with thousands of review logs.
-- Quality inputs helped most when missingness was informative about outcomes.
+- No learned router beat a cost-aware heuristic without a large review history.
+- Quality inputs appeared to help under informative missingness (exploratory).
 - Quality-triggered rules missed three-quarters of records with invisible defects.

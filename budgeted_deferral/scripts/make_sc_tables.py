@@ -47,7 +47,7 @@ cells = [[rel(sub, v, "2h_prob") for v in VARIANTS] for _, sub in R]
 # Holm adjustment over the whole table (18 comparisons = one family)
 padj = ST.holm([c[2] for row in cells for c in row]).reshape(len(R), len(VARIANTS))
 def fmt(c, pa):
-    txt = f"{c[0]:+.2f} ({c[1]})"
+    txt = (f"$+${c[0]:.2f}" if c[0] >= 0 else f"$-${-c[0]:.2f}") + f" ({c[1]})"
     return f"\\textbf{{{txt}}}" if pa < 0.05 else (txt + "$^{\\dagger}$" if c[2] < 0.05 else txt)
 lines = [f"{lab} & " + " & ".join(fmt(c, pa) for c, pa in zip(row, prow)) + " \\\\"
          for (lab, _), row, prow in zip(R, cells, padj)]
