@@ -26,7 +26,7 @@ The v1 manuscript is preserved in git history at commit `a343665`.
 |---|---|---|
 | Short communication ≤ 10 double-line-spaced pages including tables and figures (Article types) | PASS | 10 pages (US Letter, 11 pt Times, 0.75 in margins, double-spaced text, captions and references; table rows at 1.5×). |
 | Editable source; `.tex` accepted; PDF not a source file (Manuscript formatting) | PASS | Upload `manuscript.tex`, `budgeted_deferral/results/sc_tables.tex` and the figure PDFs. Use of the Elsevier LaTeX template is *encouraged*, not required; the article class is used. |
-| Title page: title, author, lettered affiliation with full postal address and country, corresponding author with e-mail (Title page) | PASS (confirm) | Present. Author to confirm affiliation and e-mail. |
+| Title page: title, author, lettered affiliation with full postal address and country, corresponding author with e-mail (Title page) | PASS with one deviation | Corresponding author's e-mail (yeshwanth.kunam@gmail.com) on the title page. Affiliation is "Independent Researcher, USA" at the author's request; the guide asks for a full postal address, so the editorial office may request one. |
 | Abstract ≤ 250 words, stand-alone, states purpose, procedures, main findings with statistical significance, conclusions; no references (Abstract) | PASS | 229 words; reports p-values and the Holm result; no citations. |
 | 1–7 keywords (Keywords) | PASS | 6. |
 | Highlights: separate editable file with "highlights" in the name; 3–5 bullets ≤ 85 characters (Highlights) | PASS | `highlights.txt`: 5 bullets, 72–80 characters. |
