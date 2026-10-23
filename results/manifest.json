@@ -1,0 +1,483 @@
+{
+  "version": "1.1.0",
+  "command": [
+    "dq-budgeted-deferral/experiment.py",
+    "--seeds",
+    "20",
+    "--start-seed",
+    "2",
+    "--cache",
+    "data_cache",
+    "--out",
+    "dq-budgeted-deferral/results"
+  ],
+  "python": "3.12.14",
+  "numpy": "2.3.5",
+  "pandas": "2.2.3",
+  "scipy": "1.17.0",
+  "sklearn": "1.8.0",
+  "matplotlib": "3.10.8",
+  "code_sha256": "395ccbfe631ef9d26c8efefad4f613301e91db4186be01093b6e6ca7eb67e641",
+  "datasets": {
+    "german": {
+      "url": "https://archive.ics.uci.edu/ml/machine-learning-databases/statlog/german/german.data-numeric",
+      "file": "german.data-numeric",
+      "doi": "10.24432/C5NC77",
+      "sha256": "2752b044394958ab6dd193a0b56ca0f0b3a2d8bc7cb8c008e35a5e84bbec02f8",
+      "n": 1000,
+      "d": 24,
+      "positive_rate": 0.3,
+      "split_counts": {
+        "train": 450,
+        "calibration": 150,
+        "selector": 200,
+        "test": 200
+      },
+      "split_counts_by_seed": {
+        "2": {
+          "train": 450,
+          "calibration": 150,
+          "selector": 200,
+          "test": 200
+        },
+        "3": {
+          "train": 450,
+          "calibration": 150,
+          "selector": 200,
+          "test": 200
+        },
+        "4": {
+          "train": 450,
+          "calibration": 150,
+          "selector": 200,
+          "test": 200
+        },
+        "5": {
+          "train": 450,
+          "calibration": 150,
+          "selector": 200,
+          "test": 200
+        },
+        "6": {
+          "train": 450,
+          "calibration": 150,
+          "selector": 200,
+          "test": 200
+        },
+        "7": {
+          "train": 450,
+          "calibration": 150,
+          "selector": 200,
+          "test": 200
+        },
+        "8": {
+          "train": 450,
+          "calibration": 150,
+          "selector": 200,
+          "test": 200
+        },
+        "9": {
+          "train": 450,
+          "calibration": 150,
+          "selector": 200,
+          "test": 200
+        },
+        "10": {
+          "train": 450,
+          "calibration": 150,
+          "selector": 200,
+          "test": 200
+        },
+        "11": {
+          "train": 450,
+          "calibration": 150,
+          "selector": 200,
+          "test": 200
+        },
+        "12": {
+          "train": 450,
+          "calibration": 150,
+          "selector": 200,
+          "test": 200
+        },
+        "13": {
+          "train": 450,
+          "calibration": 150,
+          "selector": 200,
+          "test": 200
+        },
+        "14": {
+          "train": 450,
+          "calibration": 150,
+          "selector": 200,
+          "test": 200
+        },
+        "15": {
+          "train": 450,
+          "calibration": 150,
+          "selector": 200,
+          "test": 200
+        },
+        "16": {
+          "train": 450,
+          "calibration": 150,
+          "selector": 200,
+          "test": 200
+        },
+        "17": {
+          "train": 450,
+          "calibration": 150,
+          "selector": 200,
+          "test": 200
+        },
+        "18": {
+          "train": 450,
+          "calibration": 150,
+          "selector": 200,
+          "test": 200
+        },
+        "19": {
+          "train": 450,
+          "calibration": 150,
+          "selector": 200,
+          "test": 200
+        },
+        "20": {
+          "train": 450,
+          "calibration": 150,
+          "selector": 200,
+          "test": 200
+        },
+        "21": {
+          "train": 450,
+          "calibration": 150,
+          "selector": 200,
+          "test": 200
+        }
+      }
+    },
+    "australian": {
+      "url": "https://archive.ics.uci.edu/ml/machine-learning-databases/statlog/australian/australian.dat",
+      "file": "australian.dat",
+      "doi": "10.24432/C59012",
+      "sha256": "3abe5af151afa50b999a9ba21cbc884e80d80a4050b716cf88b34a2e6ecb731c",
+      "n": 690,
+      "d": 14,
+      "positive_rate": 0.4449275362318841,
+      "split_counts": {
+        "train": 310,
+        "calibration": 103,
+        "selector": 139,
+        "test": 138
+      },
+      "split_counts_by_seed": {
+        "2": {
+          "train": 310,
+          "calibration": 103,
+          "selector": 139,
+          "test": 138
+        },
+        "3": {
+          "train": 310,
+          "calibration": 103,
+          "selector": 139,
+          "test": 138
+        },
+        "4": {
+          "train": 310,
+          "calibration": 103,
+          "selector": 139,
+          "test": 138
+        },
+        "5": {
+          "train": 310,
+          "calibration": 103,
+          "selector": 139,
+          "test": 138
+        },
+        "6": {
+          "train": 310,
+          "calibration": 103,
+          "selector": 139,
+          "test": 138
+        },
+        "7": {
+          "train": 310,
+          "calibration": 103,
+          "selector": 139,
+          "test": 138
+        },
+        "8": {
+          "train": 310,
+          "calibration": 103,
+          "selector": 139,
+          "test": 138
+        },
+        "9": {
+          "train": 310,
+          "calibration": 103,
+          "selector": 139,
+          "test": 138
+        },
+        "10": {
+          "train": 310,
+          "calibration": 103,
+          "selector": 139,
+          "test": 138
+        },
+        "11": {
+          "train": 310,
+          "calibration": 103,
+          "selector": 139,
+          "test": 138
+        },
+        "12": {
+          "train": 310,
+          "calibration": 103,
+          "selector": 139,
+          "test": 138
+        },
+        "13": {
+          "train": 310,
+          "calibration": 103,
+          "selector": 139,
+          "test": 138
+        },
+        "14": {
+          "train": 310,
+          "calibration": 103,
+          "selector": 139,
+          "test": 138
+        },
+        "15": {
+          "train": 310,
+          "calibration": 103,
+          "selector": 139,
+          "test": 138
+        },
+        "16": {
+          "train": 310,
+          "calibration": 103,
+          "selector": 139,
+          "test": 138
+        },
+        "17": {
+          "train": 310,
+          "calibration": 103,
+          "selector": 139,
+          "test": 138
+        },
+        "18": {
+          "train": 310,
+          "calibration": 103,
+          "selector": 139,
+          "test": 138
+        },
+        "19": {
+          "train": 310,
+          "calibration": 103,
+          "selector": 139,
+          "test": 138
+        },
+        "20": {
+          "train": 310,
+          "calibration": 103,
+          "selector": 139,
+          "test": 138
+        },
+        "21": {
+          "train": 310,
+          "calibration": 103,
+          "selector": 139,
+          "test": 138
+        }
+      }
+    },
+    "default": {
+      "url": "https://archive.ics.uci.edu/static/public/350/default+of+credit+card+clients.zip",
+      "file": "default.zip",
+      "doi": "10.24432/C55S3H",
+      "sha256": "56c885f84457f6680f8438f02bfcdac9579323d8a94465ee5f26e32baa727602",
+      "n": 30000,
+      "d": 23,
+      "positive_rate": 0.2212,
+      "split_counts": {
+        "train": 13503,
+        "calibration": 4500,
+        "selector": 5999,
+        "test": 5998
+      },
+      "split_counts_by_seed": {
+        "2": {
+          "train": 13503,
+          "calibration": 4500,
+          "selector": 5999,
+          "test": 5998
+        },
+        "3": {
+          "train": 13503,
+          "calibration": 4498,
+          "selector": 5999,
+          "test": 6000
+        },
+        "4": {
+          "train": 13499,
+          "calibration": 4505,
+          "selector": 5998,
+          "test": 5998
+        },
+        "5": {
+          "train": 13502,
+          "calibration": 4493,
+          "selector": 6005,
+          "test": 6000
+        },
+        "6": {
+          "train": 13500,
+          "calibration": 4505,
+          "selector": 6000,
+          "test": 5995
+        },
+        "7": {
+          "train": 13502,
+          "calibration": 4496,
+          "selector": 6001,
+          "test": 6001
+        },
+        "8": {
+          "train": 13497,
+          "calibration": 4501,
+          "selector": 6001,
+          "test": 6001
+        },
+        "9": {
+          "train": 13498,
+          "calibration": 4497,
+          "selector": 6007,
+          "test": 5998
+        },
+        "10": {
+          "train": 13497,
+          "calibration": 4496,
+          "selector": 6003,
+          "test": 6004
+        },
+        "11": {
+          "train": 13502,
+          "calibration": 4501,
+          "selector": 5995,
+          "test": 6002
+        },
+        "12": {
+          "train": 13499,
+          "calibration": 4495,
+          "selector": 6007,
+          "test": 5999
+        },
+        "13": {
+          "train": 13499,
+          "calibration": 4503,
+          "selector": 5997,
+          "test": 6001
+        },
+        "14": {
+          "train": 13493,
+          "calibration": 4504,
+          "selector": 6004,
+          "test": 5999
+        },
+        "15": {
+          "train": 13500,
+          "calibration": 4500,
+          "selector": 6001,
+          "test": 5999
+        },
+        "16": {
+          "train": 13499,
+          "calibration": 4501,
+          "selector": 6005,
+          "test": 5995
+        },
+        "17": {
+          "train": 13493,
+          "calibration": 4501,
+          "selector": 6005,
+          "test": 6001
+        },
+        "18": {
+          "train": 13500,
+          "calibration": 4503,
+          "selector": 5995,
+          "test": 6002
+        },
+        "19": {
+          "train": 13494,
+          "calibration": 4503,
+          "selector": 6000,
+          "test": 6003
+        },
+        "20": {
+          "train": 13494,
+          "calibration": 4506,
+          "selector": 6001,
+          "test": 5999
+        },
+        "21": {
+          "train": 13500,
+          "calibration": 4497,
+          "selector": 5995,
+          "test": 6008
+        }
+      }
+    }
+  },
+  "seeds": [
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21
+  ],
+  "budgets": [
+    0.05,
+    0.1,
+    0.2,
+    0.3
+  ],
+  "scenarios": [
+    "clean",
+    "missing",
+    "outliers",
+    "mixed",
+    "shift"
+  ],
+  "profiles": [
+    "constant",
+    "quality",
+    "adverse"
+  ],
+  "costs": {
+    "false_negative": 5.0,
+    "false_positive": 1.0,
+    "review": 0.05,
+    "hold": 1.5
+  },
+  "reviewer": "Simulated expected losses; no human participants",
+  "duration_seconds": 210.83262426999954,
+  "results_sha256": "ddbe872e5b57eb56049f68b54d8a7a13b12ca59f73e053b4d6687bc246a7d405"
+}

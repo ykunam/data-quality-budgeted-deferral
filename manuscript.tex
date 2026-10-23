@@ -1,0 +1,137 @@
+\documentclass[11pt,letterpaper]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{mathptmx,amsmath,amssymb,graphicx,booktabs,setspace,caption,url}
+\usepackage[hidelinks]{hyperref}
+\usepackage{float}
+\hypersetup{pdftitle={Data-Quality-Aware Knowledge-Based Systems for AI Governance and Managerial Decision-Making: Budgeted Human Deferral},pdfauthor={Yeshwanth Reddy Kunam},pdfsubject={Short communication author-review draft},pdfkeywords={AI governance, data quality, knowledge-based systems, human deferral}}
+\captionsetup{font={small,stretch=2},labelfont=bf}
+\setlength{\parindent}{1em}
+\setlength{\parskip}{0pt}
+\setlength{\textfloatsep}{10pt}
+\setlength{\intextsep}{9pt}
+\newcommand{\R}{\mathbb{R}}
+\input{results/tables.tex}
+\begin{document}
+\doublespacing
+\begin{center}
+{\large\bfseries Data-Quality-Aware Knowledge-Based Systems for AI Governance and Managerial Decision-Making: Budgeted Human Deferral\par}
+\vspace{3pt}
+Yeshwanth Reddy Kunam$^{a,*}$\\
+{\small $^a$Doctor of Business Administration, Midwest University,\\
+851 Parr Road, Wentzville, MO 63385, United States\\
+$^*$Correspondence: \texttt{yeshwanthkunam05@gmail.com}}
+\end{center}
+\vspace{-6pt}
+\noindent\textit{Short communication. Author-review draft; not submitted or peer reviewed.}
+
+\begin{abstract}
+AI governance requires decisions about when automation may proceed and when limited human review is necessary. This study examines a compact data-quality-conditioned gain model combined with explicit review rules. The model estimates the expected reduction in asymmetric decision loss from review; a batch allocator enforces capacity and holds mandatory cases that cannot be reviewed. For feasible mandatory workloads, sorting positive optional gains solves the estimated allocation problem exactly. Experiments use three public credit benchmarks, five data conditions, three simulated reviewer profiles, four capacities, and 20 repeated group-disjoint splits. At 20\% capacity with quality-dependent reviewer errors, the quality-aware policy changes expected cost relative to feature-aware gain by \StudyDelta\ units per record in its favor; the descriptive paired split interval is [\StudyDeltaLow, \StudyDeltaHigh]. It does not consistently improve on simpler confidence or cost-risk routing. The results distinguish predictive benefit from policy adherence and reveal the service backlog imposed by mandatory review under severe data degradation. They support explicit capacity accounting, rather than universal performance claims for quality-aware deferral.
+\end{abstract}
+\noindent\textbf{Keywords:} Artificial intelligence; Data quality; Knowledge-based systems; AI governance; Managerial decision-making; Human deferral
+
+\section{Introduction}
+An AI recommendation can remain confident when its inputs are incomplete or outside familiar ranges. Managers must allocate limited review capacity while respecting restrictions on automation. Selective prediction formalizes abstention \cite{selectivenet}; learning to defer incorporates another decision maker \cite{mozannar}. Calibration and human--AI dependence affect routing quality \cite{verma,wei}. The operational challenge is to connect observable data limitations with review benefit and unresolved workload.
+
+Existing work develops consistent losses \cite{liu}, multiple-expert routing \cite{mao}, quality-aware translation cascades \cite{farinhas}, and training-time expert-query budgets \cite{desalvo}. Congestion-aware online deferral \cite{congestion} and claim-specific evidence controls in lending \cite{trust} address further capacity and governance concerns. These contributions motivate a specific evaluation question: \textit{does observable data quality improve fixed-batch routing when mandatory-review rules and held cases are counted?} We study an eight-input gain model coupled to an explicit two-rule knowledge base and three-action allocator. The contribution is a reproducible separation of routing benefit, rule adherence, and unresolved service demand. It is an integration study, not a claim of first use of quality-aware deferral, a new learning guarantee, or dynamic queue control.
+
+\section{Method}
+For a batch of $n$ records, let $p_i$ denote a calibrated probability of class 1. False-negative and false-positive costs are 5 and 1, respectively; the automated decision is $\hat y_i=\mathbf{1}[p_i\geq1/6]$. Let $q_i=(u_i,v_i)$ contain the missing-feature fraction and the fraction outside training-derived bounds. The knowledge base uses two forward rules: excessive missingness or excessive range violations trigger mandatory review. Their combined predicate is the illustrative policy
+\begin{equation}
+ m_i=\mathbf{1}[u_i\geq0.5\;\lor\;v_i\geq0.25].
+\label{eq:rule}
+\end{equation}
+These illustrative thresholds are organizational assumptions. For feature $j$, define $t_j=\max(Q_{.99,j}-Q_{.01,j},1)$ and bounds $[Q_{.01,j}-0.1t_j,Q_{.99,j}+0.1t_j]$ from predictor-training rows. Both quality fractions use all features as denominator; missing values are excluded from range-violation counts. The router receives observed flags, not injected-corruption labels.
+
+Actions $a_i,r_i,h_i\in\{0,1\}$ indicate automation, review, and hold. With $B=\lfloor bn\rfloor$, review fee $c_R=0.05$, and hold penalty $c_H=1.5$, evaluate
+\begin{equation}
+ C=\frac{1}{n}\sum_i\{a_i\ell_{Ai}+r_i(\bar\ell_{Hi}+c_R)+h_i c_H\},
+\label{eq:cost}
+\end{equation}
+subject to $a_i+r_i+h_i=1$, $\sum_i r_i\leq B$, $a_i\leq1-m_i$, and $h_i\leq m_i$. A service-first constraint fixes $\sum_i h_i=\max(0,\sum_i m_i-B)$, preventing voluntary holds when mandatory review is feasible. For true label $y_i$, $\ell_{Ai}=(1+4y_i)\mathbf{1}[\hat y_i\ne y_i]$ and $\bar\ell_{Hi}=(1+4y_i)e(q_i)$, where $e(q_i)$ is a simulated symmetric reviewer error probability. The review fee is added once. Holding represents unresolved service, not a correct prediction. Labels enter fitting and retrospective evaluation, never allocation.
+
+A squared-loss gradient-boosted regressor estimates
+\begin{equation}
+ \hat g_i\approx\mathbb{E}[\ell_{Ai}-\bar\ell_{Hi}-c_R\mid z_i],\quad
+ z_i=(p_i,s_i,q_i,p_iq_i,\hat y_iq_i),
+\label{eq:gain}
+\end{equation}
+where $s_i=\min(5p_i,1-p_i)$. The eight-input representation has width independent of the underlying feature count. The prediction model is fitted first and remains fixed during gain estimation. A probability-only model uses $(p_i,s_i)$. The feature-aware comparator adds raw predictors, median-imputed from training data, centered on training medians, divided by $t_j$, and clipped to $[-5,5]$. The base predictor handles missing values directly.
+
+Let $M=\{i:m_i=1\}$. If $|M|\leq B$, review all mandatory records, then select up to $B-|M|$ optional records with the largest positive estimated gains. If $|M|>B$, review the $B$ mandatory records with greatest estimated gains and hold the rest; no optional record is reviewed. Stable input order resolves ties. The label-free audit stores probability, quality measurements, rule flag, gain, and action.
+
+\textbf{Allocation property.} When $|M|\leq B$, this policy minimizes estimated cost among feasible routes. Mandatory costs are fixed; each optional review replaces automated cost by reviewed cost, reducing the objective by $\hat g_i$. An exchange of a lower selected gain for a higher unselected gain cannot increase cost, and negative gains are never beneficial. Sorting costs $O(n\log n)$. If optional gain errors are uniformly bounded by $\epsilon$, excess mean cost relative to the true-gain optimum is at most $2(B-|M|)\epsilon/n$, by bounding the two policies' estimation errors separately. These are conditional allocation properties, not consistency claims for the fitted regressor. Under overload, at least $|M|-B$ records must be held; the implementation attains the lower bound $\max(0,|M|-B)/n$ on the hold fraction, but its ordering is not claimed to minimize cost among all overloaded policies.
+
+\section{Experimental protocol}
+We use German numeric credit (1,000 records, 24 released numeric predictors), Australian credit (690, 14), and credit-card default (30,000, 23; identifier removed) \cite{german,australian,default}. Feature-identical records are grouped before splitting, including those with conflicting labels. Groups are stratified by majority label into approximately 45\% predictor training, 15\% calibration, 20\% gain fitting, and 20\% testing. This prevents identical feature vectors from crossing roles. German class 2 is recoded to 1; Australian and default binary labels are retained. Released numeric category encodings are unchanged. The common 5:1 loss is illustrative, not a harmonized monetary valuation across outcomes.
+
+The predictor uses histogram gradient boosting with at most 120 iterations, 15 leaves, learning rate 0.07, and L2 penalty 1. Logistic calibration uses clipped predicted log odds ($[10^{-6},1-10^{-6}]$ probabilities), $C=1$, and a disjoint calibration partition. Gain regressors share at most 100 iterations, seven leaves, learning rate 0.06, L2 penalty 5, and minimum leaf size $\max(20,\lfloor0.005N\rfloor)$ for the expanded gain-fitting size $N$. Calibration and gain partitions are separately expanded into clean, missing, outlier, and mixed versions. All preprocessing bounds come from predictor-training rows. Other estimator settings retain scikit-learn 1.8.0 defaults, including automatic early stopping.
+
+Missing-only conditions sample per-record missing rates uniformly from $[0,0.55]$; outlier-only rates use $[0,0.18]$. Mixed conditions use missing rates $[0,0.35]$ and outlier rates $[0,0.12]$. Independently selected outlier cells receive signed offsets of 1.2--2.5 training ranges before missingness is applied. A held-out severity condition uses missing rates $[0.35,0.75]$ and outlier rates $[0.08,0.25]$. This is a corruption-severity shift, not evidence of concept-drift adaptation.
+
+Reviewer errors are explicitly simulated: constant 0.10; quality-dependent $\min(0.40,0.05+0.35u_i+0.25v_i)$; and adverse 0.25. Expected asymmetric reviewer loss is calculated analytically from these symmetric error probabilities. The learner observes expected reviewer losses on its fitting partition, an optimistic substitute for limited human-review logs. There are no human participants. Capacities are 5\%, 10\%, 20\%, and 30\%.
+
+Comparators are automation only, random, boundary confidence ($-|p_i-1/6|$), cost risk ($s_i$), quality-only ranking ($u_i+v_i$), probability-only gain, feature-aware gain, and both probability-only and proposed gain without rules. The latter two complete a $2\times2$ ablation of quality conditioning and the rule layer. Automation-only and both no-rule variants deliberately relax the governance constraint. Rule-constrained heuristics fill capacity; learned methods admit only positive optional gains. These are component comparators, not reimplementations of the cited surrogate-loss algorithms.
+
+Seeds 0 and 1 informed the compact representation during development. Final evaluation retains seeds 2--21: 60 dataset splits and 36,000 method-condition rows, not independent experimental units. The primary comparison equally weights datasets and four non-clean conditions at 20\% capacity with the quality-dependent reviewer. Intervals describe paired variation across split seeds; overlapping observations mean they are not independent population-level confidence statements. No population significance claim is made.
+
+\section{Results and discussion}
+Table~\ref{tab:main} reports primary costs, including held-case penalties. The paired feature-aware-minus-quality-aware difference is \StudyDelta\ (descriptive 95\% split interval [\StudyDeltaLow, \StudyDeltaHigh]). This approximately 0.20\% relative change is small, and the interval crosses zero. Quality-only ranking performs worse, but simpler confidence and cost-risk policies remain competitive or better. Thus the experiment does not establish general predictive superiority for adding quality features. The default benchmark gives costs 0.6314 versus 0.6379 for quality-aware and feature-aware gain, respectively, whereas Australian credit gives 0.5151 versus 0.5098. This reversal cautions against inferring a general advantage from a favorable dataset. Figure~\ref{fig:capacity} shows capacity tradeoffs; Figure~\ref{fig:paired} displays every data-condition/reviewer combination.
+
+\begin{table}[H]
+\centering\small\renewcommand{\arraystretch}{1}
+\caption{Expected cost per record at 20\% capacity with quality-dependent reviewer errors, averaged across 20 seeds and four non-clean conditions. Macro gives equal dataset weight. Unconstrained diagnostic rows are not policy-compliant alternatives.}\label{tab:main}
+\MainTable
+\end{table}
+
+\begin{figure}[H]
+\centering\includegraphics[width=0.93\linewidth]{results/Figure_1.pdf}
+\caption{Capacity and expected cost, equally averaged across datasets and non-clean conditions for the quality-dependent reviewer. Bands are mean $\pm1.96$ standard errors across seed averages, descriptive of repeated-split variability rather than population uncertainty. Capacity is a maximum, not guaranteed usage. All displayed policies enforce the same rules. Figures are generated reproducibly from experimental results using AI-assisted analysis code.}\label{fig:capacity}
+\end{figure}
+
+Table~\ref{tab:governance} separates quality conditioning from rule enforcement. Severe corruption produces mandatory demand beyond capacity: approximately 47.0\% of records are held at 20\% capacity. Cheaper unconstrained routes partly reflect prohibited automation. Zero violations follow from construction and do not validate policy appropriateness, fairness, or legal sufficiency. In the primary comparison, confidence costs 0.6028 and cost risk 0.6051, versus 0.6055 for quality-aware gain. The proposed policy reviews 19.85\% and holds 11.80\% overall; maximum capacity and realized service must therefore be reported separately.
+
+\begin{table}[H]
+\centering\small\renewcommand{\arraystretch}{1}
+\caption{Factorial ablation of quality conditioning and the rule layer at 20\% capacity for the quality-dependent reviewer. Quality On uses the compact quality-conditioned gain representation; Off uses probability-only gain. Rules denotes the mandatory-review layer. Review, hold, and violation are percentages of all records, equally averaged across datasets and seeds. Violation means automated processing of a mandatory-review record.}\label{tab:governance}
+\GovernanceTable
+\end{table}
+
+\begin{figure}[H]
+\centering\includegraphics[width=0.94\linewidth]{results/Figure_2.pdf}
+\caption{Paired feature-aware-minus-quality-aware cost differences at 20\% capacity. Positive values favor quality-aware gain. Points average all datasets; bars are descriptive 95\% paired split-seed t intervals. Reviewer profiles are simulated. Figures are generated reproducibly from experimental results using AI-assisted analysis code.}\label{fig:paired}
+\end{figure}
+
+A fixed-route accounting sensitivity changes the severe-shift hold penalty from 0.5 to 3.0: mean cost rises from 0.5606 to 1.7350, with 1.0304 at the main penalty of 1.5. This calculation holds routing decisions fixed; it does not claim that these routes remain optimal under alternative penalties. For managers, this separates three decisions: whether inputs permit automation, where review is beneficial, and whether staffing can meet compulsory demand. The experiment supports monitoring those quantities together; it does not establish a financial return or an operationally justified threshold.
+
+\section{Limitations}
+The quality-dependent reviewer is constructed from the same quality fractions supplied to the proposed model; this coupling may favor that representation. Constant and adverse profiles probe, but do not remove, this simulation dependence. Other limitations are old benchmarks, categorical-code corruption, full expected reviewer-loss targets, fixed costs and rules, and reused observations across splits. No managerial behavior, causal effect, fairness, calibration-under-shift, or production effectiveness is established. Stronger evidence requires realistic corruption, reviewer logs, retrained policy/cost sensitivity, and published deferral baselines.
+
+\section{Conclusion}
+A quality-conditioned gain model and explicit rules permit auditable batch allocation. Exact feasible allocation does not ensure accurate gains or better routing. The reproducible finding is the tradeoff between rule adherence and unresolved service demand; the comparative evidence does not establish general superiority of quality-aware gain.
+
+\paragraph{Data and code availability}
+The accompanying reproducibility package contains executable code, all seed-level metrics, a label-free audit sample, vector artwork, and a checksum manifest. Original datasets are available through the persistent identifiers in references \cite{german,australian,default}. The author-review repository is private: \url{https://github.com/ykunam/data-quality-budgeted-deferral}. A publicly accessible versioned release and archival deposit must be added before submission.
+
+\paragraph{Author declarations}
+The author must confirm authorship, affiliation, correspondence, funding, competing interests, and contribution statements before submission. No unverified funding or conflict declaration is asserted here.
+
+\paragraph{Declaration of generative AI and AI-assisted technologies in the manuscript preparation process}
+ChatGPT (OpenAI) assisted with study design, code development, computational analysis, literature checking, and manuscript drafting. The human author must critically verify and adopt the work before submission and remains responsible for its accuracy and originality. No author review or approval is implied by this draft.
+
+\small
+\begin{thebibliography}{13}
+\bibitem{selectivenet} Y. Geifman, R. El-Yaniv, SelectiveNet: A deep neural network with an integrated reject option, in: Proc. ICML, PMLR 97 (2019) 2151--2159. \url{https://proceedings.mlr.press/v97/geifman19a.html}.
+\bibitem{mozannar} H. Mozannar, D. Sontag, Consistent estimators for learning to defer to an expert, in: Proc. ICML, PMLR 119 (2020) 7076--7087. \url{https://proceedings.mlr.press/v119/mozannar20b.html}.
+\bibitem{verma} R. Verma, D. Barrejon, E. Nalisnick, Learning to defer to multiple experts: Consistent surrogate losses, confidence calibration, and conformal ensembles, in: Proc. AISTATS, PMLR 206 (2023) 11415--11434. \url{https://proceedings.mlr.press/v206/verma23a.html}.
+\bibitem{wei} Z. Wei, Y. Cao, L. Feng, Exploiting human-AI dependence for learning to defer, in: Proc. ICML, PMLR 235 (2024) 52484--52499. \url{https://proceedings.mlr.press/v235/wei24a.html}.
+\bibitem{liu} S. Liu, Y. Cao, Q. Zhang, L. Feng, B. An, Mitigating underfitting in learning to defer with consistent losses, in: Proc. AISTATS, PMLR 238 (2024) 4816--4824. \url{https://proceedings.mlr.press/v238/liu24h.html}.
+\bibitem{mao} A. Mao, M. Mohri, Y. Zhong, Mastering multiple-expert routing: Realizable H-consistency and strong guarantees for learning to defer, in: Proc. ICML, PMLR 267 (2025) 43035--43066. \url{https://proceedings.mlr.press/v267/mao25c.html}.
+\bibitem{farinhas} A. Farinhas, N.M. Guerreiro, S. Agrawal, R. Rei, A. Martins, Translate smart, not hard: Cascaded translation systems with quality-aware deferral, in: Proc. EMNLP (2025) 26742--26756. \url{https://doi.org/10.18653/v1/2025.emnlp-main.1358}.
+\bibitem{desalvo} G. DeSalvo, C. Mohri, M. Mohri, Y. Zhong, Budgeted multiple-expert deferral, arXiv preprint (2025). \url{https://doi.org/10.48550/arXiv.2510.26706}.
+\bibitem{congestion} V. Saketos, W. Reveillard, A. Proutiere, S. Dalleiger, M. Xiao, To defer or not to defer? Online learning with LLMs and congested experts, arXiv preprint (2026). \url{https://doi.org/10.48550/arXiv.2610.15128}.
+\bibitem{trust} Y. Si, Governing data trust in digital lending ecosystems: Strategic data packaging and traceability in China's retail banking, J. Bank. Regul. 27 (2026) article 69. \url{https://doi.org/10.1057/s41261-026-00364-8}.
+\bibitem{german} [dataset] H. Hofmann, Statlog (German Credit Data), UCI Machine Learning Repository (1994). \url{https://doi.org/10.24432/C5NC77}.
+\bibitem{australian} [dataset] R. Quinlan, Statlog (Australian Credit Approval), UCI Machine Learning Repository (1987). \url{https://doi.org/10.24432/C59012}.
+\bibitem{default} [dataset] I. Yeh, Default of Credit Card Clients, UCI Machine Learning Repository (2009). \url{https://doi.org/10.24432/C55S3H}.
+\end{thebibliography}
+\end{document}

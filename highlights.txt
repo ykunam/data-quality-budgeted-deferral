@@ -1,0 +1,5 @@
+- Explicit data-quality rules restrict automated decisions under review budgets.
+- A compact gain model routes cases using probability and observable quality.
+- Mandatory cases are held when review capacity is exhausted.
+- Three credit benchmarks test costs, capacity, and simulated reviewer errors.
+- Quality signals do not guarantee improvement over simpler routing policies.
