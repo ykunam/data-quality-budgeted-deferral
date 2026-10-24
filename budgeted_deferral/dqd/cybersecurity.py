@@ -364,7 +364,7 @@ def report():
         vals=[]
         for ds in ('unsw','cic'):
             r=next(r for r in display if r['dataset']==ds and r['method']==method)
-            vals += [f"{r['cost']:.4f}",f"{100*r['close']:.1f}",f"{100*r['unmet_attack']:.1f}"]
+            vals += [f"{r['cost']:.4f}",f"{100*r['close']:.2f}",f"{100*r['unmet_attack']:.2f}"]
         lines.append(label+' & '+' & '.join(vals)+r'\\')
     lines += [r'\bottomrule\end{tabular}}',r'\newcommand{\CyberTableTwo}{%',r'\begin{tabular}{llrrlrr}\toprule',r'Data & Condition & $\Delta$ & Rel. (\%) & 95\% MC interval & $p$ & Holm\\\midrule']
     results=json.loads((OUT/'cyber-summary.json').read_text())
