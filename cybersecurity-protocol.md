@@ -1,126 +1,47 @@
-# Cybersecurity alert triage extension
+# Frozen cybersecurity analysis plan
 
-Design version 0.1, 24 October 2026. Base repository snapshot: `298d02838d3ed20cb56fd8863b915735db06d354`.
+Version 1, 24 October 2026. Supersedes design version 0.1, retained in commit 2614c4770916dd29529a7772b2bf34877c5e3114. This plan is frozen after source/schema/label-count checks and before any model fit or validation outcome. It is a timestamped repository analysis plan, not an externally registered study.
 
-**Status: research design, not a completed experiment or a frozen statistical analysis plan.** The user selected cybersecurity alert triage as the extension. No cybersecurity datasets have been downloaded or analyzed in preparing this document; no cybersecurity results are claimed. Resolve the preflight items below and commit the complete analysis specification and implementation before examining validation outcomes.
+## Question and scope
 
-## Working title and contribution
+When does telemetry quality improve post-flow triage beyond predictive uncertainty under a fixed review budget? Network flows are proxy alert units; all retained flows enter the queue. No production SOC, real analyst judgments, observed review durations, adversarial manipulation or causal managerial benefit is claimed. The existing financial results are historical and will not be presented as cybersecurity findings.
 
-**Data-quality-aware human deferral for cybersecurity alert triage under analyst capacity constraints**
+## Data and preflight decisions
 
-The intended contribution is a controlled investigation of when observable telemetry quality improves routing beyond predictive uncertainty, while explicit knowledge rules restrict automation and analysts have limited capacity. The contribution must be established through matched comparisons, not inferred from adding a cybersecurity dataset or changing the title. Retain AI governance and managerial decision-making in the abstract, keywords and interpretation of escalation rules, staffing and unresolved workload.
+Use the official UNSW-NB15 partition roles (175341 training, 82332 testing source rows) from pinned Mouwiya/UNSW-NB15-small revision 6f5f54594dfc80c84264aec4c7cc3d9b162f1e2f, and CICIDS2017 traffic-label Parquet files from bvsam/cic-ids-2017 revision 70bac6246d99cf046186a02e1cce6883e2ffe7ea. Source-provider pages are https://research.unsw.edu.au/projects/unsw-nb15-dataset and https://www.unb.ca/cic/datasets/ids-2017.html. Direct UNSW SharePoint access failed; CIC directs downloaders through a personal-information form. Mirrors are disclosed. Do not claim provider-signed checksums or verified original ground truth. Versioned mirror LFS SHA256s must match every downloaded file. The smaller UNSW partition also matches an independent GitHub LFS content hash, although that mirror misnames its partition; official row counts determine roles.
 
-Primary question: **When does telemetry quality improve security-alert triage beyond predictive uncertainty under a fixed analyst review budget?**
+Preflight found 288602 unlabeled extra rows in the CIC Thursday-morning mirror file. Remove missing labels before any fit. The remaining CIC labeled-row total is 2830743. Remove id and attack category from UNSW inputs. Remove Flow ID, both IP addresses, both ports, Timestamp, Label and duplicate Fwd Header Length.1 from CIC inputs. Keep attack family only for retrospective description. Numeric nonfinite and negative values become missing, including unknown-window sentinels; this is a declared cleaning rule, not repaired ground truth. Strings remain categorical; codebooks use predictor-training rows only. Unseen categories become missing. No staleness measurement is available.
 
-Secondary questions: (1) Does any improvement persist when review counts and mandatory ordering are identical? (2) When do escalation rules exhaust analyst capacity, leaving unresolved threats despite policy compliance?
+Deduplicate identical modeled features plus binary label, retaining conflicting-label feature groups together. Earlier roles own exact feature duplicates; remove their feature hashes from all later roles without consulting later outcomes. Select label-independent smallest feature hashes to cap UNSW development at 80000 rows, CIC Monday-Wednesday training at 60000, Thursday calibration/gain pool at 40000, and Friday evaluation at 40000. Retain every surviving UNSW test row. Preserve these fixed source roles. This is a deduplicated sampled benchmark, not deployment prevalence.
 
-The directional hypothesis is conditional: quality information may reduce decision cost under observable degradation. A null or harmful effect remains publishable evidence about the method's operating conditions. Do not promise improved security, analyst effectiveness, legal compliance or real-world deployment before testing them.
+For UNSW, each seed allocates entire feature groups 60/20/20 to predictor training/calibration/gain fitting. For CIC, predictor training is Monday-Wednesday; split Thursday groups 37.5/62.5 to calibration/gain fitting; Friday is the fixed holdout. CIC groups are connected components of equal modeled features OR equal Flow ID and acquisition date. Augmented copies stay in the same inner gain fold. Seeds are 2 through 21. Never pool official holdouts into training or tune against Friday/test outcomes. Source counts, exclusions, feature families and prepared hashes are in budgeted_deferral/results/cyber-data-verification.json.
 
-## Position against existing work
+## Models and degradation
 
-- Jalalvand et al. already study learning to defer with human feedback for SOC alert prioritization on UNSW-NB15 and CICIDS2017 [1]. Do not claim the first application of learning to defer to cybersecurity. Compare the problem settings, reviewer assumptions, workload treatment and feedback access before claiming an unresolved gap.
-- A recent dual-threshold conformal security-triage study is a required prior-art and comparator candidate [2]. Its accompanying repository is accessible, but the publisher full text returned an access/rate-limit error during this review. Complete the primary-paper and code review before implementing it or asserting that its assumptions exclude telemetry quality or capacity. A constrained adaptation must be labeled separately from the original method; capacity clipping does not automatically preserve conformal guarantees.
-- Cost-sensitive learning to defer with workload constraints is also existing work [3]. The current repository does not contain a newly tuned DeCCaF implementation. Retain that limitation unless an audited comparison is actually added.
+Fit a separate histogram-gradient-boosting binary predictor per dataset/seed: 100 iterations, 15 leaves, learning rate 0.07, L2 1, no early stopping. Logistic calibration uses clean, outage and severe copies of calibration rows; underlying raw classifier is fixed. Fit each loss head using identical two-option search (3 or 7 leaves), 100 iterations, learning rate 0.06, L2 5, minimum leaf 20, no early stopping, grouped inner 80/20 validation, then refit. Fitting implementation is revision.fit_head. Automation targets are asymmetric classification losses; reviewer targets use one simulated judgment per gain-copy, logged independently at probability 0.4. All outcome labels are assumed available in gain fitting. No selective/IPW claim is made in this extension.
 
-The gap to investigate is the **joint effect of observable telemetry degradation, explicit automation restrictions and binding analyst capacity**, with estimation and allocation effects separated. This is a candidate gap, not an exhaustive novelty finding.
+Four field families are fixed by cybersecurity.families: UNSW timing, protocol/context, connection counts and remaining volume/window fields; CIC timing, flag/protocol/window, byte/size fields and remaining count/rate fields. See verification output for exact lists. All degradation is label-independent and receives no outcome argument. Conditions: clean; outage (50% of records lose one uniformly chosen family); severe (every record loses three of four families); replacement (50% of records replace one family with values from a uniformly sampled training-row donor). Replacement is plausible-value stress, not observed data age. Calibration/gain augmentation uses only clean/outage/severe. Frozen test RNG is seed*31337+condition index; training corruption RNG is seed*7919.
 
-## Data and validity
+Quality inputs: overall missing fraction, training-range outlier fraction, four family missing fractions and interactions with model probability, alongside probability and Bayes risk. Rich comparator adds observed raw features. Bounds are training Q01/Q99 plus 10% of max(interquantile range,1); these are distributional proxies, not verified schema invalidity or attack signatures. Mandatory review is missing fraction >=0.5 OR outlier fraction >=0.25, an experimental policy assumption. Unit review budgets: 5%,10%,20% of the evaluation batch. Costs: missed attack 5, benign escalation 1, review 0.05, unresolved hold 1.5. These are illustrative values. Sensitivity revalues fixed routes at missed-attack cost 2,10,20; it does not retrain or claim reoptimized policies.
 
-Use UNSW-NB15 as the first candidate benchmark and CICIDS2017 as an independent replication candidate [4,5]. Train dataset-specific models under one frozen protocol; independently training on two datasets is replication, not transfer of a detector across incompatible feature schemas.
+Reviewers: constant error 0.1; correlated error min(0.45,0.05+0.25*I(detector wrong)+0.1*(1-|2*p_clean-1|)). Outcomes are latent simulation quantities shared by methods. No quality-defined reviewer advantage or perfect-analyst assumption. Report expected reviewer loss at test time, not a sampled human observation.
 
-UNSW-NB15 contains cyber-range traffic combining normal activity and generated attack behavior. CICIDS2017 is a controlled, scheduled traffic collection. Neither establishes performance in a contemporary production SOC. A network flow is a proxy triage unit; flow labels are not analyst judgments, incident severity, review time or organizational losses. State whether the experiment routes all flows or only alerts emitted by a detector, and use that population consistently in every denominator.
+## Comparators and allocation
 
-Prefer source-provider distributions. Record URLs, access dates, licensing terms, file hashes, row counts, label mappings and exclusions. Cite the provider's requested dataset papers; necessary dataset and statistical sources need not be Q1 journal articles. Do not redistribute data merely because source code is public.
+Compare probability-only, quality in automation head only, quality in both heads, observed-feature two-head, single-head gain, confidence, Chow risk, rules-only, random, and a capacity-constrained dual-threshold conformal adaptation. Common mandatory flags and probability-only reviewer ordering in matched arms; fill every remaining optional review slot except the rules-only comparator. Thus the primary pair has identical review/hold counts. Native arms admit only positive estimated gains for learned models and use their own reviewer ordering. No-rule ablation fills the budget with quality-both gains and records policy violations. Preserve the original fixed-estimated-loss allocation proof and overload null; no new learning guarantee is claimed.
 
-Exclude labels, attack category, identifiers and fields unavailable at the stated decision time from predictor and router inputs. Attack category may be retained for retrospective subgroup reporting. Completed-flow features support post-flow triage; they do not establish early packet-level detection. Unknown categories and transformations must be learned using training data only. Rare but valid attack patterns must not be automatically described as corrupt telemetry.
+Conformal thresholds use the gain pool, disjoint from both detector training and logistic calibration; augmented copies are dependent, so no finite-sample exchangeability guarantee is asserted here. Conformal comparator: alpha=beta=0.05; upper benign order statistic ceil((1-alpha)*(n+1)), lower threat order statistic floor(beta*(n+1)); infeasible thresholds +/-infinity; strict score comparisons. Values above upper escalate, values below lower close (lower-zone priority if overlapping), remaining band joins mandatory review; excess band cases hold. Service ordering uses common probability-only reviewer-loss estimates. No spare optional review outside band/rules. This is an explicit capacity adaptation of the author's released E11 procedure, not an exact reproduction of the full published SOC system. Distribution-shift guarantees and end-to-end human error guarantees are not claimed. Upstream inspected repository: https://github.com/fsahin197650/conformal-deferral-soc ; paper DOI 10.3390/electronics15184084. L2DHF already incorporates analyst capacity; it is discussed but not numerically reproduced because its sequential severity/time model is different. No claim of outperforming L2DHF or DeCCaF is permitted.
 
-Preserve the official UNSW train/test boundary if using its prepared files. Audit duplicates across that boundary before fitting, and document a deterministic leakage-removal rule. Do not pool and randomly repartition the official test set. Keep augmented copies, related flows and duplicate groups together. For CIC data, use acquisition/session/day metadata to design a temporal or grouped split before fitting; Monday is benign-only, so a naive Monday-only supervised training design is unsuitable. Exact source files, grouping keys and split maps remain preflight items.
+## Primary and secondary inference
 
-## Telemetry quality and knowledge rules
+One primary: UNSW, outage, 20% capacity, matched arm, quality-A versus probability-only; average the two reviewer scenarios within each seed. Effect is baseline cost minus quality-A cost. Prespecified practical success requires >=1% relative reduction, positive absolute reduction, and a two-sided one-sample t test of the 20 paired-seed differences at p<0.05. Report a t-based 95% interval over independent experimental randomizations. This is a Monte Carlo interval conditional on fixed source corpora, sampling and preprocessing; it is NOT a confidence interval for new networks, incidents, human analysts or source-label correctness. Random seeds do not create independent traffic deployments. No corrected resampled t-test or row-wise pseudo-replication is used.
 
-Operationalize completeness as the missing fraction of required, available fields. Operationalize validity using documented schema constraints and training-only bounds, while distinguishing legitimate extreme traffic from malformed measurements. Investigate source-family outages, using label-independent corruption at the record or acquisition-block level. Predefine numeric and categorical field families and corruption intensities before outcome evaluation.
+Seven secondary contrasts are exactly the same comparison/budget/arm under UNSW clean/severe/replacement and CIC clean/outage/severe/replacement. Apply one Holm correction across all seven, including structural zeros; a zero-variance zero contrast has p=1 and interval [0,0]. All other method comparisons, budgets, rules ablations and valuation sensitivity are descriptive/exploratory. Retain every null or adverse result; no endpoint or primary-setting substitution after evaluation.
 
-Do not reuse the original label-conditioned informative-missingness mechanism as the sole cybersecurity justification. Include an unmodified-data condition. If natural quality defects are absent, describe the quality experiments as synthetic stress tests on benchmark traffic.
+Metrics: cost per incoming retained flow; automated attack closure / all attacks; automated benign escalation / all benign; held attacks / all attacks; all holds / all arrivals; expected reviewer error; review utilization; rule violations; and unmet attacks / all attacks, counting automated missed attacks, expected reviewer misses and every held attack. A hold is never credited as resolved. Report injected-defect coverage separately from policy violations. No actual response-time or containment claim. No queue simulation is needed for this batch extension.
 
-Use staleness only if source acquisition and measurement timestamps genuinely identify data age. Replacing values with synthetic stale copies is a separately labeled simulation, not observed telemetry freshness. Without reliable timestamps, omit real staleness and response-time claims.
+## Presentation and reproducibility
 
-Represent each knowledge rule with its input fields, rationale, threshold provenance, triggered action and unresolved-case behavior. Schema-invalid telemetry can trigger an explicit experimental prohibition on auto-closure; broader escalation rules require an actual policy source or expert validation. Retain thresholds as stated experimental assumptions when such validation is unavailable. Measure both rule compliance and defect coverage, including false triggers on valid traffic.
+Exactly two main figures: (1) deterministic architecture/design; (2) dataset-paired cost and unmet-attack curves versus capacity, averaging all four prespecified conditions and both reviewers, from saved outputs. Exactly two editable tables: (1) key comparator outcomes under outage/20% capacity for each dataset; (2) all eight declared quality contrasts, including the primary and seven Holm-adjusted secondary contrasts. Full outputs retain all methods/arms/conditions/cost valuations. Use vector PDFs plus high-resolution PNGs. Rewrite all claims and conclusions from actual results; do not carry forward 5.23% finance results or earlier submission-readiness statements.
 
-Adversarial tampering is outside the initial extension. Random defects do not establish evasion resistance, poisoning resistance or robustness against an adaptive attacker.
-
-## Decisions and matched comparisons
-
-Maintain three routing actions: automate the detector's disposition, review, or hold pending review. Automation may classify a flow as benign or malicious; automatic escalation is a referral decision, not verified incident resolution. State whether downstream incident-response capacity is modeled. Hold means unresolved; it is not a correct classification, successful containment or safe dismissal.
-
-Reuse the existing fixed-loss allocator where its assumptions apply. It is exact for estimated losses under unit review cost and mandatory priority, not for realized security harm. Adding heterogeneous investigation times or analyst assignments changes the optimization problem and invalidates reuse of its exactness proof without a new derivation. Preserve the original structural result: when mandatory cases exceed capacity and reviewer-loss ordering is fixed, changing only the automation-loss estimator cannot change routing.
-
-Core comparisons should include probability-only two-head estimation; quality added only to the automation-loss head; quality in both heads; an observed-feature comparator; uncertainty routing; Chow-style cost-risk routing; and rules-only routing. Include the relevant SOC-specific deferral comparator after its assumptions and implementation are reviewed. Give learned estimators identical training access, search budgets and validation opportunities.
-
-Run a matched arm with common mandatory flags, identical reviewer estimates and ordering, and identical review counts. This isolates quality's contribution to optional ranking. Retain a separate native-policy arm to evaluate the complete method. Do not confuse better estimation with additional review or weaker policy restrictions. Include a no-rule ablation with violations explicitly counted; do not describe prohibited automation as an unqualified benefit.
-
-Proposed review budgets are 5%, 10% and 20%, with 20% as the candidate primary budget. These are design choices, not measured SOC staffing levels. Candidate initial cost ratios may reuse false-negative 5, false-positive 1, review 0.05 and hold 1.5 for continuity, but must be labeled illustrative and accompanied by a prespecified sensitivity grid. They are not empirically measured cyber losses.
-
-No real analyst response data have been supplied. If unavailable, use clearly declared simulated reviewer scenarios shared across methods, including an imperfect reviewer and a reviewer whose errors correlate with detector errors. Do not define quality-aware reviewer error in a way that mechanically favors the quality-aware router. A perfect oracle can be an upper-bound scenario only. Never relabel recorded traffic truth as an observed analyst decision.
-
-## Outcomes and statistical specification
-
-Candidate primary contrast: quality in the automation-loss head versus probability-only estimation, on UNSW-NB15, under a prespecified moderate source-family outage, random review logging and 20% review capacity, with matched review counts and mandatory ordering. Freeze the exact outage, reviewer averaging, logging rate, cost vector, split design and inference procedure before fitting or scoring validation data. Reuse seeds 2–21 only as a reproducibility choice; random seeds are not independent organizations or deployments.
-
-Report the primary contrast even if it is null or adverse. The existing 5.23% Bank Marketing reduction is historical finance-domain evidence and must never appear as a cybersecurity finding. Any practical-effect threshold must be chosen in advance; 1% relative cost reduction is a candidate continuity threshold, not an established security standard.
-
-Report these outcomes with explicit denominators:
-
-- Expected decision cost per incoming triage unit, including declared hold cost.
-- Automatically closed attacks divided by all labeled attacks.
-- Benign flows automatically escalated divided by all benign flows.
-- Reviewer error, using its stated observation or simulation model.
-- Held attacks divided by all attacks, and held cases divided by all arrivals.
-- A sensitivity endpoint counting both incorrectly resolved and unresolved attacks as unmet, so favorable miss rates cannot be produced solely by holding more threats.
-- Review utilization, automation coverage, rule violations and rule defect coverage.
-
-Classification accuracy or F1 alone cannot establish operational triage benefit. Do not count a deferred or held attack as detected by a human who has not reviewed it. Report attack-family outcomes descriptively unless they belong to a prespecified multiplicity family; do not derive costs or real criticality from retrospective attack labels.
-
-Select inference around the actual independent sampling unit. Repeatedly scoring the same official holdout does not create independent test samples. If session/time clustering is available, use a specified paired cluster/block procedure and document its target population; if unavailable, narrow claims and report conditional descriptive uncertainty. Do not automatically transplant the original corrected resampled t-test to a fixed-holdout design. Freeze the primary test, any secondary family, multiplicity correction, confidence intervals and minimum effective sample requirements before validation. All other comparisons remain exploratory.
-
-Queue analysis requires trustworthy arrival timestamps, explicit service assumptions and an end-of-study rule for unresolved cases. Without them, report batch capacity and held workload rather than observed response time. A synthetic queue is a declared simulation; heterogeneous service or fatigue requires new evidence and modeling.
-
-## Two figures and two tables
-
-1. **Figure 1:** compact system and experimental design, showing telemetry, observable quality, knowledge rules, automate/review/hold actions, and the matched-estimator comparison. Draw deterministically using code.
-2. **Figure 2:** panels showing cost versus analyst capacity and unresolved-attack burden versus capacity, across clean and degraded conditions, with uncertainty appropriate to the frozen design. Generate only from saved outputs.
-3. **Table 1:** main held-out comparisons, including cost, attack auto-closure, benign auto-escalation, review utilization and unresolved attacks. Identify the single primary contrast and distinguish descriptive means from inferential findings.
-4. **Table 2:** matched quality, rules and capacity ablations; report primary and declared secondary contrasts, intervals and corrected significance where justified, including every null result.
-
-Use supplementary machine-readable outputs for full grids rather than introducing a third main figure. Recheck the current KBS author guide, final pagination and any portal requirements after the substantive rewrite. Adding cybersecurity removes the basis for carrying forward the previous manuscript's submission-readiness recommendation without a fresh audit.
-
-## Compact implementation and release gates
-
-Use the existing `budgeted_deferral` layout. Target one new `dqd/cybersecurity.py` entry point, one focused scientific-invariants test module, compact generated results and modifications to existing figure/table scripts. Avoid new notebooks, frameworks or dependency changes unless needed. The exact file count is a target, not a reason to omit provenance or required submission files.
-
-Before evaluation, complete and commit:
-
-- [ ] Source acquisition, licensing review, file hashes and schema availability.
-- [ ] Flow-versus-alert population definition, decision-time feature inventory and leakage audit.
-- [ ] Immutable train/calibration/gain/test membership and group/temporal keys.
-- [ ] Exact quality-feature definitions, outage generator and rule dictionary.
-- [ ] Reviewer and logging mechanisms, costs, sensitivity grid and all seeds.
-- [ ] Primary estimand, matched comparison, inference unit and secondary multiplicity family.
-- [ ] Audited SOC baseline specification, including any constrained adaptations.
-- [ ] Tests for budget compliance, mandatory holds, no label leakage, split isolation, matched review counts and the overload structural null.
-- [ ] Frozen implementation commit and an environment/data manifest before validation outcomes.
-
-After evaluation, regenerate both figures and both tables from saved outputs; verify exported files; reconcile every reported number with the code; rewrite the abstract and conclusions to match actual findings; and conduct a new journal and reference audit. Actual analyst data, validated organizational costs, contemporary deployment and exhaustive originality checks remain limitations unless independently supplied and verified.
-
-## Sources checked and follow-up reading
-
-[1] F. Jalalvand, M. Baruwal Chhetri, S. Nepal, C. Paris, *Adaptive alert prioritisation in security operations centres via learning to defer with human feedback*, arXiv:2506.18462 (2025). https://doi.org/10.48550/arXiv.2506.18462. Primary abstract and full-text HTML consulted; not labeled a Q1 journal article.
-
-[2] F. Şahin, N.S. Mert, *Dual-Threshold Conformal Deferral for Trustworthy Security Alert Triage*, Electronics 15 (2026) 4084. https://doi.org/10.3390/electronics15184084. Publisher index identifies the paper; publisher full text was inaccessible in this review. Author repository consulted: https://github.com/fsahin197650/conformal-deferral-soc. Full-text methodological verification and journal-quartile verification remain pending.
-
-[3] J.V. Alves et al., *Cost-sensitive learning to defer to multiple experts with workload constraints*, Transactions on Machine Learning Research (2024). https://openreview.net/forum?id=TAvGZm2Rqb. Existing manuscript reference; full implementation comparison remains pending.
-
-[4] UNSW, *The UNSW-NB15 Dataset*. https://research.unsw.edu.au/projects/unsw-nb15-dataset. Official description, prepared partition counts and academic-use terms checked. Its requested underlying references must be verified and cited when data are used.
-
-[5] Canadian Institute for Cybersecurity, UNB, *Intrusion detection evaluation dataset CIC-IDS2017*. https://www.unb.ca/cic/datasets/ids-2017.html. Official collection schedule and feature description checked. Dataset paper: I. Sharafaldin, A.H. Lashkari, A.A. Ghorbani, *Toward Generating a New Intrusion Detection Dataset and Intrusion Traffic Characterization*, ICISSP (2018), as identified by the provider; complete bibliographic metadata remains to be checked.
-
-This source list grounds the design. It is not a completed reference audit or a substitute for claim-level citations in the rewritten manuscript.
+Entry point: cd budgeted_deferral ; OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 ../.venv/bin/python -m dqd.cybersecurity fetch ; then verify ; then run --jobs 4 ; then analyze/report once implemented. Record this plan's remote commit SHA in CYBER_PLAN_COMMIT before run. Source hashes and environment must match before reusing per-seed checkpoints. All core model/allocator changes after freezing require an explicit amendment and rerun. No third-party raw data are committed. Existing finance code/results remain provenance.
