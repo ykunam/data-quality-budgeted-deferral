@@ -106,7 +106,10 @@ def load_dataset(name):
         z = zipfile.ZipFile(DATA/'cifar10h-raw.zip')
         trials = pd.read_csv(z.open('cifar10h-raw.csv'))
         trials = trials[trials.is_attn_check == 0]
-        idx = trials.cifar10_test_set_idx.to_numpy(int)
+        # The released CSV uses test_test; its README documents test_set.
+        col = 'cifar10_test_set_idx' if 'cifar10_test_set_idx' in trials else 'cifar10_test_test_idx'
+        idx = trials[col].to_numpy(int)
+        assert np.array_equal(np.asarray(d[b'labels'])[idx],trials.true_label.to_numpy(int))
         choices = np.isin(trials.chosen_label, [2, 3, 4, 5, 6, 7]).astype(int)
         count = np.bincount(idx, minlength=len(y))
         errors = np.bincount(idx, weights=(choices != y[idx]), minlength=len(y))

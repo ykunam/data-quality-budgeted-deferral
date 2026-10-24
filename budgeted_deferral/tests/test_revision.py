@@ -1,5 +1,7 @@
 """Identification, overlap, leakage and matched-allocation checks for revision."""
-import itertools, unittest
+import itertools, unittest, json
+from pathlib import Path
+from scipy import stats
 import numpy as np
 import pandas as pd
 from dqd.revision import propensity, inner_masks, encode_training_categories
@@ -49,6 +51,47 @@ class RevisionDesign(unittest.TestCase):
                 self.assertEqual(hold.sum(),max(0,int(m.sum())-B))
                 routes.append(r)
             if B<m.sum():np.testing.assert_array_equal(*routes)
+
+
+class SavedRevisionResults(unittest.TestCase):
+    path=Path(__file__).resolve().parents[1]/'results/revision.csv.gz'
+
+    @unittest.skipUnless(path.exists(),'Run the revision grid to check saved outputs')
+    def test_complete_grid_capacity_costs_and_structural_null(self):
+        d=pd.read_csv(self.path)
+        self.assertEqual(len(d),102960)
+        keys=['dataset','seed','reviewer','logging','weighting','condition','capacity','method','arm']
+        self.assertFalse(d.duplicated(keys).any())
+        self.assertEqual(set(d.dataset),{'default','bank','human'})
+        self.assertTrue((d.review<=d.capacity+1e-10).all())
+        self.assertTrue((d[d.arm!='no_rules'].violation==0).all())
+        np.testing.assert_allclose(d.cost,d.auto_loss+d.review_loss+.05*d.review+1.5*d.hold,atol=1e-10)
+        fill=d[(d.arm=='fill')&(d.method!='rules_only')]
+        np.testing.assert_allclose(fill.review,np.floor(fill.capacity*fill.n)/fill.n,atol=1e-10)
+        x=d[(d.arm=='matched')&(d.mandatory>d.capacity)&d.method.isin(['prob','quality_A'])]
+        x=x.pivot(index=keys[:7],columns='method',values='cost')
+        np.testing.assert_allclose(x.prob,x.quality_A,atol=1e-12)
+
+    @unittest.skipUnless(path.exists(),'Run the revision grid to check saved inference')
+    def test_primary_inference_and_declared_holm_family(self):
+        d=pd.read_csv(self.path)
+        s=d[(d.dataset=='bank')&(d.condition=='informative')&(d.logging=='random')&
+            (d.weighting=='unweighted')&(d.capacity==.2)&(d.arm=='matched')]
+        x=s.groupby(['seed','method']).cost.mean().unstack();diff=x.prob-x.quality_A
+        mean=diff.mean();se=np.sqrt((1/20+.25)*diff.var(ddof=1))
+        p=2*stats.t.sf(abs(mean/se),19)
+        summary=json.loads((self.path.parent/'revision-summary.json').read_text())
+        self.assertAlmostEqual(summary['primary']['diff'],mean,places=12)
+        self.assertAlmostEqual(summary['primary']['p'],p,places=12)
+        ci=stats.t.ppf(.975,19)*se
+        self.assertAlmostEqual(summary['primary']['lo'],mean-ci,places=12)
+        self.assertAlmostEqual(summary['primary']['hi'],mean+ci,places=12)
+        rows=summary['secondary_family_6'];self.assertEqual(len(rows),6)
+        self.assertEqual({(r['dataset'],r['logging']) for r in rows},
+            set(itertools.product(['default','bank'],['random','uncertainty','rules'])))
+        raw=np.array([r['p'] for r in rows]);order=np.argsort(raw)
+        adjusted=np.empty(6);adjusted[order]=np.minimum(1,np.maximum.accumulate(raw[order]*np.arange(6,0,-1)))
+        np.testing.assert_allclose(adjusted,[r['p_holm'] for r in rows],atol=1e-12)
 
 
 if __name__=='__main__':unittest.main()

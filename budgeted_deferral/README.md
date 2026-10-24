@@ -161,3 +161,64 @@ them directly from saved outputs. A repeated command must recover the same
 numbers. No claims of human-study approval, causal managerial effects, legal
 compliance, or guaranteed journal acceptance are made.
 
+
+## Reproducing the core revision
+
+Use CPython 3.12.14. The exact direct and runtime dependency versions used are
+pinned in requirements.txt. From budgeted_deferral/:
+
+```bash
+python -m pip install -r requirements.txt
+python -m dqd.revision fetch
+OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 python -m unittest discover -s tests -v
+OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 python -m dqd.revision run --jobs 4
+python -m dqd.revision analyze
+python scripts/make_sc_tables.py
+python scripts/fig_volume.py
+python scripts/fig_dynamic.py
+```
+
+Compile manuscript.tex twice from the repository root. The original exploratory
+360,000-row grid is retained; the new experiment refits models in the pinned
+environment and writes revision.csv.gz. Temporary per-seed checkpoints are local
+only and are not committed. Delete/checkpoint these intentionally when changing
+experimental code; the source-hash guard rejects inconsistent reuse.
+
+Primary inference is the single Bank/informative/random/20%-capacity contrast.
+The secondary family has exactly six members, explicitly listed in
+revision-summary.json. All other new contrasts are exploratory. Earlier prose
+about unspecified seven-/nine-comparison families has been removed; the original
+pooled-eight and exploratory-eighteen families remain reproducible in their
+original scripts and outputs, without being used as new confirmatory claims.
+
+### Data provenance, human judgments and licenses
+
+- Bank Marketing: original UCI release, DOI 10.24432/C5K306, CC BY 4.0.
+  The primary task is pre-call subscription prediction; duration is excluded.
+  Bank reviewers are simulated and must not be described as observed staff.
+- Default: original UCI release, DOI 10.24432/C55S3H.
+- CIFAR-10: original Toronto Python archive, test_batch, original image order.
+- CIFAR-10H: original jcpeterson/cifar-10h release. Cite Peterson et al.,
+  ICCV 2019, Human uncertainty makes classification more robust. The dataset
+  and metadata are licensed CC BY-NC-SA 4.0, as stated in its LICENSE.txt:
+  https://github.com/jcpeterson/cifar-10h/blob/master/LICENSE.txt .
+  Our changes map recorded ten-class choices to animal (2--7)/vehicle
+  (0,1,8,9), exclude attention checks and aggregate or resample recorded choices.
+  Derived human-data portions of the result files are distributed under
+  CC BY-NC-SA 4.0; this exception does not relicense independent source code.
+  Original images and participant-level data are downloaded locally and are not
+  redistributed in this repository. Human-image results are descriptive transfer
+  evidence, not a finance expert study or a new participant experiment.
+
+Source hashes and the executed environment are in revision-environment.json.
+Retain original provider licenses and attributions for downloaded data.
+
+### Technical amendment before human analysis
+
+The original CIFAR-10H CSV calls the image-index field
+`cifar10_test_test_idx`, while its README documents `cifar10_test_set_idx`.
+The adapter accepts either spelling and asserts that all recorded truth labels
+match the original CIFAR-10 image indices. The first human run stopped before
+producing results. No model, endpoint or analysis choice changed. All tabular
+and human models were rerun after this adapter fix so the final manifest has
+one executed source hash.
