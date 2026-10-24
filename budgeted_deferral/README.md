@@ -64,3 +64,100 @@ capacity, method, cost, review/hold/violation rates and per-condition diagnostic
   NumPy network); see the manuscript, Table 4.
 * The proposed method is **not** uniformly best: Chow's cost-risk rule and confidence ranking are
   cheaper when review history is small. The package is designed to report those conditions, not hide them.
+
+# Core revision: frozen prospective analysis plan (24 October 2026)
+
+This section was committed before fetching the new validation datasets or running
+the revision experiments. It is a timestamped analysis plan, not a registered
+clinical protocol. The existing four credit datasets are development evidence;
+Bank Marketing and CIFAR-10H have not previously been analyzed in this project.
+The earlier PDF and experimental outputs remain recoverable in git history.
+
+Primary question: when does quality information improve loss estimation beyond
+model probabilities under mandatory review rules and scarce review capacity?
+No new surrogate, universal superiority, or new propensity estimator is claimed.
+
+## Fixed design
+
+- Development: Default of Credit Card Clients, unchanged 45/15/20/20 grouped
+  predictor/calibration/gain/test split, seeds 2--21. Prospective validation:
+  UCI Bank Marketing `bank-full.csv` (45,211 rows); remove `duration`, which is
+  unavailable before the call. Encode categorical values from predictor-training
+  rows only and treat unseen/unknown categories as missing. Labels are historical
+  subscription outcomes, not human review decisions. The application is a
+  transfer stress test with illustrative costs, not a deployed credit policy.
+- New data are not used for method selection. Holdout evaluation is run once
+  after tests and code freezing. Per-seed inner validation is allowed only within
+  the gain-fitting partition, with all augmented copies of an original record
+  grouped together (80/20 inner fit/validation). No outcome-dependent tuning.
+- Retain the original base predictor and calibration. Train loss regressors
+  with max_leaf_nodes in {3, 7}, max_iter=100, learning_rate=.06, L2=5.
+  Select each head by inner validation MSE; fit the selected configuration on
+  the whole permitted gain partition. Single-head gain uses the same two-option
+  search. Models never receive test labels or true reviewer error probabilities.
+- Simulated reviewers: constant and AI-correlated (existing definitions).
+  Test conditions: clean, informative missingness, stale records and severe shift.
+  Train augmentation remains clean/missing/outliers/mixed. Costs FN=5, FP=1,
+  review=.05, hold=1.5; capacities .10 and .20. Rules remain missing >=.5 OR
+  invalid >=.25. Rules/costs are experimental policy assumptions, not regulations.
+- Review logs: random (probability .4); uncertainty-prioritized and
+  rule-prioritized (logistic selection, minimum .1, maximum .9, intercept chosen
+  to give mean .4). All use shared uniforms and the same potential reviewer
+  outcomes per seed/reviewer. Selection depends only on observed covariates.
+  Compare unweighted fitting with inverse-propensity-weighted (IPW) fitting.
+  Known logging probabilities are simulation metadata, never estimated from
+  test outcomes. Label availability for all gain rows remains an assumption.
+- Matched variants: probability-only two-head; quality only in automation head;
+  quality in both heads; observed-feature two-head; single-head gain; Chow risk;
+  confidence. Learned variants use the same allocator. Also evaluate a
+  fill-budget arm that ranks optional cases without a positive-gain cutoff;
+  and quality-aware full-model arms with gain-order overload and without rules.
+  These distinguish estimation, optional admission, overload ordering and rules.
+  Published CE/OvA baselines remain in the original exploratory grid; this
+  revision does not relabel them as newly tuned state-of-the-art comparisons.
+
+## Primary endpoint and declared inference
+
+Primary contrast: on Bank Marketing, informative missingness, random logging,
+20% capacity, unweighted fitting, mean over the two reviewer models, compare
+quality-in-automation-only against probability-only, with identical reviewer
+head/admission/allocator. Cost reduction is positive when quality helps.
+Use the corrected resampled two-sided t-test, test/train ratio .2/.8, 95% CI.
+There is one primary test (alpha .05); a practically useful effect additionally
+requires >=1% relative cost reduction. Report failure to meet either criterion.
+Twenty splits are dependent resamples, not 20 independent datasets.
+
+Secondary family: IPW versus unweighted full quality two-head, per dataset and
+logging policy, averaged over both reviewers and all four conditions at .20:
+2 datasets x 3 policies = 6 tests, adjusted together by Holm. All other condition,
+rule, allocation, budget and representation breakdowns are descriptive/exploratory;
+do not promote them to confirmatory findings after seeing results. The original
+pooled 8-test and quality-ablation 18-test families remain explicitly enumerated
+in analysis.py; ambiguous earlier 7/9-test claims will be retired from the paper.
+
+## Actual-human transfer check (separate, secondary)
+
+If the original public CIFAR-10/CIFAR-10H files can be obtained, use all 10,000
+images, binary animal (labels 2--7) versus vehicle (0,1,8,9), with the same
+grouped split and seeds. Predictor input is 8x8 spatially averaged RGB (192
+features), no pretrained model or human statistics. Individual human choices
+come from original non-attention-check trials; sample one actual recorded choice
+per gain image before applying each log mask. Evaluate against the empirical
+binary human error rate per test image. No corruption is applied: humans saw
+the original clean images. Evaluate .20 capacity, all three logging policies,
+unweighted/IPW and the same fixed model search. This checks transfer of review-
+loss estimation with genuine human choices, not human response to corrupted
+credit records, expert finance performance, or the primary quality hypothesis.
+No inferential success criterion is attached; report descriptively. If files are
+unavailable, report this limitation rather than substituting simulated humans.
+
+## Reproducibility and reporting
+
+Pin the actual Python/package environment; save source/data hashes, selected
+hyperparameters, logging counts, effective sample sizes, row-level paired
+contrasts and policy diagnostics. Report all fixed cells, including unfavorable
+ones. Keep exactly two manuscript figures and two manuscript tables; generate
+them directly from saved outputs. A repeated command must recover the same
+numbers. No claims of human-study approval, causal managerial effects, legal
+compliance, or guaranteed journal acceptance are made.
+
