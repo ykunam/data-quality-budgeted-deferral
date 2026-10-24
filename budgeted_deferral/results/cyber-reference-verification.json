@@ -1,0 +1,1973 @@
+{
+  "abraham": {
+    "doi": "10.1016/j.ijinfomgt.2019.07.008",
+    "verified": true,
+    "metadata": {
+      "publisher": "Elsevier BV",
+      "published-print": {
+        "date-parts": [
+          [
+            2019,
+            12
+          ]
+        ]
+      },
+      "DOI": "10.1016/j.ijinfomgt.2019.07.008",
+      "type": "journal-article",
+      "page": "424-438",
+      "title": [
+        "Data governance: A conceptual framework, structured review, and research agenda"
+      ],
+      "volume": "49",
+      "author": [
+        {
+          "given": "Rene",
+          "family": "Abraham"
+        },
+        {
+          "given": "Johannes",
+          "family": "Schneider"
+        },
+        {
+          "given": "Jan",
+          "family": "vom Brocke"
+        }
+      ],
+      "container-title": [
+        "International Journal of Information Management"
+      ],
+      "URL": "https://doi.org/10.1016/j.ijinfomgt.2019.07.008",
+      "ISSN": [
+        "0268-4012"
+      ],
+      "published": {
+        "date-parts": [
+          [
+            2019,
+            12
+          ]
+        ]
+      }
+    },
+    "ranking": {
+      "basis": "SJR 2025 best quartile, not publication-year or every-category quartile",
+      "quartile": "Q1",
+      "url": "https://www.scimagojr.com/journalsearch.php?clean=0&q=15631&tip=sid",
+      "checked": "2026-10-24",
+      "evidence": "Official SCImago indexed search result; direct bulk CSV request returned 403"
+    },
+    "verification_scope": "DOI/title/authors/venue metadata; no exhaustive full-text or retraction audit"
+  },
+  "janssen": {
+    "doi": "10.1016/j.giq.2020.101493",
+    "verified": true,
+    "metadata": {
+      "publisher": "Elsevier BV",
+      "issue": "3",
+      "published-print": {
+        "date-parts": [
+          [
+            2020,
+            7
+          ]
+        ]
+      },
+      "DOI": "10.1016/j.giq.2020.101493",
+      "type": "journal-article",
+      "page": "101493",
+      "title": [
+        "Data governance: Organizing data for trustworthy Artificial Intelligence"
+      ],
+      "volume": "37",
+      "author": [
+        {
+          "given": "Marijn",
+          "family": "Janssen"
+        },
+        {
+          "given": "Paul",
+          "family": "Brous"
+        },
+        {
+          "given": "Elsa",
+          "family": "Estevez"
+        },
+        {
+          "given": "Luis S.",
+          "family": "Barbosa"
+        },
+        {
+          "given": "Tomasz",
+          "family": "Janowski"
+        }
+      ],
+      "container-title": [
+        "Government Information Quarterly"
+      ],
+      "URL": "https://doi.org/10.1016/j.giq.2020.101493",
+      "ISSN": [
+        "0740-624X"
+      ],
+      "published": {
+        "date-parts": [
+          [
+            2020,
+            7
+          ]
+        ]
+      },
+      "article-number": "101493"
+    },
+    "ranking": {
+      "basis": "SJR 2025 best quartile, not publication-year or every-category quartile",
+      "quartile": "Q1",
+      "url": "https://www.scimagojr.com/journalsearch.php?clean=0&q=14735&tip=sid",
+      "checked": "2026-10-24",
+      "evidence": "Official SCImago indexed search result; direct bulk CSV request returned 403"
+    },
+    "verification_scope": "DOI/title/authors/venue metadata; no exhaustive full-text or retraction audit"
+  },
+  "green": {
+    "doi": "10.1016/j.clsr.2022.105681",
+    "verified": true,
+    "metadata": {
+      "publisher": "Elsevier BV",
+      "published-print": {
+        "date-parts": [
+          [
+            2022,
+            7
+          ]
+        ]
+      },
+      "DOI": "10.1016/j.clsr.2022.105681",
+      "type": "journal-article",
+      "page": "105681",
+      "title": [
+        "The flaws of policies requiring human oversight of government algorithms"
+      ],
+      "volume": "45",
+      "author": [
+        {
+          "given": "Ben",
+          "family": "Green"
+        }
+      ],
+      "container-title": [
+        "Computer Law &amp; Security Review"
+      ],
+      "URL": "https://doi.org/10.1016/j.clsr.2022.105681",
+      "ISSN": [
+        "2212-473X"
+      ],
+      "published": {
+        "date-parts": [
+          [
+            2022,
+            7
+          ]
+        ]
+      },
+      "article-number": "105681"
+    },
+    "ranking": {
+      "basis": "SJR 2025 best quartile, not publication-year or every-category quartile",
+      "quartile": "Q1",
+      "url": "https://www.scimagojr.com/journalsearch.php?clean=0&q=28888&tip=sid",
+      "checked": "2026-10-24",
+      "evidence": "Official SCImago indexed search result; direct bulk CSV request returned 403"
+    },
+    "verification_scope": "DOI/title/authors/venue metadata; no exhaustive full-text or retraction audit"
+  },
+  "chow": {
+    "doi": "10.1109/TIT.1970.1054406",
+    "verified": true,
+    "metadata": {
+      "publisher": "Institute of Electrical and Electronics Engineers (IEEE)",
+      "issue": "1",
+      "published-print": {
+        "date-parts": [
+          [
+            1970,
+            1
+          ]
+        ]
+      },
+      "DOI": "10.1109/tit.1970.1054406",
+      "type": "journal-article",
+      "page": "41-46",
+      "title": [
+        "On optimum recognition error and reject tradeoff"
+      ],
+      "volume": "16",
+      "author": [
+        {
+          "given": "C.",
+          "family": "Chow"
+        }
+      ],
+      "container-title": [
+        "IEEE Transactions on Information Theory"
+      ],
+      "URL": "https://doi.org/10.1109/tit.1970.1054406",
+      "ISSN": [
+        "0018-9448",
+        "1557-9654"
+      ],
+      "published": {
+        "date-parts": [
+          [
+            1970,
+            1
+          ]
+        ]
+      }
+    },
+    "ranking": {
+      "basis": "SJR 2025 best quartile, not publication-year or every-category quartile",
+      "quartile": "Q1",
+      "url": "https://www.scimagojr.com/journalsearch.php?clean=0&q=15107&tip=sid",
+      "checked": "2026-10-24",
+      "evidence": "Official SCImago indexed search result; direct bulk CSV request returned 403"
+    },
+    "verification_scope": "DOI/title/authors/venue metadata; no exhaustive full-text or retraction audit"
+  },
+  "chai": {
+    "doi": "10.1109/TKDE.2022.3148237",
+    "verified": true,
+    "metadata": {
+      "publisher": "Institute of Electrical and Electronics Engineers (IEEE)",
+      "published-print": {
+        "date-parts": [
+          [
+            2022
+          ]
+        ]
+      },
+      "DOI": "10.1109/tkde.2022.3148237",
+      "type": "journal-article",
+      "page": "1-1",
+      "title": [
+        "Data Management for Machine Learning: A Survey"
+      ],
+      "author": [
+        {
+          "given": "Chengliang",
+          "family": "Chai"
+        },
+        {
+          "given": "Jiayi",
+          "family": "Wang"
+        },
+        {
+          "given": "Yuyu",
+          "family": "Luo"
+        },
+        {
+          "given": "Zeping",
+          "family": "Niu"
+        },
+        {
+          "given": "Guoliang",
+          "family": "Li"
+        }
+      ],
+      "container-title": [
+        "IEEE Transactions on Knowledge and Data Engineering"
+      ],
+      "URL": "https://doi.org/10.1109/tkde.2022.3148237",
+      "ISSN": [
+        "1041-4347",
+        "1558-2191",
+        "2326-3865"
+      ],
+      "published": {
+        "date-parts": [
+          [
+            2022
+          ]
+        ]
+      }
+    },
+    "final_issue_override": {
+      "year": 2023,
+      "volume": "35",
+      "issue": "5",
+      "page": "4646-4667",
+      "source": "https://dbgroup.cs.tsinghua.edu.cn/ligl/papers/DM4ML_Survey.pdf",
+      "reason": "Crossref record retains early-access page 1-1"
+    },
+    "ranking": {
+      "basis": "SJR 2025 best quartile, not publication-year or every-category quartile",
+      "quartile": "Q1",
+      "url": "https://www.scimagojr.com/journalsearch.php?clean=0&q=17362&tip=sid",
+      "checked": "2026-10-24",
+      "evidence": "Official SCImago indexed search result; direct bulk CSV request returned 403"
+    },
+    "verification_scope": "DOI/title/authors/venue metadata; no exhaustive full-text or retraction audit"
+  },
+  "iot": {
+    "doi": "10.3390/s21175834",
+    "verified": true,
+    "metadata": {
+      "publisher": "MDPI AG",
+      "issue": "17",
+      "abstract": "<jats:p>Nowadays, IoT is being used in more and more application areas and the importance of IoT data quality is widely recognized by practitioners and researchers. The requirements for data and its quality vary from application to application or organization in different contexts. Many methodologies and frameworks include techniques for defining, assessing, and improving data quality. However, due to the diversity of requirements, it can be a challenge to choose the appropriate technique for the IoT system. This paper surveys data quality frameworks and methodologies for IoT data, and related international standards, comparing them in terms of data types, data quality definitions, dimensions and metrics, and the choice of assessment dimensions. The survey is intended to help narrow down the possible choices of IoT data quality management technique.</jats:p>",
+      "DOI": "10.3390/s21175834",
+      "type": "journal-article",
+      "page": "5834",
+      "title": [
+        "Data Quality Management in the Internet of Things"
+      ],
+      "volume": "21",
+      "author": [
+        {
+          "given": "Lina",
+          "family": "Zhang"
+        },
+        {
+          "given": "Dongwon",
+          "family": "Jeong"
+        },
+        {
+          "given": "Sukhoon",
+          "family": "Lee"
+        }
+      ],
+      "published-online": {
+        "date-parts": [
+          [
+            2021,
+            8,
+            30
+          ]
+        ]
+      },
+      "container-title": [
+        "Sensors"
+      ],
+      "URL": "https://doi.org/10.3390/s21175834",
+      "ISSN": [
+        "1424-8220"
+      ],
+      "published": {
+        "date-parts": [
+          [
+            2021,
+            8,
+            30
+          ]
+        ]
+      }
+    },
+    "ranking": {
+      "basis": "SJR 2025 best quartile, not publication-year or every-category quartile",
+      "quartile": "Q1",
+      "url": "https://www.scimagojr.com/journalsearch.php?clean=0&q=130124&tip=sid",
+      "checked": "2026-10-24",
+      "evidence": "Official SCImago indexed search result; direct bulk CSV request returned 403"
+    },
+    "verification_scope": "DOI/title/authors/venue metadata; no exhaustive full-text or retraction audit"
+  },
+  "mohammed": {
+    "doi": "10.1016/j.is.2025.102549",
+    "verified": true,
+    "metadata": {
+      "publisher": "Elsevier BV",
+      "published-print": {
+        "date-parts": [
+          [
+            2025,
+            7
+          ]
+        ]
+      },
+      "DOI": "10.1016/j.is.2025.102549",
+      "type": "journal-article",
+      "page": "102549",
+      "title": [
+        "The effects of data quality on machine learning performance on tabular data"
+      ],
+      "volume": "132",
+      "author": [
+        {
+          "given": "Sedir",
+          "family": "Mohammed"
+        },
+        {
+          "given": "Lukas",
+          "family": "Budach"
+        },
+        {
+          "given": "Moritz",
+          "family": "Feuerpfeil"
+        },
+        {
+          "given": "Nina",
+          "family": "Ihde"
+        },
+        {
+          "given": "Andrea",
+          "family": "Nathansen"
+        },
+        {
+          "given": "Nele",
+          "family": "Noack"
+        },
+        {
+          "given": "Hendrik",
+          "family": "Patzlaff"
+        },
+        {
+          "given": "Felix",
+          "family": "Naumann"
+        },
+        {
+          "given": "Hazar",
+          "family": "Harmouch"
+        }
+      ],
+      "container-title": [
+        "Information Systems"
+      ],
+      "URL": "https://doi.org/10.1016/j.is.2025.102549",
+      "ISSN": [
+        "0306-4379"
+      ],
+      "published": {
+        "date-parts": [
+          [
+            2025,
+            7
+          ]
+        ]
+      },
+      "article-number": "102549"
+    },
+    "ranking": {
+      "basis": "SJR 2025 best quartile, not publication-year or every-category quartile",
+      "quartile": "Q1",
+      "url": "https://www.scimagojr.com/journalsearch.php?clean=0&q=12305&tip=sid",
+      "checked": "2026-10-24",
+      "evidence": "Official SCImago indexed search result; direct bulk CSV request returned 403"
+    },
+    "verification_scope": "DOI/title/authors/venue metadata; no exhaustive full-text or retraction audit"
+  },
+  "wuhitl": {
+    "doi": "10.1016/j.future.2022.05.014",
+    "verified": true,
+    "metadata": {
+      "publisher": "Elsevier BV",
+      "published-print": {
+        "date-parts": [
+          [
+            2022,
+            10
+          ]
+        ]
+      },
+      "DOI": "10.1016/j.future.2022.05.014",
+      "type": "journal-article",
+      "page": "364-381",
+      "title": [
+        "A survey of human-in-the-loop for machine learning"
+      ],
+      "volume": "135",
+      "author": [
+        {
+          "given": "Xingjiao",
+          "family": "Wu"
+        },
+        {
+          "given": "Luwei",
+          "family": "Xiao"
+        },
+        {
+          "given": "Yixuan",
+          "family": "Sun"
+        },
+        {
+          "given": "Junhang",
+          "family": "Zhang"
+        },
+        {
+          "given": "Tianlong",
+          "family": "Ma"
+        },
+        {
+          "given": "Liang",
+          "family": "He"
+        }
+      ],
+      "container-title": [
+        "Future Generation Computer Systems"
+      ],
+      "URL": "https://doi.org/10.1016/j.future.2022.05.014",
+      "ISSN": [
+        "0167-739X"
+      ],
+      "published": {
+        "date-parts": [
+          [
+            2022,
+            10
+          ]
+        ]
+      }
+    },
+    "ranking": {
+      "basis": "SJR 2025 best quartile, not publication-year or every-category quartile",
+      "quartile": "Q1",
+      "url": "https://www.scimagojr.com/journalsearch.php?clean=0&q=12264&tip=sid",
+      "checked": "2026-10-24",
+      "evidence": "Official SCImago indexed search result; direct bulk CSV request returned 403"
+    },
+    "verification_scope": "DOI/title/authors/venue metadata; no exhaustive full-text or retraction audit"
+  },
+  "onari": {
+    "doi": "10.1016/j.knosys.2024.111761",
+    "verified": true,
+    "metadata": {
+      "publisher": "Elsevier BV",
+      "published-print": {
+        "date-parts": [
+          [
+            2024,
+            7
+          ]
+        ]
+      },
+      "DOI": "10.1016/j.knosys.2024.111761",
+      "type": "journal-article",
+      "page": "111761",
+      "title": [
+        "An explainable data-driven decision support framework for strategic customer development"
+      ],
+      "volume": "295",
+      "author": [
+        {
+          "given": "Mohsen Abbaspour",
+          "family": "Onari"
+        },
+        {
+          "given": "Mustafa Jahangoshai",
+          "family": "Rezaee"
+        },
+        {
+          "given": "Morteza",
+          "family": "Saberi"
+        },
+        {
+          "given": "Marco S.",
+          "family": "Nobile"
+        }
+      ],
+      "container-title": [
+        "Knowledge-Based Systems"
+      ],
+      "URL": "https://doi.org/10.1016/j.knosys.2024.111761",
+      "ISSN": [
+        "0950-7051"
+      ],
+      "published": {
+        "date-parts": [
+          [
+            2024,
+            7
+          ]
+        ]
+      },
+      "article-number": "111761"
+    },
+    "ranking": {
+      "basis": "SJR 2025 best quartile, not publication-year or every-category quartile",
+      "quartile": "Q1",
+      "url": "https://www.scimagojr.com/journalsearch.php?clean=0&q=24772&tip=sid",
+      "checked": "2026-10-24",
+      "evidence": "Official SCImago indexed search result; direct bulk CSV request returned 403"
+    },
+    "verification_scope": "DOI/title/authors/venue metadata; no exhaustive full-text or retraction audit"
+  },
+  "jarrahi": {
+    "doi": "10.1016/j.bushor.2018.03.007",
+    "verified": true,
+    "metadata": {
+      "publisher": "Elsevier BV",
+      "issue": "4",
+      "published-print": {
+        "date-parts": [
+          [
+            2018,
+            7
+          ]
+        ]
+      },
+      "DOI": "10.1016/j.bushor.2018.03.007",
+      "type": "journal-article",
+      "page": "577-586",
+      "title": [
+        "Artificial intelligence and the future of work: Human-AI symbiosis in organizational decision making"
+      ],
+      "volume": "61",
+      "author": [
+        {
+          "given": "Mohammad Hossein",
+          "family": "Jarrahi"
+        }
+      ],
+      "container-title": [
+        "Business Horizons"
+      ],
+      "URL": "https://doi.org/10.1016/j.bushor.2018.03.007",
+      "ISSN": [
+        "0007-6813"
+      ],
+      "published": {
+        "date-parts": [
+          [
+            2018,
+            7
+          ]
+        ]
+      }
+    },
+    "ranking": {
+      "basis": "SJR 2025 best quartile, not publication-year or every-category quartile",
+      "quartile": "Q1",
+      "url": "https://www.scimagojr.com/journalsearch.php?clean=0&q=20209&tip=sid",
+      "checked": "2026-10-24",
+      "evidence": "Official SCImago indexed search result; direct bulk CSV request returned 403"
+    },
+    "verification_scope": "DOI/title/authors/venue metadata; no exhaustive full-text or retraction audit"
+  },
+  "jalalvand": {
+    "doi": "10.1016/j.ins.2026.124128",
+    "verified": true,
+    "metadata": {
+      "publisher": "Elsevier BV",
+      "published-print": {
+        "date-parts": [
+          [
+            2027,
+            1
+          ]
+        ]
+      },
+      "DOI": "10.1016/j.ins.2026.124128",
+      "type": "journal-article",
+      "page": "124128",
+      "title": [
+        "Adaptive alert prioritisation in security operations centres via learning to defer with human feedback"
+      ],
+      "volume": "760",
+      "author": [
+        {
+          "given": "Fatemeh",
+          "family": "Jalalvand"
+        },
+        {
+          "given": "Mohan",
+          "family": "Baruwal Chhetri"
+        },
+        {
+          "given": "Surya",
+          "family": "Nepal"
+        },
+        {
+          "given": "C\u00e9cile",
+          "family": "Paris"
+        }
+      ],
+      "container-title": [
+        "Information Sciences"
+      ],
+      "URL": "https://doi.org/10.1016/j.ins.2026.124128",
+      "ISSN": [
+        "0020-0255"
+      ],
+      "published": {
+        "date-parts": [
+          [
+            2027,
+            1
+          ]
+        ]
+      },
+      "article-number": "124128"
+    },
+    "ranking": {
+      "basis": "SJR 2025 best quartile, not publication-year or every-category quartile",
+      "quartile": "Q1",
+      "url": "https://www.scimagojr.com/journalsearch.php?clean=0&q=15134&tip=sid",
+      "checked": "2026-10-24",
+      "evidence": "Official SCImago indexed search result; direct bulk CSV request returned 403"
+    },
+    "verification_scope": "DOI/title/authors/venue metadata; no exhaustive full-text or retraction audit"
+  },
+  "sahin": {
+    "doi": "10.3390/electronics15184084",
+    "verified": true,
+    "metadata": {
+      "publisher": "MDPI AG",
+      "issue": "18",
+      "abstract": "<jats:p>Automated alert triage can reduce Security Operations Center (SOC) workload, yet the validation-tuned thresholds deployed systems rely on carry no finite-sample control of their operational error rates and degrade unpredictably under distribution shift. We present a model-agnostic dual-threshold conformal deferral architecture: high-score alerts are auto-escalated under finite-sample marginal class-conditional control of the benign-escalation probability (budget \u03b1), low-score alerts are auto-closed under matching control of the threat-miss probability (budget \u03b2), and the rest are deferred to an analyst. It needs no retraining and closes an automatic zone rather than certifying what the calibration data cannot support. We evaluate it on a reinforcement-learning investigation agent in a simulated SOC and on four classifiers trained on CIC-IDS2017 and tested on CSE-CIC-IDS2018, using stratified 25,000-flow calibration and evaluation samples, with attack-type recall computed over the full 16.2-million-flow corpus. Pooling episodes from ten trained policies across two evaluation datasets, the architecture automated 73.7% of decisions at \u03b1 = \u03b2 = 0.01\u2014a figure for that predefined pooled mixture rather than a per-policy or per-dataset guarantee\u2014realizing benign auto-escalation and threat auto-close rates of 0.0099 and 0.0101 and deferring the hardest ~26% of alerts. After recalibration on labeled target-domain data, severe cross-dataset degradation appears not as a silent error but as sharply reduced certifiable automation, with deferral rising to 79\u201399% for the most affected classifiers. This visibility is a property of the recalibrated layer: thresholds left un-recalibrated after a shift continue to certify nothing while still deciding, so the architecture requires periodic recalibration on labelled target-domain alerts to deliver it. Substituting open-weight language models for the analyst inside the band failed a pre-specified criterion at every scale tested from 7B to 32B across two model families, with the discriminative signal flat in model size and far below the first-stage policy\u2019s own.</jats:p>",
+      "DOI": "10.3390/electronics15184084",
+      "type": "journal-article",
+      "page": "4084",
+      "title": [
+        "Dual-Threshold Conformal Deferral for Trustworthy Security Alert Triage"
+      ],
+      "volume": "15",
+      "author": [
+        {
+          "given": "Fatih",
+          "family": "\u015eahin"
+        },
+        {
+          "given": "Necibe Sare",
+          "family": "Mert"
+        }
+      ],
+      "published-online": {
+        "date-parts": [
+          [
+            2026,
+            9,
+            9
+          ]
+        ]
+      },
+      "container-title": [
+        "Electronics"
+      ],
+      "URL": "https://doi.org/10.3390/electronics15184084",
+      "ISSN": [
+        "2079-9292"
+      ],
+      "published": {
+        "date-parts": [
+          [
+            2026,
+            9,
+            9
+          ]
+        ]
+      }
+    },
+    "ranking": {
+      "basis": "SJR 2025 best quartile, not publication-year or every-category quartile",
+      "quartile": "Q2",
+      "url": "https://www.scimagojr.com/journalsearch.php?clean=0&q=21100829272&tip=sid",
+      "checked": "2026-10-24",
+      "evidence": "Official SCImago indexed search result; direct bulk CSV request returned 403"
+    },
+    "verification_scope": "DOI/title/authors/venue metadata; no exhaustive full-text or retraction audit"
+  },
+  "vielberth": {
+    "doi": "10.1109/ACCESS.2020.3045514",
+    "verified": true,
+    "metadata": {
+      "publisher": "Institute of Electrical and Electronics Engineers (IEEE)",
+      "published-print": {
+        "date-parts": [
+          [
+            2020
+          ]
+        ]
+      },
+      "DOI": "10.1109/access.2020.3045514",
+      "type": "journal-article",
+      "page": "227756-227779",
+      "title": [
+        "Security Operations Center: A Systematic Study and Open Challenges"
+      ],
+      "volume": "8",
+      "author": [
+        {
+          "given": "Manfred",
+          "family": "Vielberth"
+        },
+        {
+          "given": "Fabian",
+          "family": "Bohm"
+        },
+        {
+          "given": "Ines",
+          "family": "Fichtinger"
+        },
+        {
+          "given": "Gunther",
+          "family": "Pernul"
+        }
+      ],
+      "container-title": [
+        "IEEE Access"
+      ],
+      "URL": "https://doi.org/10.1109/access.2020.3045514",
+      "ISSN": [
+        "2169-3536"
+      ],
+      "published": {
+        "date-parts": [
+          [
+            2020
+          ]
+        ]
+      }
+    },
+    "ranking": {
+      "basis": "SJR 2025 best quartile, not publication-year or every-category quartile",
+      "quartile": "Q1",
+      "url": "https://www.scimagojr.com/journalsearch.php?clean=0&q=21100374601&tip=sid",
+      "checked": "2026-10-24",
+      "evidence": "Official SCImago indexed search result; direct bulk CSV request returned 403"
+    },
+    "verification_scope": "DOI/title/authors/venue metadata; no exhaustive full-text or retraction audit"
+  },
+  "apruzzese": {
+    "doi": "10.1109/TNSM.2022.3157344",
+    "verified": true,
+    "metadata": {
+      "publisher": "Institute of Electrical and Electronics Engineers (IEEE)",
+      "issue": "4",
+      "published-print": {
+        "date-parts": [
+          [
+            2022,
+            12
+          ]
+        ]
+      },
+      "DOI": "10.1109/tnsm.2022.3157344",
+      "type": "journal-article",
+      "page": "5152-5169",
+      "title": [
+        "The Cross-Evaluation of Machine Learning-Based Network Intrusion Detection Systems"
+      ],
+      "volume": "19",
+      "author": [
+        {
+          "given": "Giovanni",
+          "family": "Apruzzese"
+        },
+        {
+          "given": "Luca",
+          "family": "Pajola"
+        },
+        {
+          "given": "Mauro",
+          "family": "Conti"
+        }
+      ],
+      "container-title": [
+        "IEEE Transactions on Network and Service Management"
+      ],
+      "URL": "https://doi.org/10.1109/tnsm.2022.3157344",
+      "ISSN": [
+        "1932-4537",
+        "2373-7379"
+      ],
+      "published": {
+        "date-parts": [
+          [
+            2022,
+            12
+          ]
+        ]
+      }
+    },
+    "ranking": {
+      "basis": "SJR 2025 best quartile, not publication-year or every-category quartile",
+      "quartile": "Q1",
+      "url": "https://www.scimagojr.com/journalsearch.php?clean=0&q=7200153156&tip=sid",
+      "checked": "2026-10-24",
+      "evidence": "Official SCImago indexed search result; direct bulk CSV request returned 403"
+    },
+    "verification_scope": "DOI/title/authors/venue metadata; no exhaustive full-text or retraction audit"
+  },
+  "cantone": {
+    "doi": "10.1109/ACCESS.2024.3472907",
+    "verified": true,
+    "metadata": {
+      "publisher": "Institute of Electrical and Electronics Engineers (IEEE)",
+      "published-print": {
+        "date-parts": [
+          [
+            2024
+          ]
+        ]
+      },
+      "DOI": "10.1109/access.2024.3472907",
+      "type": "journal-article",
+      "page": "144489-144508",
+      "title": [
+        "Machine Learning in Network Intrusion Detection: A Cross-Dataset Generalization Study"
+      ],
+      "volume": "12",
+      "author": [
+        {
+          "given": "Marco",
+          "family": "Cantone"
+        },
+        {
+          "given": "Claudio",
+          "family": "Marrocco"
+        },
+        {
+          "given": "Alessandro",
+          "family": "Bria"
+        }
+      ],
+      "container-title": [
+        "IEEE Access"
+      ],
+      "URL": "https://doi.org/10.1109/access.2024.3472907",
+      "ISSN": [
+        "2169-3536"
+      ],
+      "published": {
+        "date-parts": [
+          [
+            2024
+          ]
+        ]
+      }
+    },
+    "ranking": {
+      "basis": "SJR 2025 best quartile, not publication-year or every-category quartile",
+      "quartile": "Q1",
+      "url": "https://www.scimagojr.com/journalsearch.php?clean=0&q=21100374601&tip=sid",
+      "checked": "2026-10-24",
+      "evidence": "Official SCImago indexed search result; direct bulk CSV request returned 403"
+    },
+    "verification_scope": "DOI/title/authors/venue metadata; no exhaustive full-text or retraction audit"
+  },
+  "dhooge": {
+    "doi": "10.1016/j.jisa.2020.102564",
+    "verified": true,
+    "metadata": {
+      "publisher": "Elsevier BV",
+      "published-print": {
+        "date-parts": [
+          [
+            2020,
+            10
+          ]
+        ]
+      },
+      "DOI": "10.1016/j.jisa.2020.102564",
+      "type": "journal-article",
+      "page": "102564",
+      "title": [
+        "Inter-dataset generalization strength of supervised machine learning methods for intrusion detection"
+      ],
+      "volume": "54",
+      "author": [
+        {
+          "given": "Laurens",
+          "family": "D\u2019hooge"
+        },
+        {
+          "given": "Tim",
+          "family": "Wauters"
+        },
+        {
+          "given": "Bruno",
+          "family": "Volckaert"
+        },
+        {
+          "given": "Filip",
+          "family": "De Turck"
+        }
+      ],
+      "container-title": [
+        "Journal of Information Security and Applications"
+      ],
+      "URL": "https://doi.org/10.1016/j.jisa.2020.102564",
+      "ISSN": [
+        "2214-2126"
+      ],
+      "published": {
+        "date-parts": [
+          [
+            2020,
+            10
+          ]
+        ]
+      },
+      "article-number": "102564"
+    },
+    "ranking": {
+      "basis": "SJR 2025 best quartile, not publication-year or every-category quartile",
+      "quartile": "Q1",
+      "url": "https://www.scimagojr.com/journalsearch.php?clean=0&q=21100332403&tip=sid",
+      "checked": "2026-10-24",
+      "evidence": "Official SCImago indexed search result; direct bulk CSV request returned 403"
+    },
+    "verification_scope": "DOI/title/authors/venue metadata; no exhaustive full-text or retraction audit"
+  },
+  "aldweesh": {
+    "doi": "10.1016/j.knosys.2019.105124",
+    "verified": true,
+    "metadata": {
+      "publisher": "Elsevier BV",
+      "published-print": {
+        "date-parts": [
+          [
+            2020,
+            2
+          ]
+        ]
+      },
+      "DOI": "10.1016/j.knosys.2019.105124",
+      "type": "journal-article",
+      "page": "105124",
+      "title": [
+        "Deep learning approaches for anomaly-based intrusion detection systems: A survey, taxonomy, and open issues"
+      ],
+      "volume": "189",
+      "author": [
+        {
+          "given": "Arwa",
+          "family": "Aldweesh"
+        },
+        {
+          "given": "Abdelouahid",
+          "family": "Derhab"
+        },
+        {
+          "given": "Ahmed Z.",
+          "family": "Emam"
+        }
+      ],
+      "container-title": [
+        "Knowledge-Based Systems"
+      ],
+      "URL": "https://doi.org/10.1016/j.knosys.2019.105124",
+      "ISSN": [
+        "0950-7051"
+      ],
+      "published": {
+        "date-parts": [
+          [
+            2020,
+            2
+          ]
+        ]
+      },
+      "article-number": "105124"
+    },
+    "ranking": {
+      "basis": "SJR 2025 best quartile, not publication-year or every-category quartile",
+      "quartile": "Q1",
+      "url": "https://www.scimagojr.com/journalsearch.php?clean=0&q=24772&tip=sid",
+      "checked": "2026-10-24",
+      "evidence": "Official SCImago indexed search result; direct bulk CSV request returned 403"
+    },
+    "verification_scope": "DOI/title/authors/venue metadata; no exhaustive full-text or retraction audit"
+  },
+  "ferrag": {
+    "doi": "10.1016/j.jisa.2019.102419",
+    "verified": true,
+    "metadata": {
+      "publisher": "Elsevier BV",
+      "published-print": {
+        "date-parts": [
+          [
+            2020,
+            2
+          ]
+        ]
+      },
+      "DOI": "10.1016/j.jisa.2019.102419",
+      "type": "journal-article",
+      "page": "102419",
+      "title": [
+        "Deep learning for cyber security intrusion detection: Approaches, datasets, and comparative study"
+      ],
+      "volume": "50",
+      "author": [
+        {
+          "given": "Mohamed Amine",
+          "family": "Ferrag"
+        },
+        {
+          "given": "Leandros",
+          "family": "Maglaras"
+        },
+        {
+          "given": "Sotiris",
+          "family": "Moschoyiannis"
+        },
+        {
+          "given": "Helge",
+          "family": "Janicke"
+        }
+      ],
+      "container-title": [
+        "Journal of Information Security and Applications"
+      ],
+      "URL": "https://doi.org/10.1016/j.jisa.2019.102419",
+      "ISSN": [
+        "2214-2126"
+      ],
+      "published": {
+        "date-parts": [
+          [
+            2020,
+            2
+          ]
+        ]
+      },
+      "article-number": "102419"
+    },
+    "ranking": {
+      "basis": "SJR 2025 best quartile, not publication-year or every-category quartile",
+      "quartile": "Q1",
+      "url": "https://www.scimagojr.com/journalsearch.php?clean=0&q=21100332403&tip=sid",
+      "checked": "2026-10-24",
+      "evidence": "Official SCImago indexed search result; direct bulk CSV request returned 403"
+    },
+    "verification_scope": "DOI/title/authors/venue metadata; no exhaustive full-text or retraction audit"
+  },
+  "buczak": {
+    "doi": "10.1109/COMST.2015.2494502",
+    "verified": true,
+    "metadata": {
+      "publisher": "Institute of Electrical and Electronics Engineers (IEEE)",
+      "issue": "2",
+      "published-print": {
+        "date-parts": [
+          [
+            2016
+          ]
+        ]
+      },
+      "DOI": "10.1109/comst.2015.2494502",
+      "type": "journal-article",
+      "page": "1153-1176",
+      "title": [
+        "A Survey of Data Mining and Machine Learning Methods for Cyber Security Intrusion Detection"
+      ],
+      "volume": "18",
+      "author": [
+        {
+          "given": "Anna L.",
+          "family": "Buczak"
+        },
+        {
+          "given": "Erhan",
+          "family": "Guven"
+        }
+      ],
+      "container-title": [
+        "IEEE Communications Surveys &amp; Tutorials"
+      ],
+      "URL": "https://doi.org/10.1109/comst.2015.2494502",
+      "ISSN": [
+        "1553-877X",
+        "2373-745X"
+      ],
+      "published": {
+        "date-parts": [
+          [
+            2016
+          ]
+        ]
+      }
+    },
+    "ranking": {
+      "basis": "SJR 2025 best quartile, not publication-year or every-category quartile",
+      "quartile": "Q1",
+      "url": "https://www.scimagojr.com/journalsearch.php?clean=0&q=17900156715&tip=sid",
+      "checked": "2026-10-24",
+      "evidence": "Official SCImago indexed search result; direct bulk CSV request returned 403"
+    },
+    "verification_scope": "DOI/title/authors/venue metadata; no exhaustive full-text or retraction audit"
+  },
+  "ring": {
+    "doi": "10.1016/j.cose.2019.06.005",
+    "verified": true,
+    "metadata": {
+      "publisher": "Elsevier BV",
+      "published-print": {
+        "date-parts": [
+          [
+            2019,
+            9
+          ]
+        ]
+      },
+      "DOI": "10.1016/j.cose.2019.06.005",
+      "type": "journal-article",
+      "page": "147-167",
+      "title": [
+        "A survey of network-based intrusion detection data sets"
+      ],
+      "volume": "86",
+      "author": [
+        {
+          "given": "Markus",
+          "family": "Ring"
+        },
+        {
+          "given": "Sarah",
+          "family": "Wunderlich"
+        },
+        {
+          "given": "Deniz",
+          "family": "Scheuring"
+        },
+        {
+          "given": "Dieter",
+          "family": "Landes"
+        },
+        {
+          "given": "Andreas",
+          "family": "Hotho"
+        }
+      ],
+      "container-title": [
+        "Computers &amp; Security"
+      ],
+      "URL": "https://doi.org/10.1016/j.cose.2019.06.005",
+      "ISSN": [
+        "0167-4048"
+      ],
+      "published": {
+        "date-parts": [
+          [
+            2019,
+            9
+          ]
+        ]
+      }
+    },
+    "ranking": {
+      "basis": "SJR 2025 best quartile, not publication-year or every-category quartile",
+      "quartile": "Q1",
+      "url": "https://www.scimagojr.com/journalsearch.php?clean=0&q=28898&tip=sid",
+      "checked": "2026-10-24",
+      "evidence": "Official SCImago indexed search result; direct bulk CSV request returned 403"
+    },
+    "verification_scope": "DOI/title/authors/venue metadata; no exhaustive full-text or retraction audit"
+  },
+  "abdar": {
+    "doi": "10.1016/j.inffus.2021.05.008",
+    "verified": true,
+    "metadata": {
+      "publisher": "Elsevier BV",
+      "published-print": {
+        "date-parts": [
+          [
+            2021,
+            12
+          ]
+        ]
+      },
+      "DOI": "10.1016/j.inffus.2021.05.008",
+      "type": "journal-article",
+      "page": "243-297",
+      "title": [
+        "A review of uncertainty quantification in deep learning: Techniques, applications and challenges"
+      ],
+      "volume": "76",
+      "author": [
+        {
+          "given": "Moloud",
+          "family": "Abdar"
+        },
+        {
+          "given": "Farhad",
+          "family": "Pourpanah"
+        },
+        {
+          "given": "Sadiq",
+          "family": "Hussain"
+        },
+        {
+          "given": "Dana",
+          "family": "Rezazadegan"
+        },
+        {
+          "given": "Li",
+          "family": "Liu"
+        },
+        {
+          "given": "Mohammad",
+          "family": "Ghavamzadeh"
+        },
+        {
+          "given": "Paul",
+          "family": "Fieguth"
+        },
+        {
+          "given": "Xiaochun",
+          "family": "Cao"
+        },
+        {
+          "given": "Abbas",
+          "family": "Khosravi"
+        },
+        {
+          "given": "U. Rajendra",
+          "family": "Acharya"
+        },
+        {
+          "given": "Vladimir",
+          "family": "Makarenkov"
+        },
+        {
+          "given": "Saeid",
+          "family": "Nahavandi"
+        }
+      ],
+      "container-title": [
+        "Information Fusion"
+      ],
+      "URL": "https://doi.org/10.1016/j.inffus.2021.05.008",
+      "ISSN": [
+        "1566-2535"
+      ],
+      "published": {
+        "date-parts": [
+          [
+            2021,
+            12
+          ]
+        ]
+      }
+    },
+    "ranking": {
+      "basis": "SJR 2025 best quartile, not publication-year or every-category quartile",
+      "quartile": "Q1",
+      "url": "https://www.scimagojr.com/journalsearch.php?clean=0&q=26099&tip=sid",
+      "checked": "2026-10-24",
+      "evidence": "Official SCImago indexed search result; direct bulk CSV request returned 403"
+    },
+    "verification_scope": "DOI/title/authors/venue metadata; no exhaustive full-text or retraction audit"
+  },
+  "lu": {
+    "doi": "10.1109/TKDE.2018.2876857",
+    "verified": true,
+    "metadata": {
+      "publisher": "Institute of Electrical and Electronics Engineers (IEEE)",
+      "published-print": {
+        "date-parts": [
+          [
+            2018
+          ]
+        ]
+      },
+      "DOI": "10.1109/tkde.2018.2876857",
+      "type": "journal-article",
+      "page": "1-1",
+      "title": [
+        "Learning under Concept Drift: A Review"
+      ],
+      "author": [
+        {
+          "given": "Jie",
+          "family": "Lu"
+        },
+        {
+          "given": "Anjin",
+          "family": "Liu"
+        },
+        {
+          "given": "Fan",
+          "family": "Dong"
+        },
+        {
+          "given": "Feng",
+          "family": "Gu"
+        },
+        {
+          "given": "Joao",
+          "family": "Gama"
+        },
+        {
+          "given": "Guangquan",
+          "family": "Zhang"
+        }
+      ],
+      "container-title": [
+        "IEEE Transactions on Knowledge and Data Engineering"
+      ],
+      "URL": "https://doi.org/10.1109/tkde.2018.2876857",
+      "ISSN": [
+        "1041-4347",
+        "1558-2191",
+        "2326-3865"
+      ],
+      "published": {
+        "date-parts": [
+          [
+            2018
+          ]
+        ]
+      }
+    },
+    "final_issue_override": {
+      "year": 2019,
+      "volume": "31",
+      "issue": "12",
+      "page": "2346-2363",
+      "source": "https://doi.org/10.1109/TKDE.2018.2876857",
+      "reason": "Crossref record retains early-access page 1-1"
+    },
+    "ranking": {
+      "basis": "SJR 2025 best quartile, not publication-year or every-category quartile",
+      "quartile": "Q1",
+      "url": "https://www.scimagojr.com/journalsearch.php?clean=0&q=17362&tip=sid",
+      "checked": "2026-10-24",
+      "evidence": "Official SCImago indexed search result; direct bulk CSV request returned 403"
+    },
+    "verification_scope": "DOI/title/authors/venue metadata; no exhaustive full-text or retraction audit"
+  },
+  "unsw": {
+    "doi": "10.1109/MilCIS.2015.7348942",
+    "verified": true,
+    "metadata": {
+      "publisher": "IEEE",
+      "published-print": {
+        "date-parts": [
+          [
+            2015,
+            11
+          ]
+        ]
+      },
+      "DOI": "10.1109/milcis.2015.7348942",
+      "type": "proceedings-article",
+      "page": "1-6",
+      "title": [
+        "UNSW-NB15: a comprehensive data set for network intrusion detection systems (UNSW-NB15 network data set)"
+      ],
+      "author": [
+        {
+          "given": "Nour",
+          "family": "Moustafa"
+        },
+        {
+          "given": "Jill",
+          "family": "Slay"
+        }
+      ],
+      "container-title": [
+        "2015 Military Communications and Information Systems Conference (MilCIS)"
+      ],
+      "URL": "https://doi.org/10.1109/milcis.2015.7348942",
+      "published": {
+        "date-parts": [
+          [
+            2015,
+            11
+          ]
+        ]
+      }
+    },
+    "verification_scope": "DOI/title/authors/venue metadata; no exhaustive full-text or retraction audit"
+  },
+  "unsw_eval": {
+    "doi": "10.1080/19393555.2015.1125974",
+    "verified": true,
+    "metadata": {
+      "publisher": "Informa UK Limited",
+      "issue": "1-3",
+      "published-print": {
+        "date-parts": [
+          [
+            2016,
+            4,
+            4
+          ]
+        ]
+      },
+      "DOI": "10.1080/19393555.2015.1125974",
+      "type": "journal-article",
+      "page": "18-31",
+      "title": [
+        "The evaluation of Network Anomaly Detection Systems: Statistical analysis of the UNSW-NB15 data set and the comparison with the KDD99 data set"
+      ],
+      "volume": "25",
+      "author": [
+        {
+          "given": "Nour",
+          "family": "Moustafa"
+        },
+        {
+          "given": "Jill",
+          "family": "Slay"
+        }
+      ],
+      "published-online": {
+        "date-parts": [
+          [
+            2016,
+            1,
+            11
+          ]
+        ]
+      },
+      "container-title": [
+        "Information Security Journal: A Global Perspective"
+      ],
+      "URL": "https://doi.org/10.1080/19393555.2015.1125974",
+      "ISSN": [
+        "1939-3555",
+        "1939-3547"
+      ],
+      "published": {
+        "date-parts": [
+          [
+            2016,
+            1,
+            11
+          ]
+        ]
+      }
+    },
+    "ranking": {
+      "basis": "SJR 2025 best quartile, not publication-year or every-category quartile",
+      "quartile": "Q2",
+      "url": "https://www.scimagojr.com/journalsearch.php?clean=0&q=19700187807&tip=sid",
+      "checked": "2026-10-24",
+      "evidence": "Official SCImago indexed search result; direct bulk CSV request returned 403"
+    },
+    "verification_scope": "DOI/title/authors/venue metadata; no exhaustive full-text or retraction audit"
+  },
+  "unsw_geometry": {
+    "doi": "10.1109/TBDATA.2017.2715166",
+    "verified": true,
+    "metadata": {
+      "publisher": "Institute of Electrical and Electronics Engineers (IEEE)",
+      "issue": "4",
+      "published-print": {
+        "date-parts": [
+          [
+            2019,
+            12,
+            1
+          ]
+        ]
+      },
+      "DOI": "10.1109/tbdata.2017.2715166",
+      "type": "journal-article",
+      "page": "481-494",
+      "title": [
+        "Novel Geometric Area Analysis Technique for Anomaly Detection Using Trapezoidal Area Estimation on Large-Scale Networks"
+      ],
+      "volume": "5",
+      "author": [
+        {
+          "given": "Nour",
+          "family": "Moustafa"
+        },
+        {
+          "given": "Jill",
+          "family": "Slay"
+        },
+        {
+          "given": "Gideon",
+          "family": "Creech"
+        }
+      ],
+      "container-title": [
+        "IEEE Transactions on Big Data"
+      ],
+      "URL": "https://doi.org/10.1109/tbdata.2017.2715166",
+      "ISSN": [
+        "2332-7790",
+        "2372-2096"
+      ],
+      "published": {
+        "date-parts": [
+          [
+            2019,
+            12,
+            1
+          ]
+        ]
+      }
+    },
+    "ranking": {
+      "basis": "SJR 2025 best quartile, not publication-year or every-category quartile",
+      "quartile": "Q1",
+      "url": "https://www.scimagojr.com/journalsearch.php?clean=0&q=21101019393&tip=sid",
+      "checked": "2026-10-24",
+      "evidence": "Official SCImago indexed search result; direct bulk CSV request returned 403"
+    },
+    "verification_scope": "DOI/title/authors/venue metadata; no exhaustive full-text or retraction audit"
+  },
+  "netflow": {
+    "doi": "10.1007/978-3-030-72802-1_9",
+    "verified": true,
+    "metadata": {
+      "publisher": "Springer International Publishing",
+      "published-print": {
+        "date-parts": [
+          [
+            2021
+          ]
+        ]
+      },
+      "DOI": "10.1007/978-3-030-72802-1_9",
+      "type": "book-chapter",
+      "page": "117-135",
+      "title": [
+        "NetFlow Datasets for Machine Learning-Based Network Intrusion Detection Systems"
+      ],
+      "author": [
+        {
+          "given": "Mohanad",
+          "family": "Sarhan"
+        },
+        {
+          "given": "Siamak",
+          "family": "Layeghy"
+        },
+        {
+          "given": "Nour",
+          "family": "Moustafa"
+        },
+        {
+          "given": "Marius",
+          "family": "Portmann"
+        }
+      ],
+      "published-online": {
+        "date-parts": [
+          [
+            2021,
+            4,
+            9
+          ]
+        ]
+      },
+      "container-title": [
+        "Lecture Notes of the Institute for Computer Sciences, Social Informatics and Telecommunications Engineering",
+        "Big Data Technologies and Applications"
+      ],
+      "URL": "https://doi.org/10.1007/978-3-030-72802-1_9",
+      "ISSN": [
+        "1867-8211",
+        "1867-822X"
+      ],
+      "published": {
+        "date-parts": [
+          [
+            2021
+          ]
+        ]
+      }
+    },
+    "verification_scope": "DOI/title/authors/venue metadata; no exhaustive full-text or retraction audit"
+  },
+  "cic": {
+    "doi": "10.5220/0006639801080116",
+    "verified": true,
+    "metadata": {
+      "publisher": "SCITEPRESS - Science and Technology Publications",
+      "published-print": {
+        "date-parts": [
+          [
+            2018
+          ]
+        ]
+      },
+      "DOI": "10.5220/0006639801080116",
+      "type": "proceedings-article",
+      "page": "108-116",
+      "title": [
+        "Toward Generating a New Intrusion Detection Dataset and Intrusion Traffic Characterization"
+      ],
+      "author": [
+        {
+          "given": "Iman",
+          "family": "Sharafaldin"
+        },
+        {
+          "given": "Arash",
+          "family": "Habibi Lashkari"
+        },
+        {
+          "given": "Ali A.",
+          "family": "Ghorbani"
+        }
+      ],
+      "container-title": [
+        "Proceedings of the 4th International Conference on Information Systems Security and Privacy"
+      ],
+      "URL": "https://doi.org/10.5220/0006639801080116",
+      "published": {
+        "date-parts": [
+          [
+            2018
+          ]
+        ]
+      }
+    },
+    "verification_scope": "DOI/title/authors/venue metadata; no exhaustive full-text or retraction audit"
+  },
+  "engelen": {
+    "doi": "10.1109/SPW53761.2021.00009",
+    "verified": true,
+    "metadata": {
+      "publisher": "IEEE",
+      "published-print": {
+        "date-parts": [
+          [
+            2021,
+            5
+          ]
+        ]
+      },
+      "DOI": "10.1109/spw53761.2021.00009",
+      "type": "proceedings-article",
+      "page": "7-12",
+      "title": [
+        "Troubleshooting an Intrusion Detection Dataset: the CICIDS2017 Case Study"
+      ],
+      "author": [
+        {
+          "given": "Gints",
+          "family": "Engelen"
+        },
+        {
+          "given": "Vera",
+          "family": "Rimmer"
+        },
+        {
+          "given": "Wouter",
+          "family": "Joosen"
+        }
+      ],
+      "container-title": [
+        "2021 IEEE Security and Privacy Workshops (SPW)"
+      ],
+      "URL": "https://doi.org/10.1109/spw53761.2021.00009",
+      "published": {
+        "date-parts": [
+          [
+            2021,
+            5
+          ]
+        ]
+      }
+    },
+    "verification_scope": "DOI/title/authors/venue metadata; no exhaustive full-text or retraction audit"
+  },
+  "unsw_dirichlet": {
+    "doi": "10.1007/978-3-319-59439-2_5",
+    "verified": true,
+    "metadata": {
+      "publisher": "Springer International Publishing",
+      "published-print": {
+        "date-parts": [
+          [
+            2017
+          ]
+        ]
+      },
+      "DOI": "10.1007/978-3-319-59439-2_5",
+      "type": "book-chapter",
+      "page": "127-156",
+      "title": [
+        "Big Data Analytics for Intrusion Detection System: Statistical Decision-Making Using Finite Dirichlet Mixture Models"
+      ],
+      "author": [
+        {
+          "given": "Nour",
+          "family": "Moustafa"
+        },
+        {
+          "given": "Gideon",
+          "family": "Creech"
+        },
+        {
+          "given": "Jill",
+          "family": "Slay"
+        }
+      ],
+      "published-online": {
+        "date-parts": [
+          [
+            2017,
+            8,
+            2
+          ]
+        ]
+      },
+      "container-title": [
+        "Data Analytics",
+        "Data Analytics and Decision Support for Cybersecurity"
+      ],
+      "URL": "https://doi.org/10.1007/978-3-319-59439-2_5",
+      "ISSN": [
+        "2520-1859",
+        "2520-1867"
+      ],
+      "published": {
+        "date-parts": [
+          [
+            2017
+          ]
+        ]
+      }
+    },
+    "verification_scope": "DOI/title/authors/venue metadata; no exhaustive full-text or retraction audit"
+  },
+  "mozannar": {
+    "verified": true,
+    "provider": "Primary proceedings/journal record",
+    "url": "https://proceedings.mlr.press/v119/mozannar20b.html",
+    "metadata": {
+      "title": [
+        "Consistent estimators for learning to defer to an expert"
+      ],
+      "container-title": [
+        "Proceedings of the 37th International Conference on Machine Learning"
+      ],
+      "published": {
+        "date-parts": [
+          [
+            2020
+          ]
+        ]
+      },
+      "volume": "119",
+      "page": "7076-7087",
+      "author": [
+        {
+          "given": "Hussein",
+          "family": "Mozannar"
+        },
+        {
+          "given": "David",
+          "family": "Sontag"
+        }
+      ]
+    },
+    "verification_scope": "Primary bibliographic record; no quartile claim for conference papers or statistical sources"
+  },
+  "verma": {
+    "verified": true,
+    "provider": "Primary proceedings/journal record",
+    "url": "https://proceedings.mlr.press/v162/verma22c.html",
+    "metadata": {
+      "title": [
+        "Calibrated learning to defer with one-vs-all classifiers"
+      ],
+      "container-title": [
+        "Proceedings of the 39th International Conference on Machine Learning"
+      ],
+      "published": {
+        "date-parts": [
+          [
+            2022
+          ]
+        ]
+      },
+      "volume": "162",
+      "page": "22184-22202",
+      "author": [
+        {
+          "given": "Rajeev",
+          "family": "Verma"
+        },
+        {
+          "given": "Eric",
+          "family": "Nalisnick"
+        }
+      ]
+    },
+    "verification_scope": "Primary bibliographic record; no quartile claim for conference papers or statistical sources"
+  },
+  "alves": {
+    "verified": true,
+    "provider": "Primary proceedings/journal record",
+    "url": "https://openreview.net/forum?id=TAvGZm2Rqb",
+    "metadata": {
+      "title": [
+        "Cost-sensitive learning to defer to multiple experts with workload constraints"
+      ],
+      "container-title": [
+        "Transactions on Machine Learning Research"
+      ],
+      "published": {
+        "date-parts": [
+          [
+            2024
+          ]
+        ]
+      },
+      "volume": "",
+      "page": "",
+      "author": [
+        {
+          "given": "Jean V.",
+          "family": "Alves"
+        },
+        {
+          "given": "Diogo",
+          "family": "Leit\u00e3o"
+        },
+        {
+          "given": "S\u00e9rgio",
+          "family": "Jesus"
+        },
+        {
+          "given": "Marco O.P.",
+          "family": "Sampaio"
+        },
+        {
+          "given": "Javier",
+          "family": "Li\u00e9bana"
+        },
+        {
+          "given": "Pedro",
+          "family": "Saleiro"
+        },
+        {
+          "given": "M\u00e1rio A.T.",
+          "family": "Figueiredo"
+        },
+        {
+          "given": "Pedro",
+          "family": "Bizarro"
+        }
+      ]
+    },
+    "verification_scope": "Primary bibliographic record; no quartile claim for conference papers or statistical sources"
+  },
+  "holm": {
+    "verified": true,
+    "provider": "Primary proceedings/journal record",
+    "url": "https://www.jstor.org/stable/4615733",
+    "metadata": {
+      "title": [
+        "A simple sequentially rejective multiple test procedure"
+      ],
+      "container-title": [
+        "Scandinavian Journal of Statistics"
+      ],
+      "published": {
+        "date-parts": [
+          [
+            1979
+          ]
+        ]
+      },
+      "volume": "6",
+      "page": "65-70",
+      "author": [
+        {
+          "given": "Sture",
+          "family": "Holm"
+        }
+      ]
+    },
+    "verification_scope": "Primary bibliographic record; no quartile claim for conference papers or statistical sources"
+  }
+}

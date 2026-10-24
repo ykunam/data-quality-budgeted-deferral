@@ -353,14 +353,19 @@ def report():
     fig.tight_layout(rect=(0,.12,1,1));export_figure(fig,figs/'cyber_fig2');plt.close(fig)
     # Editable table bodies. Every displayed cell is derived here, never typed by hand.
     names=dict(prob='Probability only',quality_A='Quality in A',quality_both='Quality in A and H',features='Observed features',confidence='Confidence',chow='Chow risk',conformal='Conformal adaptation')
-    lines=[r'\newcommand{\CyberTableOne}{%',r'\begin{tabular}{llrrrrr}\toprule',r'Data & Method & Cost & Close & Esc. & Held & Unmet\\\midrule']
+    lines=[r'\newcommand{\CyberTableOne}{%',r'\begin{tabular}{lrrrrrr}\toprule',r' & \multicolumn{3}{c}{UNSW-NB15} & \multicolumn{3}{c}{CICIDS2017}\\',r'\cmidrule(lr){2-4}\cmidrule(lr){5-7}',r'Method & Cost & Close & Unmet & Cost & Close & Unmet\\\midrule']
     display=[]
     for ds in ('unsw','cic'):
         for method,label in names.items():
             z=sub[(sub.dataset==ds)&(sub.condition=='outage')&(sub.capacity==.2)&(sub.method==method)].mean(numeric_only=True)
             vals=[float(z[c]) for c in ['cost','auto_close_attack','benign_escalation','held_attack','unmet_attack']]
             display.append(dict(dataset=ds,method=method,**dict(zip(['cost','close','escalation','held_attack','unmet_attack'],vals))))
-            lines.append(f"{'UNSW' if ds=='unsw' else 'CIC'} & {label} & {vals[0]:.4f} & "+' & '.join(f'{100*v:.1f}' for v in vals[1:])+r'\\')
+    for method,label in names.items():
+        vals=[]
+        for ds in ('unsw','cic'):
+            r=next(r for r in display if r['dataset']==ds and r['method']==method)
+            vals += [f"{r['cost']:.4f}",f"{100*r['close']:.1f}",f"{100*r['unmet_attack']:.1f}"]
+        lines.append(label+' & '+' & '.join(vals)+r'\\')
     lines += [r'\bottomrule\end{tabular}}',r'\newcommand{\CyberTableTwo}{%',r'\begin{tabular}{llrrlrr}\toprule',r'Data & Condition & $\Delta$ & Rel. (\%) & 95\% MC interval & $p$ & Holm\\\midrule']
     results=json.loads((OUT/'cyber-summary.json').read_text())
     def pv(x):return '$<0.001$' if x<.001 else f'{x:.3f}'

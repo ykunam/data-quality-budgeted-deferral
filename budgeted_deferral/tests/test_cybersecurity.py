@@ -1,6 +1,8 @@
 import unittest
 import numpy as np
 import sys
+import json
+import pandas as pd
 from pathlib import Path
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
 from dqd import cybersecurity as Y, core as C
@@ -50,5 +52,31 @@ class CybersecurityInvariants(unittest.TestCase):
         v=Y.metrics(r,h,y,yh,np.array([.1,.1]),h)
         self.assertEqual(v['auto_close_attack'],0);self.assertEqual(v['held_attack'],1)
         self.assertEqual(v['unmet_attack'],1)
+
+@unittest.skipUnless((Y.OUT/'cyber-results.csv.gz').exists(),'Run the frozen experiment first')
+class SavedCybersecurityOutputs(unittest.TestCase):
+    def test_complete_grid_and_cost_accounting(self):
+        d=pd.read_csv(Y.OUT/'cyber-results.csv.gz')
+        self.assertEqual(len(d),21120)
+        self.assertFalse(d.duplicated(['dataset','seed','reviewer','condition','capacity','method','arm']).any())
+        np.testing.assert_allclose(d.cost,d.auto_loss+d.review_loss+.05*d.review+1.5*d.hold,atol=1e-10)
+        self.assertTrue((d.review<=d.capacity+1e-12).all())
+        self.assertTrue((d[d.arm!='no_rules'].violation==0).all())
+    def test_primary_and_secondary_family_preserved(self):
+        s=json.loads((Y.OUT/'cyber-summary.json').read_text())
+        self.assertEqual(len(s['contrasts']),8)
+        self.assertEqual(sum(x['primary'] for x in s['contrasts']),1)
+        self.assertEqual(sum('p_holm' in x for x in s['contrasts']),7)
+        self.assertEqual(s['primary']['seeds'],20)
+        self.assertEqual([s['primary'][k] for k in ['dataset','condition']],['unsw','outage'])
+    def test_display_values_and_vector_exports(self):
+        d=pd.read_csv(Y.OUT/'cyber-results.csv.gz')
+        for x in json.loads((Y.OUT/'cyber-display.json').read_text()):
+            arm='native' if x['method']=='conformal' else 'matched'
+            z=d[(d.dataset==x['dataset'])&(d.method==x['method'])&(d.condition=='outage')&(d.capacity==.2)&(d.arm==arm)].cost.mean()
+            self.assertAlmostEqual(x['cost'],z,12)
+        for n in (1,2):
+            b=(Y.ROOT/f'figs/cyber_fig{n}.pdf').read_bytes()
+            self.assertTrue(b.startswith(b'%PDF') and b'%%EOF' in b[-30:])
 
 if __name__=='__main__':unittest.main()

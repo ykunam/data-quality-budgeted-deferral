@@ -1,0 +1,21 @@
+{
+  "source_sha256": "97a275746a91c39662a6b177fba8bb2e832263d1cafb319c196e41fd09545b1c",
+  "core_sha256": "8b0c4c767807a956526dc9119a0e8cb78e332106dfe17ede18e479f590ad8f3b",
+  "head_fitting_sha256": "5ad0a8df048b97a169608d0a17d6ba3eeb9ec43cbf12faf16260305a17f655d3",
+  "python": "3.12.14",
+  "packages": {
+    "numpy": "2.3.5",
+    "pandas": "2.2.3",
+    "scipy": "1.17.0",
+    "scikit-learn": "1.8.0",
+    "pyarrow": "22.0.0",
+    "matplotlib": "3.10.8"
+  },
+  "plan_commit": "e16fe85e54cd28f77d1e2c4a291d5670661eb2fc",
+  "verification_sha256": "793a46ccd638a9af9819431b7a9b8c5c6c4d3d126d442c8ca4011098813dd84a",
+  "initial_plan_commit": "cab4cdec3a1827a3a0a1c531f5c1b23eb84a560a",
+  "amendment_commit": "e16fe85e54cd28f77d1e2c4a291d5670661eb2fc",
+  "postprocessing_source_sha256": "882f6d2612bab8839c8f994bda8953b3487a2e62dfd5255a6c634e73c5eb8e22",
+  "postprocessing_amendment": "Only report() changed after corrected full rerun: compact Table 1. All fitting/allocation/inference ASTs identical.",
+  "rerun_validation": "All 40 jobs refitted after comparator correction. All 19200 non-feature-comparator rows exactly match initial outputs; features comparator alone changes."
+}
