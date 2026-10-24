@@ -1,5 +1,0 @@
-- Exact sorting solves governance-constrained review allocation in both regimes.
-- Backlog depends on staffing, not on how mandatory cases are prioritised.
-- Learned deferral beat cost-aware heuristics only with thousands of review logs.
-- Quality inputs helped most when missingness was informative about outcomes.
-- Quality-triggered rules missed three-quarters of records with invisible defects.

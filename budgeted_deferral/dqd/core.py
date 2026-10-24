@@ -309,20 +309,28 @@ def fit_l2d_ce(X, y, lh, costs, seed):
 
 
 def fit_l2d_ova(X, y, correct, costs, seed):
-    """One-vs-all surrogate of Verma & Nalisnick (2022) with logistic phi; examples
-    weighted by the asymmetric error cost (our adaptation for the 5:1 loss)."""
-    w = np.where(y == 1, costs.fn, costs.fp)
+    """One-vs-all surrogate of Verma & Nalisnick (2022) with logistic phi, trained unweighted as
+    in the original so that its heads remain calibrated probability estimates.  Routing uses those
+    calibrated estimates in a cost-sensitive plug-in rule (our adaptation for asymmetric costs and a
+    review fee):  score = E[automation loss | x] - E[review loss | x] - c_R, where
+    E[automation loss] = c_FP (1-P1) if yhat=1 else c_FN P1, and
+    E[review loss] = (1 - P(expert correct)) (c_FN P1 + c_FP (1-P1)).
+    P1 is the normalised class-1 head; the expert-error/class independence is an approximation."""
     T = np.c_[y == 0, y == 1, correct].astype(float)            # targets for the three OvA heads
     n = len(X); r = np.random.default_rng(seed); va = r.random(n) < 0.2
     sig = lambda O: 1 / (1 + np.exp(-O))
-    gr = lambda O, b: (sig(O) - T[~va][b]) * w[~va][b, None]
+    gr = lambda O, b: (sig(O) - T[~va][b])
     def lv(O):
         S = np.clip(sig(O), 1e-9, 1 - 1e-9); Tv = T[va]
-        return -((Tv * np.log(S) + (1 - Tv) * np.log(1 - S)).sum(1) * w[va]).mean()
+        return -((Tv * np.log(S) + (1 - Tv) * np.log(1 - S)).sum(1)).mean()
     net = MLP(X.shape[1], 3, seed=seed).fit(X[~va], gr, X[va], lv, seed=seed)
 
-    def score(Z):
-        S = sig(net.forward(Z)[1]); return S[:, 2] - S[:, :2].max(1)
+    def score(Z, yhat):
+        S = sig(net.forward(Z)[1])
+        p1 = S[:, 1] / np.maximum(S[:, 0] + S[:, 1], 1e-12)
+        auto = np.where(yhat == 1, costs.fp * (1 - p1), costs.fn * p1)
+        review = (1 - S[:, 2]) * (costs.fn * p1 + costs.fp * (1 - p1))
+        return auto - review - costs.review
     return score
 
 

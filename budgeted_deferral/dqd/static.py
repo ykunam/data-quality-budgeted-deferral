@@ -123,7 +123,7 @@ def route_scores(T, R, costs):
         g = pa - qh - costs.review; S["2h_qH"] = (g, g > 0, -qh, True)
     for k in ["l2d_ce", "l2d_ova"]:
         if k in R:
-            sc = R[k](T["l2d_in"])
+            sc = R[k](T["l2d_in"]) if k == "l2d_ce" else R[k](T["l2d_in"], T["yh"])
             S[k] = (sc, sc > 0, sc, True)
     return S
 
