@@ -1,163 +1,146 @@
 \documentclass[11pt,letterpaper]{article}
 \usepackage[margin=0.75in]{geometry}
+\usepackage[T1]{fontenc}
 \usepackage{mathptmx,amsmath,amssymb,graphicx,booktabs,setspace,caption,url}
+\usepackage{xurl,titlesec}
 \usepackage[hidelinks]{hyperref}
-\usepackage{float}
-\hypersetup{pdftitle={When does data quality help human deferral? Knowledge-based systems for AI governance and managerial decision-making},pdfauthor={Yeshwanth Reddy Kunam},pdfsubject={Short communication},pdfkeywords={Knowledge-based systems, learning to defer, data quality, AI governance, review capacity}}
+\titlespacing*{\section}{0pt}{1.5ex}{0.6ex}
+\titlespacing*{\subsection}{0pt}{1ex}{0.4ex}
+\titleformat{\section}{\normalsize\bfseries}{\thesection}{0.6em}{}
+\titleformat{\subsection}{\normalsize\bfseries}{\thesubsection}{0.6em}{}
 \captionsetup{font={small,stretch=2},labelfont=bf}
-\setlength{\parindent}{1em}
-\setlength{\parskip}{0pt}
-\setlength{\textfloatsep}{8pt}
-\setlength{\intextsep}{6pt}
-\widowpenalty=3000
-\clubpenalty=3000
-\input{budgeted_deferral/results/sc_tables.tex}
-\begin{document}
-\doublespacing
-\begin{center}
-{\large\bfseries When does data quality help human deferral? Knowledge-based systems for AI governance and managerial decision-making\par}
-\vspace{2pt}
+\setlength{\parindent}{1em}\setlength{\parskip}{0pt}
+\setlength{\textfloatsep}{8pt}\setlength{\intextsep}{6pt}
+\raggedbottom\widowpenalty=3000\clubpenalty=3000
+\input{budgeted_deferral/results/cyber-tables.tex}
+\hypersetup{pdftitle={Data-quality-aware human deferral for cybersecurity alert triage under analyst capacity constraints},pdfauthor={Yeshwanth Reddy Kunam}}\begin{document}\doublespacing
+\begin{center}{\large\bfseries Data-quality-aware human deferral for cybersecurity alert triage under analyst capacity constraints\par}
 Yeshwanth Reddy Kunam$^{a,*}$\\
 {\small $^a$Midwest University, 851 Parr Road, Wentzville, MO 63385, USA\\
-$^*$Corresponding author. E-mail: \texttt{yeshwanth.kunam@gmail.com}}
+$^*$Corresponding author: \texttt{yeshwanth.kunam@gmail.com}}
 \end{center}
-\vspace{-8pt}
 \noindent\textit{Short communication.}
-
-\begin{abstract}
-AI governance must allocate scarce review capacity when data-quality rules prohibit automation. We investigate when quality information improves deferral beyond model probabilities, separating estimation, admission and rule enforcement. A fixed-loss allocator handles mandatory overload exactly; propensity-weighted fitting addresses selective review logs under explicit overlap assumptions. Following exploratory credit experiments, we froze a validation plan before analyzing a new Bank Marketing dataset. In its primary contrast, adding quality only to the automation-loss head reduced cost by 5.23\% relative to probability-only estimation under informative missingness (20/20 splits; corrected 95\% interval for absolute reduction, 0.0099--0.0224; $p<0.001$). This supports a conditional benefit, not universal superiority. Across six planned secondary comparisons, inverse-propensity weighting did not significantly improve cost after Holm adjustment. A separate transfer check uses recorded human image classifications without simulating responses to corrupted stimuli. Policy ablations distinguish visible-defect coverage from zero rule violations; service simulations distinguish review priority from capacity under unit service times. The contribution is a reproducible conditions analysis of governance-constrained deferral, with matched component comparisons and an independently evaluated quality hypothesis.
-\end{abstract}
-\noindent\textbf{Keywords:} Knowledge-based systems; Learning to defer; Data quality; AI governance; Human--AI collaboration; Review capacity; Managerial decision-making
+\begin{abstract}Knowledge-based triage must allocate scarce analyst capacity when telemetry quality deteriorates. We investigate whether observable quality improves human deferral beyond detector probabilities, separating estimation from mandatory escalation and review volume. A frozen analysis plan evaluates label-independent field-family outages on verified, deduplicated UNSW-NB15 and temporally separated CICIDS2017 corpora, using two explicitly simulated reviewer scenarios. In the primary UNSW comparison at 20\% capacity, quality information reduced expected cost by 3.20\% relative to probability-only estimation, with identical review counts and mandatory ordering. The absolute reduction was 0.00686; the 95\% Monte Carlo interval was 0.00561-0.00811 over 20 experimental randomizations. These intervals condition on the fixed benchmark corpora. The CIC outage comparison did not corroborate the benefit, and confidence routing achieved lower mean cost there. Under severe outages, mandatory review covered every flow, leaving 80\% unresolved and making the automation-head contrast structurally zero. A capacity-constrained conformal comparator exposed a different balance between automatic errors and unresolved cases. The study identifies conditional estimation benefits and capacity-driven failure boundaries for AI governance; it does not establish analyst performance or production security effectiveness.\end{abstract}
+\noindent\textbf{Keywords:} Knowledge-based systems; Cybersecurity; Learning to defer; Data quality; AI governance; Analyst capacity; Managerial decision-making
 
 \section{Introduction}
-Organizations divide decisions between models and reviewers. Governance defines controls \cite{abraham,janssen}, but oversight alone does not establish effectiveness \cite{green}. Deterioration can increase mandatory review; predictive benefit, rule coverage and capacity differ.
+Security operations centers combine people, processes and technology {[}1{]}. Data governance assigns responsibilities and controls {[}2,3{]}, while mandatory human oversight alone does not demonstrate effectiveness {[}4{]}. For a manager, the relevant question is which decisions require scarce review and what happens when that review is unavailable.
 
-Rejection and learning to defer balance model error against abstention or reviewer error \cite{chow,mozannar,verma}, while confidence and cost-risk rules offer simpler alternatives. DeCCaF combines costs, limited feedback and workload constraints \cite{alves}; related work addresses quality-aware cascades \cite{farinhas} and congestion \cite{congestion}. We test quality under automation restrictions and mandatory holds, claiming no new surrogate or first constrained deferral system.
+Intrusion-detection research offers extensive machine-learning and deep-learning methods {[}5,6,7{]}. Dataset fidelity and transfer remain separate challenges {[}8,9,10,11{]}. A confident detector can therefore provide an inadequate basis for triage when its inputs or deployment environment change.
 
-Completeness and validity incompletely measure quality \cite{chai,iot,mohammed}. Human-in-the-loop and knowledge-based systems connect predictions to action \cite{wuhitl,onari}; routing traces document decisions rather than explain models. We ask: \emph{when does quality-aware deferral improve on probability-only estimation and cost-aware heuristics under mandatory review rules?} We provide exact allocation, matched comparisons and planned cross-dataset validation.
+Rejection and learning to defer formalize selective prediction and expert referral {[}12,13,14{]}; DeCCaF already combines asymmetric costs and workload constraints {[}15{]}. SOC-specific learning to defer with human feedback also models analyst availability {[}16{]}. Dual-threshold conformal triage separates automatic closure, escalation and deferral {[}17{]}. We claim neither the first cybersecurity deferral system nor a new consistent surrogate.
+
+Data preparation, completeness and distributional quality can affect learned predictions {[}18,19,20{]}. Uncertainty and concept-drift research motivate testing their relationship to observable quality rather than equating them {[}21,22{]}. Human-in-the-loop and knowledge-based decision support connect predictions to organizational action {[}23,24,25{]}. We ask: \textbf{when does telemetry quality improve triage beyond predictive uncertainty under a fixed analyst budget?} Our contribution is a reproducible conditions analysis, with matched loss-estimator comparisons, a temporal replication and explicit accounting for unresolved attacks.
 
 \section{Method}
-\subsection{Rules and scarce review capacity}
-A predictor gives $p_i$ and automates with $\hat y_i=\mathbf1[p_i\ge1/6]$. False-negative, false-positive, review and hold costs are $5$, $1$, $c_R=0.05$ and $c_H=1.5$. Observable quality $q_i=(u_i,v_i)$ is the missing-field and out-of-range fraction. Training-only bounds are $[Q_{.01,j}-.1t_j,Q_{.99,j}+.1t_j]$, $t_j=\max(Q_{.99,j}-Q_{.01,j},1)$. The knowledge base marks $m_i=\mathbf1[u_i\ge.5\lor v_i\ge.25]$. These are explicit experimental policy assumptions, not regulatory thresholds or empirically optimal rules.
+\subsection{Knowledge rules and allocation}
+Each completed flow is a proxy alert unit. Let \(p_i\) be calibrated attack probability, \(u_i\) missing-field fraction and \(v_i\) training-range outlier fraction. Bounds are \([Q_{.01,j}-0.1t_j,Q_{.99,j}+0.1t_j]\), \(t_j=\max(Q_{.99,j}-Q_{.01,j},1)\), fitted on training rows. These proxies can flag valid extreme traffic. The experimental policy sets
 
-Let $a_i,r_i,h_i$ denote automate, review and hold, $M=\{i:m_i=1\}$, and $B=\lfloor bn\rfloor$. For fixed estimated automation and reviewer losses, allocate by
-\begin{equation}
-\min\frac1n\sum_i\left[a_i\hat\ell_i^A+r_i(\hat\ell_i^H+c_R)+h_ic_H\right],
-\quad \sum_i h_i=(|M|-B)_+,
-\label{eq:allocation}
-\end{equation}
-subject to $a_i+r_i+h_i=1$, $\sum_i r_i\le B$, $a_i\le1-m_i$ and $h_i\le m_i$, with binary actions. The equality assumes mandatory service priority, not an unconstrained economic optimum.
+\begin{equation}\hat y_i=\mathbf{1}[p_i\ge1/6],\qquad m_i=\mathbf{1}[u_i\ge0.5\ \lor\ v_i\ge0.25].\end{equation}
+The knowledge base prohibits automation when \(m_i=1\). These thresholds are experimental policy assumptions. Costs are missed attack 5, benign escalation 1, review \(c_R=0.05\) and unresolved hold \(c_H=1.5\). For binary automate, review and hold indicators \(a_i,r_i,h_i\), estimated cost is
 
-\textbf{Proposition 1.} If $|M|\le B$, review all mandatory cases and up to $B-|M|$ optional cases with largest positive $\hat g_i=\hat\ell_i^A-\hat\ell_i^H-c_R$. If $|M|>B$, review the $B$ mandatory cases with smallest $\hat\ell_i^H$ and hold the rest. \emph{Proof.} Optional review changes cost by $-\hat g_i/n$. Under overload, only the sum of reviewed human losses varies; $(|M|-B)c_H$ is constant. Exchange arguments establish both cases. Allocation takes $O(n\log n)$. Exactness is conditional on estimated losses, not a guarantee of minimum realized cost.
+\begin{equation}\widehat J=\frac{1}{n}\sum_i\left[a_i\widehat\ell_i^A+r_i(\widehat\ell_i^H+c_R)+h_i c_H\right].\end{equation}
+Require \(a_i+r_i+h_i=1\), \(\sum_i r_i\le B=\lfloor bn\rfloor\), \(a_i\le1-m_i\) and \(h_i\le m_i\). With \(M=\{i:m_i=1\}\), exactly \(\max(|M|-B,0)\) cases are held. This imposes mandatory service priority. It is not an unconstrained economic optimum.
 
-Under mandatory overload, changing only the automation-loss head cannot alter routing with a fixed reviewer head. Quality must improve reviewer-loss estimates or policy coverage instead.
+\begin{equation}\widehat g_i=\widehat\ell_i^A-\widehat\ell_i^H-c_R.\end{equation}
+\textbf{Allocation property.} If \(|M|\le B\), review all mandatory cases, then optional cases with the largest positive gains in Eq. (3). Under overload, review the \(B\) mandatory cases with smallest estimated reviewer losses. An exchange argument proves fixed-estimated-loss optimality: optional review changes cost by \(-\widehat g_i/n\); the constant hold term cancels under overload. Sorting costs \(O(n\log n)\). Changing only the automation head cannot affect overloaded routing when the reviewer head is fixed.
 
-\textbf{Proposition 2.} With fixed mandatory flags, identical arrivals, unit review times, no abandonment and work-conserving mandatory service, queue ordering leaves mandatory backlog unchanged. \emph{Proof.} The recurrence $Q_{t+1}=(Q_t+A_t^M-B_t)_+$ depends on counts, not identities. This does not extend automatically to heterogeneous service times, changing flags or reviewer fatigue.
+The matched arm fills optional review slots, including nonpositive estimated gains, and shares mandatory ordering. It controls review volume; native arms use positive-gain admission. Figure 1 separates estimation, policy and capacity.
 
-\subsection{Loss estimation and selective feedback}
-With $w(y)=5y+(1-y)$, targets are $L^A=w(y)\mathbf1[\hat y\ne y]$ and $L^H=w(y)\mathbf1[\mathrm{review}\ne y]$. All gain-fitting rows have outcome labels, but only logged rows have a reviewer decision. Two boosted regressors estimate the losses. Probability inputs are $(p,s)$, $s=\min(5p,1-p)$; quality inputs add $(u,v,pu,pv,\hat yu,\hat yv)$. The primary ablation changes only the automation head, retaining the same probability-only reviewer head, admission rule and allocator.
+\begin{figure}[!ht]\centering\includegraphics[width=.98\linewidth]{budgeted_deferral/figs/cyber_fig1.pdf}\caption{Knowledge-based triage and matched comparison. Only automation-loss inputs change in the primary contrast; detector, reviewer estimates, rules, ordering and review counts are common. Holds remain unresolved. Programmatic diagram with AI-assisted coding.}\label{fig:1}\end{figure}
+\subsection{Loss estimation and reviewer assumptions}
+Training targets are \(L_i^A=w(y_i)\mathbf{1}[\hat y_i\ne y_i]\) and \(L_i^H=w(y_i)\mathbf{1}[\text{review}_i\ne y_i]\), with \(w(y)=1+4y\). Probability-only heads receive \(p_i\) and \(\min(5p_i,1-p_i)\). Quality heads add \(u_i,v_i\), four family fractions and their interactions with \(p_i\). The observed-feature comparator contains that entire representation plus raw observed features. Every head receives the same two-option search. All gain rows have outcome labels; reviewer judgments are logged randomly with probability 0.4. No selective-feedback identification claim is made.
 
-Let $S$ indicate logging with known propensity $\pi(W)$ for observed covariates $W$. Unweighted fitting minimizes logged-row squared error; inverse-propensity weighting (IPW) uses weights $1/\pi(W)$, normalized to mean one among logged rows \cite{ipw}. Under $S\perp L^H\mid W$ and $\pi(W)>0$, $\mathbb E[SR_f/\pi(W)]=\mathbb E[R_f]$, $R_f=\{L^H-f(Z)\}^2$. This standard identity identifies fitting risk even if $Z$ omits logging covariates; it does not guarantee finite-sample benefit or correct hidden selection, missing outcomes or test shift.
+No analyst judgments were available. One simulated reviewer has constant error 0.10; another has error
+
+\begin{equation}e_i=\min\{0.45,\ 0.05+0.25\mathbf{1}[\hat y_i\ne y_i]+0.1(1-|2p_i^{clean}-1|)\}.\end{equation}
+Methods share simulated fitting judgments and expected evaluation losses. Reviewer error is not defined from quality features. Its clean benchmark counterpart is a latent simulation input unavailable to the router. Human skill, fatigue and investigation time are unmeasured.
 
 \section{Experimental design}
-\subsection{Exploration and prospective validation}
-The exploratory credit grid uses German, Australian, Default and HMEQ \cite{german,australian,default,hmeq}, simulated reviewers and nine quality conditions. Adapted surrogate comparisons remain exploratory: no learned router beat the best pooled heuristic, and none of 18 quality ablations survived Holm adjustment.
+\subsection{Verified corpora and split isolation}
+UNSW-NB15 provides cyber-range traffic and official development/test partitions {[}26,27{]}; its associated anomaly-detection and feature-generation literature supplies dataset context {[}28,29,30{]}. CICIDS2017 provides scheduled benign and attack traffic {[}31{]}. Known benchmark construction problems motivate explicit verification {[}32{]}. We use pinned mirrors with matching mirror-published SHA256 values because direct provider downloads were inaccessible or required a personal-information form. These checks verify acquired bytes and metadata, not original ground truth.
 
-Before fetching new validation data, we committed the primary contrast, secondary family and complete design (plan \texttt{656f527}, implementation \texttt{da41f59}). Default supplies development evidence; Bank Marketing supplies a new business-domain validation \cite{bank} (45,211 rows). We remove post-call \texttt{duration}; categorical mappings use predictor-training rows only, with unknown or unseen categories treated as missing. Historical subscription labels are real, but review outcomes and costs remain simulated. This is cross-domain validation of the routing experiment, not a credit-deployment study.
+UNSW source partitions contain 175,341/82,332 rows. CIC mirrors contain 3,119,345 rows; excluding 288,602 unlabeled Thursday-morning extras leaves 2,830,743 labeled rows. Nonfinite and negative numeric values, including unknown-window sentinels, become missing. Remove identifiers and attack category; deduplicate modeled features plus binary label. Earlier roles own repeated feature hashes. Category mappings use training rows only. The manifest records source hashes and exclusions.
 
-Feature-identical rows stay together in partitions of 45\% training, 15\% calibration, 20\% gain fitting and 20\% testing (seeds 2--21). Histogram gradient boosting (at most 120 iterations, 15 leaves) is logistically calibrated on clean/missing/outlier/mixed copies; gain rows receive the same augmentation. Heads choose three or seven leaves by grouped 80/20 inner gain validation (100 iterations, rate .06, L2=5), then refit. No augmented copies cross inner folds; test outcomes never select models.
+UNSW retains 80,000 development and 52,648 holdout rows. Seeds 2-21 split whole development feature groups 60/20/20 into predictor training, calibration and gain fitting. CIC uses label-independent hash samples: 60,000 Monday-Wednesday training, 40,000 Thursday calibration/gain (37.5/62.5) and 40,000 Friday holdout flows. Connected feature/session groups keep related flows and augmented copies together. Models train separately. Friday changes attack families and prevalence relative to Thursday; target labels never recalibrate the detector.
 
-Conditions are clean, informative missingness, stale values and severe defects. Informative missingness multiplies a uniform $[0,.35]$ rate by 1.8 for positives and .6 for negatives. Stale continuous values are multiplied by $[.55,.90]$ on half the rows. Severe shift combines 35--75\% missingness and 8--25\% outliers. Reviewers have constant error .10 or AI-correlated error, $\min(.45,.05+.25\mathbf1[\hat y\ne y]+.10[1-|2p_{clean}-1|])$. These mechanisms are illustrative; neither reviewer is defined from quality inputs.
+\subsection{Frozen comparisons and inference}
+The histogram-gradient-boosting classifier uses 100 iterations, 15 leaves, learning rate 0.07 and L2 penalty 1. Logistic calibration uses clean, outage and severe copies. Gain heads use 100 iterations, learning rate 0.06 and L2 penalty 5; grouped 80/20 inner validation selects three or seven leaves before refitting. Early stopping is disabled. Budgets are 5\%, 10\% and 20\%.
 
-\subsection{Logging, matched comparisons and human transfer}
-Logging is random ($\pi=.4$), uncertainty-prioritized or rule-prioritized. Selective policies use $\pi=.1+.8\sigma(\alpha+z)$ with mean .4, where $z$ is standardized threshold proximity or $4m+2(u+v)$. Shared uniforms and reviewer outcomes give methods identical logs. Comparators are probability-only, quality-in-automation-only, quality-in-both-heads, observed-feature two-head, single-head gain, confidence, Chow and rules-only. The feature comparator includes raw inputs and quality; every head has the same two-option search.
+Field families partition timing, context, volume and related measurements using the manifest lists. Outage removes one uniformly selected family from 50\% of records; severe loss removes three families from every record. Plausible replacement substitutes one family on 50\% of records using a training-row donor. Generators receive no labels. Calibration/gain augmentation excludes replacement. This is synthetic telemetry degradation; measurement age and adversarial evasion are untested.
 
-The matched arm shares probability-only reviewer-loss ordering under overload. A fill-budget arm removes optional admission cutoffs. Native, gain-order and no-rule arms isolate allocation and rules at 10\% and 20\% capacity.
+Comparators include probability-only, quality in automation only, quality in both heads, observed features, single-head gain, confidence, Chow risk, random and rules-only routing. The conformal adaptation uses 0.05 class-conditional tail budgets, strict order-statistic thresholds fitted on gain rows, and a review band that joins mandatory cases; excess band cases hold. It is a capacity adaptation of the released procedure {[}17{]}, not a reproduction of the complete published system. Corrupted calibration copies are dependent and temporal exchangeability is unsupported, so its original finite-sample guarantees are not asserted here.
 
-CIFAR-10H supplies recorded human judgments \cite{human}; ten-class choices are mapped to animal/vehicle. The predictor uses $8\times8$ averaged RGB features on 10,000 original images. Gain fitting samples one recorded choice per image; held-out empirical human error supplies evaluation loss. No corruption is applied: people saw clean images. Logging, head search and 20\% capacity are unchanged. This is neither finance-expert validation nor a test of the primary quality hypothesis.
+The primary contrast compares automation-only quality with probability-only estimation on UNSW outage data at 20\% capacity, averaging reviewers within each seed. The plan predates fitting. An audit corrected omitted interactions in the observed-feature comparator; all fits were rerun and primary results remained identical. Success requires positive reduction, at least 1\% relative improvement and two-sided \(p<0.05\). T-based 95\% Monte Carlo intervals describe 20 experimental randomizations on fixed corpora, not new-network uncertainty. The other seven dataset/condition contrasts share one Holm adjustment {[}33{]}; remaining comparisons are descriptive.
 
-\subsection{Endpoints and inference}
-The single primary test compares quality-in-automation-only with probability-only on Bank under informative missingness, random logging and 20\% capacity, averaging reviewers per split. Success requires positive reduction, two-sided $p<.05$ and at least 1\% relative improvement. Corrected resampled tests use ratio $.2/.8$ \cite{nadeau}; splits are dependent. Six secondary tests compare IPW versus unweighted full-quality fitting for two datasets and three logging policies, averaging conditions/reviewers at 20\%, with one Holm adjustment \cite{holm}. Other analyses are exploratory; ambiguous earlier seven-/nine-test claims are retired.
+Report cost, automatic attack closure/all attacks, benign escalation/all benign, held attacks/all attacks, utilization and violations. Unmet attacks include automatic misses, expected reviewer misses and every held attack. Holds never count as resolutions. Sensitivity revalues fixed routes at missed-attack costs 2, 10 and 20 without refitting.
 
 \section{Results and discussion}
-\textbf{A conditional quality benefit was confirmed.} The planned contrast reduced cost by \PrimaryRelative\ (absolute reduction \PrimaryDiff; corrected 95\% interval \PrimaryCI; $p<.001$; 20/20 splits), meeting the 1\% practical criterion (Table~\ref{tab:inference}). Reviewer estimation and mandatory ordering are fixed; the fill-budget arm retains the same reduction. Figure~\ref{fig:quality} reports all condition/logging cells. Under mandatory overload, the automation-head effect is zero, as predicted. Confirmation concerns this synthetic mechanism on new data, not universal superiority.
+\textbf{The primary quality benefit was conditional.} Cost fell from 0.2144 to 0.2076, a 3.20\% reduction (absolute 0.00686; 95\% Monte Carlo interval 0.00561-0.00811; \(p<0.001\); 20/20 randomizations). Identical review counts exclude additional analyst effort as the explanation. Table 1 shows lower benign escalation (24.4\% to 23.5\% of benign flows) and unmet attacks (0.72\% to 0.57\% of attacks). These percentages refer to the retained benchmark, not operational incident rates.
 
-\textbf{Matched comparisons bound the claim.} Table~\ref{tab:main} uses a common policy. \MainResultSentence\ Lower means do not establish cross-setting significance.
+\begin{table}[!ht]\centering\caption{Outage results at 20\% review capacity, averaged over randomizations and reviewers. Close and Unmet are percentages of all attacks. Conformal adaptation adds band restrictions; other methods share matched counts. Other metrics are in the saved outputs. Means are descriptive.}\small\singlespacing\renewcommand{\arraystretch}{2}\CyberTableOne\label{tab:1}\end{table}
+\textbf{Temporal replication bounded the conclusion.} CIC outage cost changed from 0.6926 to 0.6914 (0.16\%; Holm \(p=1.000\)). Confidence cost was 0.5193 there and 0.2909 on UNSW. Table 2 retains every declared contrast: UNSW clean/replacement reductions survive Holm adjustment; no CIC contrast does. CIC replacement has an adverse estimate. Clean-UNSW benefit suggests that quality proxies also encode distributional structure; these experiments do not identify the causal effect of repairing telemetry.
 
-\textbf{Selective feedback did not make IPW uniformly useful.} None of six secondary contrasts survives Holm adjustment (Table~\ref{tab:inference}). Rule-prioritized logging selects approximately 89\% of mandatory gain rows versus 40\% under random logging at the same expected budget. Variance, shift and unchanged review selection can offset weighting benefits. Human-transfer results are descriptive: \HumanResultSentence
+\begin{table}[!ht]\centering\caption{Quality-in-automation versus probability-only cost at 20\% capacity. Positive differences favor quality. * denotes the primary; Holm covers the other seven rows. MC intervals describe randomizations on fixed corpora. Severe-condition zeros are structural.}\small\singlespacing\renewcommand{\arraystretch}{2}\CyberTableTwo\label{tab:2}\end{table}
+\textbf{Rules exposed capacity and objective limitations.} The chosen thresholds flag every severe-loss flow and no injected outage/replacement records. At 20\% capacity, approximately 80\% of severe flows remain held and the automation-only contrast is exactly zero. Native quality-both ordering leaves 96.9\% of severe-condition attacks held on UNSW and 76.0\% on CIC. A constant hold price can favor inexpensive reviews over unresolved threats; severity- and delay-dependent prices require domain evidence.
 
-\begin{table}[!htb]
-\centering\small\renewcommand{\arraystretch}{2}
-\caption{Expected cost under random logging and 20\% capacity. Default/Bank average four conditions and two reviewers; CIFAR-10H uses clean images and empirical human error. Common mandatory ordering. Bold: lowest descriptive mean, not significance.}\label{tab:main}
-\TableOne
-\end{table}
+\textbf{Alternative policies changed the trade-off.} On CIC outage data, conformal-adapted cost was 0.8345; it held 9.7\% of attacks and 48.4\% of all flows. Lower unmet attacks accompanied more unresolved benign traffic. Figure 2 displays both cost and unmet attacks. Removing severe-condition rules automated approximately 80\% of policy-barred flows. Compliance, defect coverage and effectiveness are distinct.
 
-\begin{figure}[!htb]
-\centering\includegraphics[width=.96\linewidth]{budgeted_deferral/figs/fig3_volume.pdf}
-\caption{Quality in the automation head versus probability-only at 20\% capacity, with common mandatory ordering. Positive reduction favors quality. Bars: approximate corrected 95\% intervals over 20 splits, averaging reviewers. Only Bank/informative/random is confirmatory. Programmatically generated from saved outputs.}\label{fig:quality}
-\end{figure}
-
-\begin{table}[!htb]
-\centering\small\renewcommand{\arraystretch}{2}
-\caption{Absolute cost reduction (positive favors the change), corrected 95\% interval and $p$-value. The primary test stands alone; secondary $p$-values are Holm-adjusted across six contrasts.}\label{tab:inference}
-\TableTwo
-\end{table}
-
-\textbf{Knowledge rules have costs and blind spots.} \RuleResultSentence\ Zero violations do not establish defect coverage or legal sufficiency; stale but plausible values can escape the rules.
-
-\textbf{Capacity results require their assumptions.} The 40-day simulation introduces severe defects on days 11--20 and carries holds forward. Service counts all eligible mandatory arrivals, with unresolved cases unmet; quantiles account for censoring \cite{kaplan}. Cost ordering leaves 21.7\% open at 20\% capacity, none at 40\%. At 40\%, FIFO lowers the 95th-percentile delay from 13.9 to 7.1 days despite identical backlog counts (Fig.~\ref{fig:service}). This depends on unit service and fixed flags.
-
-\begin{figure}[!htb]
-\centering\includegraphics[width=.94\linewidth]{budgeted_deferral/figs/fig5_backlog.pdf}
-\caption{Credit simulation: (a) backlog, with dotted fluid approximation; (b,c) seven-/two-day resolution among eligible mandatory arrivals, unresolved cases unmet. Four datasets, two reviewers, ten seeds; unit service times. Programmatically generated from saved outputs.}\label{fig:service}
-\end{figure}
-
-Managers should benchmark against local cost-aware heuristics, document rules, maintain exploration under selective logging and monitor unresolved cohorts. Organizational complementarity \cite{jarrahi} motivates these choices; causal firm benefits are untested.
+\begin{figure}[!ht]\centering\includegraphics[width=.98\linewidth]{budgeted_deferral/figs/cyber_fig2.pdf}\caption{Cost and unmet attacks versus capacity, averaging all four conditions and both reviewers. Bars are 95\% Monte Carlo intervals over 20 randomizations on fixed corpora. Shared matched constraints exclude the conformal adaptation, which adds a review band. Generated from saved outputs with AI-assisted coding.}\label{fig:2}\end{figure}
+Managers should benchmark quality features against inexpensive heuristics and report unresolved threats alongside automatic errors. UNSW outage savings remain positive when fixed routes are revalued at missed-attack costs 2, 10 or 20. These are illustrative valuations; staffing decisions additionally require arrival rates and investigation times.
 
 \section{Limitations and conclusion}
-Bank is old and synthetically corrupted. Human images do not validate finance workflows, damaged stimuli or fatigue. Costs and thresholds need domain validation; gradual drift, heterogeneous service, fairness and missing outcomes remain untested. IPW does not correct hidden selection. Surrogate adaptations remain exploratory; no newly tuned DeCCaF comparison or new learning guarantee is claimed.
+The old, controlled corpora and mirror discrepancy limit external validity and provenance assurance. Deduplication, sampling and temporal class shifts alter the evaluated population. Simulated reviewers cannot establish human effectiveness. Real investigation traces, costs and service times remain necessary. Quality proxies certify neither trustworthy telemetry nor security. Fairness, legal compliance, adaptive attackers and containment are untested. L2DHF and DeCCaF are relevant but not newly reproduced numerical baselines. Novelty concerns the controlled conditions analysis, not a new surrogate or general allocation theorem.
 
-A frozen validation supports a conditional quality benefit, null weighting results and no universal superiority. Separating estimation, rules and capacity makes these boundaries observable.
+Quality-aware loss estimation met the prespecified UNSW benchmark criterion; temporal CIC evidence did not corroborate its outage benefit. Mandatory overload imposed a structural boundary and exposed the constant hold price. Separating these outcomes supports a testable, bounded contribution to AI governance.
 
-\paragraph{Data and code availability}
-Code, outputs, the frozen plan and source hashes: \href{https://github.com/ykunam/data-quality-budgeted-deferral/tree/db2ab095608d7ebcd77f26309b7d92b7dec77d9c/budgeted_deferral}{public snapshot \texttt{db2ab09}}. Original credit evidence: \texttt{03166e9}. Source data: cited providers. Human-derived outputs follow CC BY-NC-SA 4.0; original images and participant-level records are not redistributed here.
+\par\noindent\textbf{CRediT authorship contribution statement}\par
+Yeshwanth Reddy Kunam: Conceptualization, Methodology, Software, Validation, Formal analysis, Investigation, Writing - original draft, Writing - review and editing, Visualization.
 
-\paragraph{Funding}
+\par\noindent\textbf{Declaration of competing interest}\par
+The author declares no known competing financial interests or personal relationships that could have appeared to influence the work reported in this paper.
+
+\par\noindent\textbf{Funding}\par
 This research did not receive any specific grant from funding agencies in the public, commercial, or not-for-profit sectors.
 
-\paragraph{CRediT authorship contribution statement}
-Yeshwanth Reddy Kunam: Conceptualization, Methodology, Software, Validation, Formal analysis, Investigation, Writing -- original draft, Writing -- review and editing, Visualization.
+\par\noindent\textbf{Data availability}\par
+Code, complete aggregate outputs, source verification, analysis plan and environment records are available at \url{https://github.com/ykunam/data-quality-budgeted-deferral/tree/f5bb01a155bda5ee4f62810ffdc5f39fd61b7e4d}. The initial plan is commit cab4cdec; the comparator amendment is commit e16fe85e. Raw third-party corpora remain at the cited providers and pinned mirrors; they are not redistributed. The release documents access and provenance limitations. A persistent research-data archive remains to be deposited.
 
-\paragraph{Declaration of generative AI and AI-assisted technologies in the manuscript preparation process}
-ChatGPT (OpenAI) assisted study design, code, drafting, experiments and verification; Claude (Anthropic) assisted earlier experimental extensions, analysis and drafting. Figures were generated from saved outputs. After using these tools, the author reviewed and edited the content as needed and takes full responsibility for the content of the published article.
+\par\noindent\textbf{Declaration of generative AI and AI-assisted technologies in manuscript preparation}\par
+ChatGPT (OpenAI) assisted study design, code, experiments, analysis, drafting and verification. Claude (Anthropic) assisted earlier financial-domain extensions and drafting. Figures were produced programmatically from the implemented design and saved outputs. The author retains responsibility for scientific claims, review of the final code and results, and approval of the submission.
 
-\begingroup\small\raggedright
-\begin{thebibliography}{25}
-\bibitem{abraham} R. Abraham, J. Schneider, J. vom Brocke, Data governance: A conceptual framework, structured review, and research agenda, Int. J. Inf. Manag. 49 (2019) 424--438. \href{https://doi.org/10.1016/j.ijinfomgt.2019.07.008}{doi:10.1016/j.ijinfomgt.2019.07.008}.
-\bibitem{janssen} M. Janssen, P. Brous, E. Estevez, L.S. Barbosa, T. Janowski, Data governance: Organizing data for trustworthy artificial intelligence, Gov. Inf. Q. 37 (2020) 101493. \href{https://doi.org/10.1016/j.giq.2020.101493}{doi:10.1016/j.giq.2020.101493}.
-\bibitem{green} B. Green, The flaws of policies requiring human oversight of government algorithms, Comput. Law Secur. Rev. 45 (2022) 105681. \href{https://doi.org/10.1016/j.clsr.2022.105681}{doi:10.1016/j.clsr.2022.105681}.
-\bibitem{chow} C. Chow, On optimum recognition error and reject tradeoff, IEEE Trans. Inf. Theory 16 (1970) 41--46. \href{https://doi.org/10.1109/TIT.1970.1054406}{doi:10.1109/TIT.1970.1054406}.
-\bibitem{mozannar} H. Mozannar, D. Sontag, Consistent estimators for learning to defer to an expert, in: Proc. 37th Int. Conf. Mach. Learn., PMLR 119 (2020) 7076--7087.
-\bibitem{verma} R. Verma, E. Nalisnick, Calibrated learning to defer with one-vs-all classifiers, in: Proc. 39th Int. Conf. Mach. Learn., PMLR 162 (2022) 22184--22202.
-\bibitem{alves} J.V. Alves, D. Leitão, S. Jesus, M.O.P. Sampaio, J. Liébana, P. Saleiro, M.A.T. Figueiredo, P. Bizarro, Cost-sensitive learning to defer to multiple experts with workload constraints, Trans. Mach. Learn. Res. (2024). \url{https://openreview.net/forum?id=TAvGZm2Rqb}.
-\bibitem{farinhas} A. Farinhas, N.M. Guerreiro, S. Agrawal, R. Rei, A. Martins, Translate smart, not hard: Cascaded translation systems with quality-aware deferral, in: Proc. 2025 Conf. Empirical Methods Nat. Lang. Process. (2025) 26742--26756. \href{https://doi.org/10.18653/v1/2025.emnlp-main.1358}{doi:10.18653/v1/2025.emnlp-main.1358}.
-\bibitem{congestion} V. Saketos, W. Reveillard, A. Proutiere, S. Dalleiger, M. Xiao, To defer or not to defer? Online learning with LLMs and congested experts, arXiv preprint (2026). \url{https://doi.org/10.48550/arXiv.2610.15128}.
-\bibitem{chai} C. Chai, J. Wang, Y. Luo, Z. Niu, G. Li, Data management for machine learning: A survey, IEEE Trans. Knowl. Data Eng. 35 (2023) 4646--4667. \href{https://doi.org/10.1109/TKDE.2022.3148237}{doi:10.1109/TKDE.2022.3148237}.
-\bibitem{iot} L. Zhang, D. Jeong, S. Lee, Data quality management in the Internet of Things, Sensors 21 (2021) 5834. \href{https://doi.org/10.3390/s21175834}{doi:10.3390/s21175834}.
-\bibitem{mohammed} S. Mohammed, L. Budach, M. Feuerpfeil, N. Ihde, A. Nathansen, N. Noack, H. Patzlaff, F. Naumann, H. Harmouch, The effects of data quality on machine learning performance on tabular data, Inf. Syst. 132 (2025) 102549. \href{https://doi.org/10.1016/j.is.2025.102549}{doi:10.1016/j.is.2025.102549}.
-\bibitem{wuhitl} X. Wu, L. Xiao, Y. Sun, J. Zhang, T. Ma, L. He, A survey of human-in-the-loop for machine learning, Future Gener. Comput. Syst. 135 (2022) 364--381. \href{https://doi.org/10.1016/j.future.2022.05.014}{doi:10.1016/j.future.2022.05.014}.
-\bibitem{onari} M. Abbaspour Onari, M. Jahangoshai Rezaee, M. Saberi, M.S. Nobile, An explainable data-driven decision support framework for strategic customer development, Knowl.-Based Syst. 295 (2024) 111761. \href{https://doi.org/10.1016/j.knosys.2024.111761}{doi:10.1016/j.knosys.2024.111761}.
-\bibitem{ipw} D.G. Horvitz, D.J. Thompson, A generalization of sampling without replacement from a finite universe, J. Am. Stat. Assoc. 47 (1952) 663--685. \href{https://doi.org/10.1080/01621459.1952.10483446}{doi:10.1080/01621459.1952.10483446}.
-\bibitem{german} [dataset] H. Hofmann, Statlog (German Credit Data), UCI Machine Learning Repository (1994). \url{https://doi.org/10.24432/C5NC77}.
-\bibitem{australian} [dataset] R. Quinlan, Statlog (Australian Credit Approval), UCI Machine Learning Repository (1987). \url{https://doi.org/10.24432/C59012}.
-\bibitem{default} [dataset] I. Yeh, Default of Credit Card Clients, UCI Machine Learning Repository (2009). \url{https://doi.org/10.24432/C55S3H}.
-\bibitem{hmeq} [dataset] B. Baesens, D. Rösch, H. Scheule, Credit Risk Analytics: Measurement Techniques, Applications, and Examples in SAS, Wiley, Hoboken, NJ, 2016 (HMEQ data set; companion data: \url{https://www.creditriskanalytics.net/datasets-private2.html}, accessed 23 October 2026).
-\bibitem{bank} [dataset] S. Moro, P. Rita, P. Cortez, Bank Marketing, UCI Machine Learning Repository (2014). \url{https://doi.org/10.24432/C5K306}.
-\bibitem{human} J.C. Peterson, R.M. Battleday, T.L. Griffiths, O. Russakovsky, Human uncertainty makes classification more robust, in: Proc. IEEE/CVF Int. Conf. Comput. Vis. (2019) 9617--9626. \url{https://openaccess.thecvf.com/content_ICCV_2019/html/Peterson_Human_Uncertainty_Makes_Classification_More_Robust_ICCV_2019_paper.html}.
-\bibitem{nadeau} C. Nadeau, Y. Bengio, Inference for the generalization error, Mach. Learn. 52 (2003) 239--281. \href{https://doi.org/10.1023/A:1024068626366}{doi:10.1023/A:1024068626366}.
-\bibitem{holm} S. Holm, A simple sequentially rejective multiple test procedure, Scand. J. Stat. 6 (1979) 65--70.
-\bibitem{kaplan} E.L. Kaplan, P. Meier, Nonparametric estimation from incomplete observations, J. Am. Stat. Assoc. 53 (1958) 457--481. \href{https://doi.org/10.1080/01621459.1958.10501452}{doi:10.1080/01621459.1958.10501452}.
-\bibitem{jarrahi} M.H. Jarrahi, Artificial intelligence and the future of work: Human-AI symbiosis in organizational decision making, Bus. Horiz. 61 (2018) 577--586. \href{https://doi.org/10.1016/j.bushor.2018.03.007}{doi:10.1016/j.bushor.2018.03.007}.
-\end{thebibliography}
-\endgroup
-\end{document}
+\begingroup\footnotesize\doublespacing\begin{thebibliography}{33}
+\bibitem{vielberth}M. Vielberth, F. Bohm, I. Fichtinger, G. Pernul, Security Operations Center: A Systematic Study and Open Challenges, IEEE Access 8 (2020) 227756-227779. \url{https://doi.org/10.1109/ACCESS.2020.3045514}.
+\bibitem{abraham}R. Abraham, J. Schneider, J. vom Brocke, Data governance: A conceptual framework, structured review, and research agenda, Int. J. Inf. Manag. 49 (2019) 424-438. \url{https://doi.org/10.1016/j.ijinfomgt.2019.07.008}.
+\bibitem{janssen}M. Janssen, P. Brous, E. Estevez, et al., Data governance: Organizing data for trustworthy Artificial Intelligence, Gov.~Inf. Q. 37 (2020) 101493. \url{https://doi.org/10.1016/j.giq.2020.101493}.
+\bibitem{green}B. Green, The flaws of policies requiring human oversight of government algorithms, Comput. Law Secur. Rev.~45 (2022) 105681. \url{https://doi.org/10.1016/j.clsr.2022.105681}.
+\bibitem{buczak}A.L. Buczak, E. Guven, A Survey of Data Mining and Machine Learning Methods for Cyber Security Intrusion Detection, IEEE Commun. Surv. Tutor. 18 (2016) 1153-1176. \url{https://doi.org/10.1109/COMST.2015.2494502}.
+\bibitem{aldweesh}A. Aldweesh, A. Derhab, A.Z. Emam, Deep learning approaches for anomaly-based intrusion detection systems: A survey, taxonomy, and open issues, Knowl.-Based Syst. 189 (2020) 105124. \url{https://doi.org/10.1016/j.knosys.2019.105124}.
+\bibitem{ferrag}M.A.~Ferrag, L. Maglaras, S. Moschoyiannis, H. Janicke, Deep learning for cyber security intrusion detection: Approaches, datasets, and comparative study, J. Inf. Secur. Appl. 50 (2020) 102419. \url{https://doi.org/10.1016/j.jisa.2019.102419}.
+\bibitem{ring}M. Ring, S. Wunderlich, D. Scheuring, et al., A survey of network-based intrusion detection data sets, Comput. Secur. 86 (2019) 147-167. \url{https://doi.org/10.1016/j.cose.2019.06.005}.
+\bibitem{apruzzese}G. Apruzzese, L. Pajola, M. Conti, The Cross-Evaluation of Machine Learning-Based Network Intrusion Detection Systems, IEEE Trans. Netw. Serv. Manag. 19 (2022) 5152-5169. \url{https://doi.org/10.1109/TNSM.2022.3157344}.
+\bibitem{cantone}M. Cantone, C. Marrocco, A. Bria, Machine Learning in Network Intrusion Detection: A Cross-Dataset Generalization Study, IEEE Access 12 (2024) 144489-144508. \url{https://doi.org/10.1109/ACCESS.2024.3472907}.
+\bibitem{dhooge}L. D'hooge, T. Wauters, B. Volckaert, F. De Turck, Inter-dataset generalization strength of supervised machine learning methods for intrusion detection, J. Inf. Secur. Appl. 54 (2020) 102564. \url{https://doi.org/10.1016/j.jisa.2020.102564}.
+\bibitem{chow}C. Chow, On optimum recognition error and reject tradeoff, IEEE Trans. Inf. Theory 16 (1970) 41-46. \url{https://doi.org/10.1109/TIT.1970.1054406}.
+\bibitem{mozannar}H. Mozannar, D. Sontag, Consistent estimators for learning to defer to an expert, Proc. 37th Int. Conf. Mach. Learn., PMLR 119 (2020) 7076-7087. \url{https://proceedings.mlr.press/v119/mozannar20b.html}.
+\bibitem{verma}R. Verma, E. Nalisnick, Calibrated learning to defer with one-vs-all classifiers, Proc. 39th Int. Conf. Mach. Learn., PMLR 162 (2022) 22184-22202. \url{https://proceedings.mlr.press/v162/verma22c.html}.
+\bibitem{alves}J.V. Alves, D. Leitão, S. Jesus, et al., Cost-sensitive learning to defer to multiple experts with workload constraints, Transactions on Machine Learning Research (2024) . \url{https://openreview.net/forum?id=TAvGZm2Rqb}.
+\bibitem{jalalvand}F. Jalalvand, M. Baruwal Chhetri, S. Nepal, C. Paris, Adaptive alert prioritisation in security operations centres via learning to defer with human feedback, Inf. Sci. 760 (2027) 124128. \url{https://doi.org/10.1016/j.ins.2026.124128}.
+\bibitem{sahin}F. Şahin, N.S. Mert, Dual-Threshold Conformal Deferral for Trustworthy Security Alert Triage, Electronics 15 (2026) 4084. \url{https://doi.org/10.3390/electronics15184084}.
+\bibitem{chai}C. Chai, J. Wang, Y. Luo, et al., Data Management for Machine Learning: A Survey, IEEE Trans. Knowl. Data Eng. 35 (2023) 4646-4667. \url{https://doi.org/10.1109/TKDE.2022.3148237}.
+\bibitem{iot}L. Zhang, D. Jeong, S. Lee, Data Quality Management in the Internet of Things, Sensors 21 (2021) 5834. \url{https://doi.org/10.3390/s21175834}.
+\bibitem{mohammed}S. Mohammed, L. Budach, M. Feuerpfeil, et al., The effects of data quality on machine learning performance on tabular data, Inf. Syst. 132 (2025) 102549. \url{https://doi.org/10.1016/j.is.2025.102549}.
+\bibitem{abdar}M. Abdar, F. Pourpanah, S. Hussain, et al., A review of uncertainty quantification in deep learning: Techniques, applications and challenges, Inf. Fusion 76 (2021) 243-297. \url{https://doi.org/10.1016/j.inffus.2021.05.008}.
+\bibitem{lu}J. Lu, A. Liu, F. Dong, et al., Learning under Concept Drift: A Review, IEEE Trans. Knowl. Data Eng. 31 (2019) 2346-2363. \url{https://doi.org/10.1109/TKDE.2018.2876857}.
+\bibitem{wuhitl}X. Wu, L. Xiao, Y. Sun, et al., A survey of human-in-the-loop for machine learning, Future Gener. Comput. Syst. 135 (2022) 364-381. \url{https://doi.org/10.1016/j.future.2022.05.014}.
+\bibitem{onari}M.A.~Onari, M.J. Rezaee, M. Saberi, M.S. Nobile, An explainable data-driven decision support framework for strategic customer development, Knowl.-Based Syst. 295 (2024) 111761. \url{https://doi.org/10.1016/j.knosys.2024.111761}.
+\bibitem{jarrahi}M.H. Jarrahi, Artificial intelligence and the future of work: Human-AI symbiosis in organizational decision making, Bus. Horiz. 61 (2018) 577-586. \url{https://doi.org/10.1016/j.bushor.2018.03.007}.
+\bibitem{unsw}N. Moustafa, J. Slay, UNSW-NB15: a comprehensive data set for network intrusion detection systems (UNSW-NB15 network data set), 2015 Military Communications and Information Systems Conference (MilCIS) (2015) 1-6. \url{https://doi.org/10.1109/MilCIS.2015.7348942}.
+\bibitem{unsw_eval}N. Moustafa, J. Slay, The evaluation of Network Anomaly Detection Systems: Statistical analysis of the UNSW-NB15 data set and the comparison with the KDD99 data set, Inf. Secur. J. 25 (2016) 18-31. \url{https://doi.org/10.1080/19393555.2015.1125974}.
+\bibitem{unsw_geometry}N. Moustafa, J. Slay, G. Creech, Novel Geometric Area Analysis Technique for Anomaly Detection Using Trapezoidal Area Estimation on Large-Scale Networks, IEEE Trans. Big Data 5 (2019) 481-494. \url{https://doi.org/10.1109/TBDATA.2017.2715166}.
+\bibitem{unsw_dirichlet}N. Moustafa, G. Creech, J. Slay, Big Data Analytics for Intrusion Detection System: Statistical Decision-Making Using Finite Dirichlet Mixture Models, Data Analytics (2017) 127-156. \url{https://doi.org/10.1007/978-3-319-59439-2_5}.
+\bibitem{netflow}M. Sarhan, S. Layeghy, N. Moustafa, M. Portmann, NetFlow Datasets for Machine Learning-Based Network Intrusion Detection Systems, Lecture Notes of the Institute for Computer Sciences, Social Informatics and Telecommunications Engineering (2021) 117-135. \url{https://doi.org/10.1007/978-3-030-72802-1_9}.
+\bibitem{cic}I. Sharafaldin, A. Habibi Lashkari, A.A. Ghorbani, Toward Generating a New Intrusion Detection Dataset and Intrusion Traffic Characterization, Proceedings of the 4th International Conference on Information Systems Security and Privacy (2018) 108-116. \url{https://doi.org/10.5220/0006639801080116}.
+\bibitem{engelen}G. Engelen, V. Rimmer, W. Joosen, Troubleshooting an Intrusion Detection Dataset: the CICIDS2017 Case Study, 2021 IEEE Security and Privacy Workshops (SPW) (2021) 7-12. \url{https://doi.org/10.1109/SPW53761.2021.00009}.
+\bibitem{holm}S. Holm, A simple sequentially rejective multiple test procedure, Scand. J. Stat. 6 (1979) 65-70. \url{https://www.jstor.org/stable/4615733}.
+\end{thebibliography}\endgroup\end{document}

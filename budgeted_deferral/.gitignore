@@ -4,3 +4,4 @@ __pycache__/
 results/revision-parts/
 
 results/*.tmp
+results/cyber-parts/

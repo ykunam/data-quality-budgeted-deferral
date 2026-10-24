@@ -1,5 +1,5 @@
-- Quality-aware deferral is tested under mandatory review and selective feedback.
-- A frozen Bank validation finds a conditional 5.23% reduction in routing cost.
-- Matched allocation separates estimation, admission and rule enforcement.
-- Propensity weighting shows no adjusted-significant cost benefit in six tests.
-- Recorded human choices support a separate, clean-image transfer check.
+Telemetry quality reduced simulated UNSW triage cost by 3.20%.
+Matched comparisons fix review volume and mandatory ordering.
+A temporal CIC case study did not corroborate the outage benefit.
+At 20% capacity, severe-loss rules leave 80% of flows unresolved.
+Code, source hashes, null results and all contrasts are available.

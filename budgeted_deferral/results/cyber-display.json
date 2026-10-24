@@ -1,0 +1,128 @@
+[
+  {
+    "dataset": "unsw",
+    "method": "prob",
+    "cost": 0.21441428261032502,
+    "close": 0.000550521546728605,
+    "escalation": 0.24404146616772499,
+    "held_attack": 0.0,
+    "unmet_attack": 0.0072145447863252495
+  },
+  {
+    "dataset": "unsw",
+    "method": "quality_A",
+    "cost": 0.20755489317862502,
+    "close": 0.00042803708776723503,
+    "escalation": 0.23507247668262501,
+    "held_attack": 0.0,
+    "unmet_attack": 0.00571993556233975
+  },
+  {
+    "dataset": "unsw",
+    "method": "quality_both",
+    "cost": 0.20863136825575,
+    "close": 0.00045569486882295003,
+    "escalation": 0.23875943087979995,
+    "held_attack": 0.0,
+    "unmet_attack": 0.0054658208151295
+  },
+  {
+    "dataset": "unsw",
+    "method": "features",
+    "cost": 0.2076617776395,
+    "close": 0.000301601517226765,
+    "escalation": 0.23754307015985,
+    "held_attack": 0.0,
+    "unmet_attack": 0.005159757327212749
+  },
+  {
+    "dataset": "unsw",
+    "method": "confidence",
+    "cost": 0.29085375806995,
+    "close": 0.0,
+    "escalation": 0.4020332085784,
+    "held_attack": 0.0,
+    "unmet_attack": 0.00048724876796949997
+  },
+  {
+    "dataset": "unsw",
+    "method": "chow",
+    "cost": 0.21161536055259997,
+    "close": 0.00032925929828239996,
+    "escalation": 0.24094635537335002,
+    "held_attack": 0.0,
+    "unmet_attack": 0.005013704295577499
+  },
+  {
+    "dataset": "unsw",
+    "method": "conformal",
+    "cost": 0.257112171002975,
+    "close": 0.028316299652294995,
+    "escalation": 0.0159612071526095,
+    "held_attack": 0.073227267938045,
+    "unmet_attack": 0.12480834087235751
+  },
+  {
+    "dataset": "cic",
+    "method": "prob",
+    "cost": 0.692553724343275,
+    "close": 0.41240775737940005,
+    "escalation": 0.0,
+    "held_attack": 0.0,
+    "unmet_attack": 0.48919908313320004
+  },
+  {
+    "dataset": "cic",
+    "method": "quality_A",
+    "cost": 0.691446265844775,
+    "close": 0.41193079553635004,
+    "escalation": 1.03849349210675e-05,
+    "held_attack": 0.0,
+    "unmet_attack": 0.4881906351274
+  },
+  {
+    "dataset": "cic",
+    "method": "quality_both",
+    "cost": 0.67847397040665,
+    "close": 0.401273398128075,
+    "escalation": 3.115480476324e-05,
+    "held_attack": 0.0,
+    "unmet_attack": 0.4787864502874751
+  },
+  {
+    "dataset": "cic",
+    "method": "features",
+    "cost": 0.659051186326275,
+    "close": 0.3875517458604,
+    "escalation": 3.37510384935025e-05,
+    "held_attack": 0.0,
+    "unmet_attack": 0.464986513309975
+  },
+  {
+    "dataset": "cic",
+    "method": "confidence",
+    "cost": 0.51926817232335,
+    "close": 0.27182325413974995,
+    "escalation": 0.0004465522016062,
+    "held_attack": 0.0,
+    "unmet_attack": 0.364504600487475
+  },
+  {
+    "dataset": "cic",
+    "method": "chow",
+    "cost": 0.6537480786139749,
+    "close": 0.3777267818574,
+    "escalation": 6.92328994738e-06,
+    "held_attack": 0.0,
+    "unmet_attack": 0.46174806768805
+  },
+  {
+    "dataset": "cic",
+    "method": "conformal",
+    "cost": 0.834529761530175,
+    "close": 0.0008054355651549002,
+    "escalation": 0.096766823594575,
+    "held_attack": 0.0968232541397475,
+    "unmet_attack": 0.10779842766394501
+  }
+]
