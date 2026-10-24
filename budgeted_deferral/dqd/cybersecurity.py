@@ -171,7 +171,8 @@ def measure(X,Q,groups):
 
 def representations(p,X,Q,groups):
     u,v,f=measure(X,Q,groups);s=np.minimum(5*p,1-p);yh=p>=1/6
-    return {'prob':np.c_[p,s], 'quality':np.c_[p,s,u,v,f,p[:,None]*f], 'rich':np.c_[p,s,u,v,f,X]},u,v,yh
+    quality=np.c_[p,s,u,v,f,p[:,None]*f]
+    return {'prob':np.c_[p,s], 'quality':quality, 'rich':np.c_[quality,X]},u,v,yh
 
 def thresholds(p,y,alpha=.05,beta=.05):
     b=np.sort(p[y==0]);t=np.sort(p[y==1]);kh=math.ceil((1-alpha)*(len(b)+1));kl=math.floor(beta*(len(t)+1))
@@ -264,7 +265,7 @@ def run(jobs=4,ds=None,seed=None):
     (OUT/'cyber-parts').mkdir(exist_ok=True)
     env={'source_sha256':sha(__file__),'core_sha256':sha(C.__file__),'head_fitting_sha256':sha(R.__file__),'python':platform.python_version(),'packages':{p:md.version(p) for p in ['numpy','pandas','scipy','scikit-learn','pyarrow','matplotlib']},'plan_commit':os.environ.get('CYBER_PLAN_COMMIT','unrecorded'),'verification_sha256':sha(OUT/'cyber-data-verification.json')}
     manifest=OUT/'cyber-environment.json'
-    if manifest.exists() and json.loads(manifest.read_text())!=env:raise ValueError('Environment/source changed; archive old checkpoints before resuming')
+    if manifest.exists() and json.loads(manifest.read_text())!=env and any((OUT/'cyber-parts').glob('*.gz')):raise ValueError('Environment/source changed; archive old checkpoints before resuming')
     dump(env,manifest)
     tasks=[(d,s) for d in (ds or ('unsw','cic')) for s in ((seed,) if seed else SEEDS)]
     with concurrent.futures.ProcessPoolExecutor(jobs) as ex:
@@ -320,38 +321,38 @@ def report():
     plt.rcParams.update({'font.family':'DejaVu Sans','font.size':9,'pdf.fonttype':42,'ps.fonttype':42,'axes.spines.top':False,'axes.spines.right':False})
     figs=ROOT/'figs';figs.mkdir(exist_ok=True)
     fig,ax=plt.subplots(figsize=(7.2,3.5));ax.set(xlim=(0,10),ylim=(0,5));ax.axis('off')
-    def box(x,y,w,h,label,color='#edf3f7'):
-        ax.add_patch(FancyBboxPatch((x,y),w,h,boxstyle='round,pad=0.08',facecolor=color,edgecolor='#29465b',linewidth=.9));ax.text(x+w/2,y+h/2,label,ha='center',va='center',fontsize=8)
+    def box(x,y,w,h,label,color='#edf3f7',size=8):
+        ax.add_patch(FancyBboxPatch((x,y),w,h,boxstyle='round,pad=0.08',facecolor=color,edgecolor='#29465b',linewidth=.9));ax.text(x+w/2,y+h/2,label,ha='center',va='center',fontsize=size)
     def arrow(x,y,xx,yy):ax.annotate('',xy=(xx,yy),xytext=(x,y),arrowprops={'arrowstyle':'->','lw':1,'color':'#29465b'})
     box(.1,2.5,1.6,1.2,'Completed-flow\ntelemetry')
     box(2.3,3.3,2.1,.9,'Calibrated detector\nprobability / risk')
     box(2.3,1.7,2.1,.9,'Observable quality\nmissingness / range')
     box(5.1,2.5,2.1,1.2,'Loss estimates\n+ knowledge rules')
-    box(7.9,2.5,1.7,1.2,'Budgeted allocation\nautomate / review\nor hold unresolved')
+    box(7.9,2.5,1.85,1.2,'Budgeted allocation\nAutomate, review\nor hold unresolved',size=7.4)
     arrow(1.8,3.1,2.2,3.65);arrow(1.8,3.1,2.2,2.2);arrow(4.5,3.7,5,3.3);arrow(4.5,2.2,5,2.8);arrow(7.3,3.1,7.8,3.1)
-    box(.2,.15,9.3,.85,'Matched comparison: change automation-loss inputs only; share detector, reviewer-loss head,\nknowledge rules, mandatory ordering and review counts. Overload implies zero routing effect.','#f4f1e8')
-    ax.text(.1,4.65,'Quality can improve ranking; it cannot create analyst capacity.',fontsize=10,weight='bold')
+    box(.2,.15,9.3,.85,'Matched comparison: change automation-loss inputs only. Share detector, reviewer-loss head,\nknowledge rules, mandatory ordering and review counts. Overload implies zero routing effect.','#f4f1e8',size=7.5)
+    ax.set_ylim(0,4.2)
     export_figure(fig,figs/'cyber_fig1');plt.close(fig)
     df=pd.read_csv(OUT/'cyber-results.csv.gz')
-    wanted=['prob','quality_A','quality_both','chow','conformal']
+    wanted=['prob','quality_A','quality_both','confidence','chow','conformal']
     sub=df[((df.arm=='matched')&(df.method!='conformal'))|((df.arm=='native')&(df.method=='conformal'))]
     agg=sub[sub.method.isin(wanted)].groupby(['dataset','seed','capacity','method'])[['cost','unmet_attack']].mean().reset_index()
     fig,axes=plt.subplots(2,2,figsize=(7.2,5.0),sharex=True)
-    colors=['#0072b2','#d55e00','#009e73','#cc79a7','#333333'];names=['Probability only','Quality in A','Quality in A and H','Chow risk','Conformal adaptation']
+    colors=['#0072b2','#d55e00','#009e73','#a6761d','#cc79a7','#333333'];names=['Probability only','Quality in A','Quality in A and H','Confidence','Chow risk','Conformal adaptation']
     for col,ds in enumerate(('unsw','cic')):
         for row,metric in enumerate(('cost','unmet_attack')):
             ax=axes[row,col]
-            for method,color,label in zip(wanted,colors,names):
+            for method,color,label,marker,ls in zip(wanted,colors,names,['o','s','^','v','D','x'],['-','--','-.',':','-','--']):
                 x=agg[(agg.dataset==ds)&(agg.method==method)].groupby('capacity')[metric]
                 mean=x.mean();err=x.sem()*stats.t.ppf(.975,19)
-                ax.errorbar(mean.index*100,mean.values,yerr=err.values,color=color,marker='o',ms=3,capsize=2,lw=1.3,label=label)
+                ax.errorbar(mean.index*100,mean.values,yerr=err.values,color=color,marker=marker,linestyle=ls,ms=3,capsize=2,lw=1.3,label=label)
             ax.grid(alpha=.18);ax.set_xticks([5,10,20]);ax.set_ylabel('Cost per retained flow' if row==0 else 'Unmet attacks / all attacks')
             if row==0:ax.set_title(('(a) UNSW-NB15' if col==0 else '(b) CICIDS2017'),loc='left',fontsize=10)
             if row==1:ax.set_xlabel('Analyst review capacity (%)')
     handles,labels=axes[0,0].get_legend_handles_labels();fig.legend(handles,labels,loc='lower center',ncol=3,fontsize=8,frameon=False)
     fig.tight_layout(rect=(0,.12,1,1));export_figure(fig,figs/'cyber_fig2');plt.close(fig)
     # Editable table bodies. Every displayed cell is derived here, never typed by hand.
-    names=dict(prob='Probability only',quality_A='Quality in A',quality_both='Quality in A and H',features='Observed features',chow='Chow risk',conformal='Conformal adaptation')
+    names=dict(prob='Probability only',quality_A='Quality in A',quality_both='Quality in A and H',features='Observed features',confidence='Confidence',chow='Chow risk',conformal='Conformal adaptation')
     lines=[r'\newcommand{\CyberTableOne}{%',r'\begin{tabular}{llrrrrr}\toprule',r'Data & Method & Cost & Close & Esc. & Held & Unmet\\\midrule']
     display=[]
     for ds in ('unsw','cic'):

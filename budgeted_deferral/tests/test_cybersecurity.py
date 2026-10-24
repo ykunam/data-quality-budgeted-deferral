@@ -6,6 +6,13 @@ sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
 from dqd import cybersecurity as Y, core as C
 
 class CybersecurityInvariants(unittest.TestCase):
+    def test_rich_comparator_contains_full_quality_representation(self):
+        X=np.arange(240,dtype=float).reshape(20,12);X[0,0]=np.nan
+        q=C.Quality(X);groups=[list(range(i*3,i*3+3)) for i in range(4)]
+        reps,_,_,_=Y.representations(np.linspace(.1,.9,20),X,q,groups)
+        n=reps['quality'].shape[1]
+        np.testing.assert_array_equal(reps['rich'][:,:n],reps['quality'])
+        np.testing.assert_array_equal(reps['rich'][:,n:],X)
     def test_session_and_feature_components(self):
         h=np.array([1,2,2,4,5]);s=np.array([6,6,7,7,8])
         g=Y.merge_groups(h,s)
