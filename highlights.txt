@@ -1,5 +1,5 @@
-- Exact sorting solves governance-constrained review allocation in both regimes.
-- Backlog depends on staffing, not on how mandatory cases are prioritized.
-- No learned router beat a cost-aware heuristic without a large review history.
-- Quality inputs appeared to help under informative missingness (exploratory).
-- Quality-triggered rules missed three-quarters of records with invisible defects.
+- Quality-aware deferral is tested under mandatory review and selective feedback.
+- A frozen Bank validation finds a conditional 5.23% reduction in routing cost.
+- Matched allocation separates estimation, admission and rule enforcement.
+- Propensity weighting shows no adjusted-significant cost benefit in six tests.
+- Recorded human choices support a separate, clean-image transfer check.
