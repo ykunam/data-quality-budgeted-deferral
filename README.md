@@ -1,3 +1,19 @@
+# Current Short Communication (core revision, 24 October 2026)
+
+The current manuscript is `manuscript.tex` / `manuscript.pdf`. Its active
+implementation, frozen analysis plan, pinned environment and reproduction commands
+are in [budgeted_deferral/README.md](budgeted_deferral/README.md).
+The new study uses `python -m dqd.revision`; it includes prospective Bank Marketing
+validation, selective logging, matched allocation and a descriptive check with
+recorded CIFAR-10H human judgments. Figures and tables are generated from saved
+outputs. See `submission-notes.md` for remaining author confirmations.
+
+The older root-level `experiment.py` and `results/` are retained for provenance.
+They are not the current manuscript's reproduction entry point. The historical
+README below describes earlier versions and is retained as history.
+
+---
+
 # Quality-aware budgeted deferral
 
 Reproducibility package for **Data-Quality-Aware Knowledge-Based Systems for AI Governance and Managerial Decision-Making: Budgeted Human Deferral**.
@@ -84,3 +100,4 @@ Read `submission-notes.md` for guide compliance and remaining author decisions. 
 ## Reference-informed presentation
 
 The author supplied Thota's UAV-planning manuscript as a writing reference. Its organization informed explicit rule definitions, matched comparisons, a 2-by-2 ablation, parameter sensitivity and failure-boundary reporting. Its wording, figures, tables, results and references were not reused as evidence for this study, and the supplied acceptance status was not independently verified. The factorial ablation crosses compact quality conditioning with the rule layer (`learned_p`, `proposed`, `no_rules_p`, `no_rules`). Sensitivity in `summary.json` varies the hold penalty for the same fixed routes; it is an accounting sensitivity, not policy retraining.
+

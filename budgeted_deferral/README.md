@@ -1,7 +1,7 @@
 # Governance-constrained budgeted human deferral (KBS revision)
 
 Reproducibility package for the manuscript **"When Does Data Quality Help Human Deferral?
-Governance-Constrained Review Allocation in Knowledge-Based Decision Systems"**
+Knowledge-based systems for AI governance and managerial decision-making"**
 (Y. R. Kunam, revised author-review draft, October 2026).
 
 This directory is self-contained: code, seed-level results, tables and figures.
@@ -20,7 +20,10 @@ This directory is self-contained: code, seed-level results, tables and figures.
 
 Labels are used only for fitting and retrospective evaluation, never for allocation.
 
-## Reproduce
+## Legacy exploratory reproduction (earlier manuscript numbering)
+
+For the current manuscript use **Reproducing the core revision** below.
+The commands and old figure/table numbers in this section are historical.
 
 ```bash
 cd budgeted_deferral
@@ -46,10 +49,11 @@ dfdbc2b7cdf728a15b53e323cde6127995715dfa6b178bd3c1e3d9916d0367aa  hmeq.csv
 bf15b02eb5a2c34f01f6d071083ecb7b8f4e803a4280a7ef497903d84c791c48  default.csv
 ```
 
-Software used for the reported results: Python 3.13, scikit-learn 1.9.1, NumPy 2.5.3, pandas 3.0.5,
-SciPy 1.18.1, matplotlib 3.11.2. All randomness is seeded; with the same versions the seed-level
-results in `results/` are reproduced exactly. Seeds 2–21 are evaluation seeds; seeds 0–1 were used
-during the original development.
+The earlier study reports Python 3.13, scikit-learn 1.9.1, NumPy 2.5.3, pandas 3.0.5,
+SciPy 1.18.1 and matplotlib 3.11.2. Those historical model fits were not independently
+repeated in that reported environment. The core revision uses the separately
+pinned actual environment in requirements.txt and revision-environment.json.
+Seeds 2--21 are evaluation seeds; seeds 0--1 were used during original development.
 
 ## Results included
 
@@ -59,7 +63,8 @@ capacity, method, cost, review/hold/violation rates and per-condition diagnostic
 
 ## Scope and honesty notes
 
-* Reviewer behaviour is simulated; no human participants or real review logs are involved.
+* Credit and Bank reviewers are simulated. The new, separate CIFAR-10H check
+  reuses recorded public human choices; it does not recruit new participants.
 * The L2D baselines are adaptations (shared automated classifier, cost weights, one-hidden-layer
   NumPy network); see the manuscript, Table 4.
 * The proposed method is **not** uniformly best: Chow's cost-risk rule and confidence ranking are
@@ -222,3 +227,15 @@ match the original CIFAR-10 image indices. The first human run stopped before
 producing results. No model, endpoint or analysis choice changed. All tabular
 and human models were rerun after this adapter fix so the final manifest has
 one executed source hash.
+
+### Output integrity amendment
+
+A zero-byte checkpoint and incomplete aggregate gzip were detected by readback
+checks. The affected seed was recomputed; the verified aggregate contains all
+102,960 unique cells. Serialization now compresses in memory, verifies bytes and
+atomically replaces each checkpoint/output. No fitting or allocation calculation
+changed. `fit_source_sha256` records the source used for the full model fits;
+`source_sha256` records the published source after this I/O-only amendment.
+A Bank seed-8 refit under the final writer reproduces all saved numeric values.
+An interrupted incomplete checkpoint must be removed before resuming; integrity
+checks fail loudly rather than silently treating it as valid.

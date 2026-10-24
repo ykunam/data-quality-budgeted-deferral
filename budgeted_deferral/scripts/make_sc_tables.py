@@ -1,61 +1,61 @@
-"""Write the two Short Communication tables (LaTeX) directly from seed-level results."""
-import os, sys
-sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
-os.chdir(os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
-import numpy as np
+"""Generate two manuscript tables and numerical prose from saved runs."""
+from pathlib import Path
+import json, sys
+sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
 import pandas as pd
-from dqd import core as C, stats as ST
-
-df = pd.read_csv("results/static_logs.csv.gz")
-nc = df[df.condition.isin(C.FAMILY_A + C.FAMILY_B) & (df.capacity == 0.2)]
-nat = df[(df.dataset == "hmeq") & (df.condition == "clean") & (df.capacity == 0.2)]
-ROWS = [("automation_only", "Automation only (rules ignored)$^a$"), ("random", "Random"), ("confidence", "Confidence"),
-        ("chow_risk", "Chow cost risk \\cite{chow}"), ("quality_only", "Quality only"),
-        ("sh_quality", "Single-head gain (earlier version)"), ("l2d_ce", "L2D-CE \\cite{mozannar}"),
-        ("l2d_ova", "L2D-OvA \\cite{verma}"), ("2h_rich_gorder", "Differential triage \\cite{raghu}"),
-        ("2h_prob", "Two-head, probability only"), ("2h_quality", "Two-head, quality-aware (proposed)"),
-        ("oracle", "Oracle (uses labels)$^b$")]
-cols = {ds: nc[nc.dataset == ds].groupby("method").cost.mean() for ds in ["german", "australian", "default"]}
-macro = pd.concat(cols, axis=1).mean(1)
-hm = nat.groupby("method").cost.mean()
-deploy = [m for m, _ in ROWS if m not in ("automation_only", "oracle")]
-best = {k: v[deploy].idxmin() for k, v in {**cols, "macro": macro, "hmeq": hm}.items()}
-def cell(series, key, m):
-    s = f"{series[m]:.4f}"
-    return f"\\textbf{{{s}}}" if best[key] == m else s
-lines = []
-for m, lab in ROWS:
-    lines.append(f"{lab} & {cell(cols['german'],'german',m)} & {cell(cols['australian'],'australian',m)} & "
-                 f"{cell(cols['default'],'default',m)} & {cell(macro,'macro',m)} & {cell(hm,'hmeq',m)} \\\\")
-t1 = ("\\begin{tabular}{lccccc}\\toprule\n"
-      "Method & German & Australian & Default & Macro & HMEQ (natural) \\\\\\midrule\n" + "\n".join(lines) +
-      "\n\\bottomrule\\end{tabular}")
-
-def rel(sub, a, b):
-    s = sub[sub.method.isin([a, b])].groupby(["seed", "method"]).cost.mean().unstack(); d = s[b] - s[a]
-    m, lo, hi, p = ST.corrected_t(d)
-    return 100 * m / s[b].mean(), int((d > 0).sum()), p
-orig = df[df.dataset.isin(["german", "australian", "default"]) & (df.capacity == 0.2)]
-R = [("Informative missingness (B)", orig[orig.condition == "informative"]),
-     ("Stale records (B)", orig[orig.condition == "stale"]),
-     ("Inconsistent codes (B)", orig[orig.condition == "inconsistent"]),
-     ("Visible defects (A), quality-coupled reviewer", orig[orig.condition.isin(C.FAMILY_A) & (orig.reviewer == "quality")]),
-     ("Visible defects (A), four decoupled reviewers", orig[orig.condition.isin(C.FAMILY_A) & (orig.reviewer != "quality")]),
-     ("HMEQ, natural missingness (external)", nat)]
-VARIANTS = ["2h_qA", "2h_qH", "2h_quality"]
-cells = [[rel(sub, v, "2h_prob") for v in VARIANTS] for _, sub in R]
-# Holm adjustment over the whole table (18 comparisons = one family)
-padj = ST.holm([c[2] for row in cells for c in row]).reshape(len(R), len(VARIANTS))
-def fmt(c, pa):
-    txt = (f"$+${c[0]:.2f}" if c[0] >= 0 else f"$-${-c[0]:.2f}") + f" ({c[1]})"
-    return f"\\textbf{{{txt}}}" if pa < 0.05 else (txt + "$^{\\dagger}$" if c[2] < 0.05 else txt)
-lines = [f"{lab} & " + " & ".join(fmt(c, pa) for c, pa in zip(row, prow)) + " \\\\"
-         for (lab, _), row, prow in zip(R, cells, padj)]
-pd.DataFrame([dict(condition=lab, variant=v, rel=c[0], wins=c[1], p=c[2], p_holm=pa)
-              for (lab, _), row, prow in zip(R, cells, padj) for v, c, pa in zip(VARIANTS, row, prow)]
-             ).to_csv("results/tables/sc_table2_holm.csv", index=False)
-t2 = ("\\begin{tabular}{lccc}\\toprule\n"
-      "Condition & Automation head only & Reviewer head only & Both heads (proposed) \\\\\\midrule\n" + "\n".join(lines) +
-      "\n\\bottomrule\\end{tabular}")
-open("results/sc_tables.tex", "w").write("\\newcommand{\\TableOne}{%\n" + t1 + "}\n\\newcommand{\\TableTwo}{%\n" + t2 + "}\n")
-print(t1); print(t2)
+root=Path(__file__).resolve().parents[1]
+d=pd.read_csv(root/'results/revision.csv.gz')
+summary=json.loads((root/'results/revision-summary.json').read_text())
+base=d[(d.capacity==.2)&(d.logging=='random')&(d.weighting=='unweighted')&(d.arm=='matched')]
+means=base.groupby(['dataset','method']).cost.mean().unstack()
+labels={'prob':'Probability-only two-head','quality_A':'Quality in automation head',
+    'quality_both':'Quality in both heads','features':'Observed-feature two-head',
+    'single':'Single-head gain','confidence':'Confidence','chow':'Chow cost risk','rules_only':'Rules only'}
+methods=['rules_only','confidence','chow','single','prob','quality_A','quality_both','features']
+datasets=['default','bank','human']
+assert set(datasets)<=set(means.index)
+t1=[r'\begin{tabular}{lrrr}\toprule',r'Method & Default & Bank & CIFAR-10H \\\midrule']
+for method in methods:
+    cells=[]
+    for ds in datasets:
+        cell=f'{means.loc[ds,method]:.4f}'
+        if means.loc[ds].idxmin()==method:cell=r'\textbf{'+cell+'}'
+        cells.append(cell)
+    t1.append(labels[method]+' & '+' & '.join(cells)+r' \\')
+t1.append(r'\bottomrule\end{tabular}')
+def pv(p):return '$<0.001$' if p<.001 else f'{p:.3f}'
+p=summary['primary']
+t2=[r'\begin{tabular}{lrrr}\toprule',r'Contrast & Reduction & 95\% interval & $p$ \\\midrule']
+def row(label,r,p):
+    return f"{label} & {r['diff']:+.4f} & [{r['lo']:+.4f}, {r['hi']:+.4f}] & {pv(p)}"+r' \\'
+t2.append(row('Primary: Bank, quality in automation head',p,p['p']))
+t2.append(r'\midrule')
+for r in summary['secondary_family_6']:
+    lab=('Default' if r['dataset']=='default' else 'Bank')+', '+{'random':'random','uncertainty':'uncertainty logs','rules':'rule-prioritized logs'}[r['logging']]
+    t2.append(row('IPW: '+lab,r,r['p_holm']))
+t2.append(r'\bottomrule\end{tabular}')
+commands={'TableOne':'\n'.join(t1),'TableTwo':'\n'.join(t2),
+    'PrimaryRelative':f"{p['relative']:.2f}\\%",'PrimaryDiff':f"{p['diff']:.4f}",
+    'PrimaryCI':f"[{p['lo']:.4f}, {p['hi']:.4f}]"}
+commands['MainResultSentence']=(
+    f"Quality in the automation head had the lowest mean among the matched variants on Default "
+    f"({means.loc['default','quality_A']:.4f}) and Bank ({means.loc['bank','quality_A']:.4f}); "
+    f"Chow cost risk gave {means.loc['default','chow']:.4f} and {means.loc['bank','chow']:.4f}, respectively.")
+h=base[base.dataset=='human'].groupby('method').cost.mean()
+commands['HumanResultSentence']=(
+    f"on clean images under random logging, quality-in-automation-only cost was {h['quality_A']:.4f}, "
+    f"probability-only {h['prob']:.4f}, and Chow {h['chow']:.4f}; these means do not establish a human-domain quality effect.")
+rule=base[(base.method=='quality_both')&base.dataset.isin(['default','bank'])]
+stale=rule[rule.condition=='stale'];shift=rule[rule.condition=='shift']
+no=d[(d.dataset.isin(['default','bank']))&(d.method=='quality_both')&(d.arm=='no_rules')&
+    (d.capacity==.2)&(d.logging=='random')&(d.weighting=='unweighted')]
+commands['RuleResultSentence']=(
+    f"Across Default and Bank, rules flagged {100*shift.defect_recall.mean():.1f}\\% of records with injected severe defects "
+    f"but {100*stale.defect_recall.mean():.1f}\\% with injected stale values. "
+    f"Under severe shift, the combined router held {100*shift.hold.mean():.1f}\\% of all records; "
+    f"removing rules automated {100*no[no.condition=='shift'].violation.mean():.1f}\\% of all records despite mandatory flags.")
+(root/'results/sc_tables.tex').write_text(''.join('\\newcommand{\\'+k+'}{%\n'+v+'}\n' for k,v in commands.items()))
+(root/'results/revision-display.json').write_text(json.dumps({'table1':means.to_dict(),
+    'table2':[summary['primary']]+summary['secondary_family_6'],
+    'prose':{k:v for k,v in commands.items() if k not in ['TableOne','TableTwo']}},indent=2))
+print('Generated both tables, numerical macros and display audit.')

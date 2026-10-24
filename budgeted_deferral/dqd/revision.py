@@ -5,7 +5,7 @@ Run: OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 python -m dqd.revision run
 Only new source module; original exploratory code/results are retained.
 """
 from __future__ import annotations
-import argparse, concurrent.futures, hashlib, io, json, os, pickle, platform
+import argparse, concurrent.futures, hashlib, io, json, os, pickle, platform, gzip
 from pathlib import Path
 import tarfile, zipfile
 import urllib.request
@@ -27,6 +27,18 @@ CAPACITIES = (.1, .2)
 METHODS = ('prob', 'quality_A', 'quality_both', 'features', 'single',
            'confidence', 'chow', 'rules_only')
 GRID = (3, 7)
+
+
+def atomic_csv(frame, destination):
+    """A checkpoint is visible only after a complete verified gzip write."""
+    destination=Path(destination)
+    payload=frame.to_csv(index=False,float_format='%.12g').encode()
+    packed=gzip.compress(payload,mtime=0)
+    assert gzip.decompress(packed)==payload
+    temporary=destination.with_name(destination.name+'.tmp')
+    temporary.write_bytes(packed)
+    assert hashlib.sha256(temporary.read_bytes()).digest()==hashlib.sha256(packed).digest()
+    temporary.replace(destination)
 
 
 def propensity(policy, p, u, v, costs=C.Costs()):
@@ -236,7 +248,7 @@ def run_seed(name, seed, destination=None):
                                 **C.evaluate(review,hold,T['la'],true_h,mandatory,costs),n=len(score)))
     out=pd.DataFrame(rows)
     if destination:
-        out.to_csv(destination,index=False,compression={'method':'gzip','mtime':0},float_format='%.12g')
+        atomic_csv(out,destination)
     return out
 
 
@@ -278,8 +290,7 @@ def analyze():
             for seed,r in x.iterrows():
                 contrasts.append(dict(zip(['dataset','logging','weighting','condition','capacity'],keys),
                     seed=int(seed),method=method,baseline='prob',diff=r['prob']-r[method]))
-    pd.DataFrame(contrasts).to_csv(RESULTS/'revision-contrasts.csv.gz',index=False,
-        compression={'method':'gzip','mtime':0},float_format='%.12g')
+    atomic_csv(pd.DataFrame(contrasts),RESULTS/'revision-contrasts.csv.gz')
     print(json.dumps(summary,indent=2))
 
 
@@ -314,15 +325,24 @@ def main():
         plan_commit='656f5270e5b8d48bf096c0644409397adc55e659',datasets={})
     for f in DATA.iterdir():
         if f.is_file():env['datasets'][f.name]=hashlib.sha256(f.read_bytes()).hexdigest()
-    if manifest.exists() and json.loads(manifest.read_text())['source_sha256']!=source:
-        raise RuntimeError('Source changed: archive old parts and manifest before rerunning')
+    if manifest.exists():
+        previous=json.loads(manifest.read_text())
+        if previous['source_sha256']!=source:
+            raise RuntimeError('Source changed: archive old parts and manifest before rerunning')
+        if any(path.exists() for _,_,path in tasks):
+            for key in ('fit_source_sha256','packaging_amendment'):
+                if key in previous:env[key]=previous[key]
     manifest.write_text(json.dumps(env,indent=2))
+    for ds,seed,path in tasks:
+        if path.exists():
+            raw=gzip.decompress(path.read_bytes())
+            if len(raw.splitlines())!=(156 if ds=='human' else 2496)+1:
+                raise RuntimeError(f'Incomplete checkpoint {path}; remove it and resume')
     with concurrent.futures.ProcessPoolExecutor(args.jobs) as pool:
         fs={pool.submit(run_seed,ds,seed,path):(ds,seed) for ds,seed,path in tasks if not path.exists()}
         for f in concurrent.futures.as_completed(fs):
             out=f.result();print(fs[f],len(out),'rows',flush=True)
-    pd.concat([pd.read_csv(path) for _,_,path in tasks],ignore_index=True).to_csv(
-        RESULTS/'revision.csv.gz',index=False,compression={'method':'gzip','mtime':0},float_format='%.12g')
+    atomic_csv(pd.concat([pd.read_csv(path) for _,_,path in tasks],ignore_index=True),RESULTS/'revision.csv.gz')
 
 
 if __name__=='__main__':
