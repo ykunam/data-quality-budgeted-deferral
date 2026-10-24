@@ -34,7 +34,7 @@ Organizations divide decisions between models and reviewers. Governance assigns 
 
 Rejection and learning to defer trade model error against abstention or reviewer error \cite{chow,zhangreject,mozannar,verma}; uncertainty methods offer simpler alternatives \cite{mena,abdar}. Triage separates model and human error \cite{raghu}. DeCCaF already combines costs, limited feedback and workload constraints \cite{alves}; related work addresses sparse expert predictions \cite{hemmer}, quality-aware cascades \cite{farinhas} and congestion \cite{congestion}. We test quality inputs under rules that prohibit automation and require holds under overload, claiming neither a new surrogate nor the first constrained deferral system.
 
-Completeness and validity are measurable but incomplete proxies for quality \cite{chai,iot,mohammed}. Human-in-the-loop and knowledge-based decision systems connect predictions to action \cite{wuhitl,tariq,onari}; routing traces document decisions rather than explain the underlying model \cite{arrieta,adadi,artelt}. We ask: \emph{under what data-quality and feedback conditions does learned deferral improve on probability-only estimation and cost-aware heuristics under mandatory review rules?} Contributions are a precise allocation model, matched component comparisons under selective feedback, and a planned quality validation on a previously unanalyzed business dataset. Negative results and rule-coverage failures are retained.
+Completeness and validity are measurable but incomplete proxies for quality \cite{chai,iot,mohammed}. Human-in-the-loop and knowledge-based decision systems connect predictions to action \cite{wuhitl,tariq,onari}; routing traces document decisions rather than explain the underlying model \cite{arrieta,adadi,artelt}. We ask: \emph{under what data-quality and feedback conditions does learned deferral improve on probability-only estimation and cost-aware heuristics under mandatory review rules?} We provide exact allocation, matched comparisons and planned cross-dataset validation.
 
 \section{Method}
 \subsection{Rules and scarce review capacity}
@@ -46,18 +46,18 @@ Let $a_i,r_i,h_i$ denote automate, review and hold, $M=\{i:m_i=1\}$, and $B=\lfl
 \quad \sum_i h_i=(|M|-B)_+,
 \label{eq:allocation}
 \end{equation}
-subject to $a_i+r_i+h_i=1$, $\sum_i r_i\le B$, $a_i\le1-m_i$ and $h_i\le m_i$, with binary actions. The last equality gives mandatory cases service priority; it is a normative assumption, not an economic optimum over all possible policies.
+subject to $a_i+r_i+h_i=1$, $\sum_i r_i\le B$, $a_i\le1-m_i$ and $h_i\le m_i$, with binary actions. The equality assumes mandatory service priority, not an unconstrained economic optimum.
 
 \textbf{Proposition 1.} If $|M|\le B$, review all mandatory cases and up to $B-|M|$ optional cases with largest positive $\hat g_i=\hat\ell_i^A-\hat\ell_i^H-c_R$. If $|M|>B$, review the $B$ mandatory cases with smallest $\hat\ell_i^H$ and hold the rest. \emph{Proof.} Optional review changes cost by $-\hat g_i/n$. Under overload, only the sum of reviewed human losses varies; $(|M|-B)c_H$ is constant. Exchange arguments establish both cases. Allocation takes $O(n\log n)$. Exactness is conditional on estimated losses, not a guarantee of minimum realized cost.
 
-An immediate consequence is a structural null: under mandatory overload, changing only the automation-loss head cannot alter the optimal route when the reviewer head is fixed. Quality can then help only through reviewer-loss estimates or policy coverage, not optional automation ranking.
+Under mandatory overload, changing only the automation-loss head cannot alter routing with a fixed reviewer head. Quality must improve reviewer-loss estimates or policy coverage instead.
 
 \textbf{Proposition 2.} With fixed mandatory flags, identical arrivals, unit review times, no abandonment and work-conserving mandatory service, queue ordering leaves mandatory backlog unchanged. \emph{Proof.} The recurrence $Q_{t+1}=(Q_t+A_t^M-B_t)_+$ depends on counts, not identities. This does not extend automatically to heterogeneous service times, changing flags or reviewer fatigue.
 
 \subsection{Loss estimation and selective feedback}
 With $w(y)=5y+(1-y)$, targets are $L^A=w(y)\mathbf1[\hat y\ne y]$ and $L^H=w(y)\mathbf1[\mathrm{review}\ne y]$. All gain-fitting rows have outcome labels, but only logged rows have a reviewer decision. Two boosted regressors estimate the losses. Probability inputs are $(p,s)$, $s=\min(5p,1-p)$; quality inputs add $(u,v,pu,pv,\hat yu,\hat yv)$. The primary ablation changes only the automation head, retaining the same probability-only reviewer head, admission rule and allocator.
 
-Let $S$ indicate logging with known propensity $\pi(W)$ for observed covariates $W$. Unweighted fitting minimizes logged-row squared error; inverse-propensity weighting (IPW) uses weights $1/\pi(W)$, normalized to mean one among logged rows \cite{ipw}. Under $S\perp L^H\mid W$ and $\pi(W)>0$, $\mathbb E[SR_f/\pi(W)]=\mathbb E[R_f]$, $R_f=\{L^H-f(Z)\}^2$. This standard identity identifies the population fitting risk even if representation $Z$ omits some logging covariates. It does not ensure finite-sample improvement or correct unobserved selection, missing outcome labels or test-time shift.
+Let $S$ indicate logging with known propensity $\pi(W)$ for observed covariates $W$. Unweighted fitting minimizes logged-row squared error; inverse-propensity weighting (IPW) uses weights $1/\pi(W)$, normalized to mean one among logged rows \cite{ipw}. Under $S\perp L^H\mid W$ and $\pi(W)>0$, $\mathbb E[SR_f/\pi(W)]=\mathbb E[R_f]$, $R_f=\{L^H-f(Z)\}^2$. This standard identity identifies fitting risk even if $Z$ omits logging covariates; it does not guarantee finite-sample benefit or correct hidden selection, missing outcomes or test shift. ChatGPT and Claude assisted code and analysis development; numerical results were computed with the released Python implementation.
 
 \section{Experimental design}
 \subsection{Exploration and prospective validation}
@@ -120,10 +120,10 @@ Bank is new to this project but old and synthetically corrupted. Human images do
 A frozen validation supports a conditional quality benefit, null weighting results and no universal superiority. Separating estimation, rules and capacity makes these boundaries observable.
 
 \paragraph{Data and code availability}
-Code, complete outputs, the frozen plan and source hashes are in the \href{https://github.com/ykunam/data-quality-budgeted-deferral/tree/db2ab095608d7ebcd77f26309b7d92b7dec77d9c/budgeted_deferral}{public revision repository}. Original credit evidence is pinned to \texttt{03166e9}; plan and implementation commits are given above. Public source datasets are cited. [Author to confirm final data-deposit statement and any archival release.]
+Code, seed-level outputs, the frozen plan and source hashes are publicly available in the \href{https://github.com/ykunam/data-quality-budgeted-deferral/tree/db2ab095608d7ebcd77f26309b7d92b7dec77d9c/budgeted_deferral}{versioned repository, snapshot \texttt{db2ab09}}. Original credit evidence is pinned to \texttt{03166e9}. Source data remain available from the cited providers. Human-derived outputs follow CC BY-NC-SA 4.0; participant-level records and original images are not redistributed here.
 
 \paragraph{Funding}
-[Author to confirm. If applicable: This research did not receive any specific grant from funding agencies in the public, commercial, or not-for-profit sectors.]
+This research did not receive any specific grant from funding agencies in the public, commercial, or not-for-profit sectors.
 
 \paragraph{CRediT authorship contribution statement}
 [Author to confirm.] Yeshwanth Reddy Kunam: Conceptualization, Methodology, Software, Validation, Formal analysis, Investigation, Writing -- original draft, Writing -- review and editing, Visualization.
