@@ -56,6 +56,15 @@ class RevisionDesign(unittest.TestCase):
 class SavedRevisionResults(unittest.TestCase):
     path=Path(__file__).resolve().parents[1]/'results/revision.csv.gz'
 
+    def test_figure_exports_are_complete(self):
+        for name in ('fig3_volume.pdf','fig5_backlog.pdf'):
+            p=self.path.parents[1]/'figs'/name
+            if not p.exists():continue
+            raw=p.read_bytes()
+            self.assertGreater(len(raw),1000)
+            self.assertTrue(raw.startswith(b'%PDF-'))
+            self.assertIn(b'%%EOF',raw[-1024:])
+
     @unittest.skipUnless(path.exists(),'Run the revision grid to check saved outputs')
     def test_complete_grid_capacity_costs_and_structural_null(self):
         d=pd.read_csv(self.path)

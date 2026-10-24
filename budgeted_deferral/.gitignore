@@ -3,3 +3,4 @@ data/*
 __pycache__/
 results/revision-parts/
 
+results/*.tmp

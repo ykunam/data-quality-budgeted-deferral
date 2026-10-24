@@ -2,7 +2,7 @@
 Legacy filename retained; old volume code/figure remain in git history.
 """
 from pathlib import Path
-import sys,json
+import sys,json,io
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
 import numpy as np,pandas as pd
 import matplotlib
@@ -38,8 +38,15 @@ axs[0].set_ylabel('Cost reduction versus probability-only (%)')
 handles,labels=axs[0].get_legend_handles_labels()
 fig.legend(handles,labels,loc='outside upper center',ncol=3,frameon=False)
 (root/'figs').mkdir(exist_ok=True)
-fig.savefig(root/'figs/fig3_volume.pdf',bbox_inches='tight')
-fig.savefig(root/'figs/fig3_volume.png',dpi=450,bbox_inches='tight')
+for suffix in ('pdf','png'):
+    buffer=io.BytesIO()
+    fig.savefig(buffer,format=suffix,dpi=450,bbox_inches='tight')
+    data_bytes=buffer.getvalue()
+    assert len(data_bytes)>1000
+    if suffix=='pdf':assert data_bytes.startswith(b'%PDF-') and b'%%EOF' in data_bytes[-100:]
+    destination=root/f'figs/fig3_volume.{suffix}'
+    temporary=destination.with_suffix(destination.suffix+'.tmp')
+    temporary.write_bytes(data_bytes);temporary.replace(destination)
 (root/'results/revision-figure.json').write_text(json.dumps(data,indent=2))
 plt.close(fig)
 print('Generated Figure 1 from',len(data),'complete cells')

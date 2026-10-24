@@ -239,3 +239,5 @@ changed. `fit_source_sha256` records the source used for the full model fits;
 A Bank seed-8 refit under the final writer reproduces all saved numeric values.
 An interrupted incomplete checkpoint must be removed before resuming; integrity
 checks fail loudly rather than silently treating it as valid.
+
+Figure 1 also uses atomic PDF/PNG exports; tests check complete PDF headers and EOF markers. Final manuscript compilation and PDF rendering verify the exported assets.
