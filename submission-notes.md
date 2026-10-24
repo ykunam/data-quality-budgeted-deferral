@@ -20,38 +20,21 @@
 - 22 requested-publisher journal references remain: Elsevier 15, IEEE 6, MDPI 1. Q1 means verified SJR 2025 best quartile, not every category, publication year, JCR or every reference. Three essential provenance/method references were added.
 - Body/captions/references are double-spaced; table row stretch is 1.5. The guide gives no explicit table-row-stretch rule; no editorial approval of this convention is claimed.
 
-## Author actions before submission
+## Author-confirmed declarations
 
-1. Supply full postal affiliation/address or obtain editorial-office guidance.
-2. Funding is confirmed by the author: no funding. Confirm CRediT and human responsibility for the AI-assisted work; remove those brackets only after review.
-3. Complete the separate competing-interest declaration using actual circumstances.
-4. Data/code wording finalized with immutable snapshot db2ab09 and original provider access. Human-derived outputs follow CC BY-NC-SA 4.0; no participant-level records or images are redistributed. A persistent archival release remains recommended, not falsely claimed complete.
-5. Recheck portal-specific files and pagination after author edits.
+- Funding: the author confirmed no funding. The no-specific-grant statement is final.
+- Competing interests: the author confirmed none. The separate `declaration-of-interest.docx` records this disclosure; no signature is added and no journal submission is made.
+- CRediT: the author confirmed that the listed contributions are accurate. The manuscript's confirmation placeholder is removed.
+- Human review and responsibility: the author confirmed personal review of the manuscript, code and results and acceptance of responsibility. The final AI-use statement records that confirmation. This is an author confirmation, not an independent certification of authorship eligibility.
+- Public code/data availability and licensing are finalized using immutable snapshot `db2ab095608d7ebcd77f26309b7d92b7dec77d9c`; human-derived outputs follow CC BY-NC-SA 4.0.
+
+## Remaining author detail
+
+Supply the exact affiliation and full postal correspondence address intended for publication, or obtain editorial-office guidance. Keep Independent Researcher only if accurate; university enrollment does not establish a publication affiliation. No address is inferred.
+
+## Submission steps still to perform
+
+- Enter any required disclosures into Elsevier's official Declaration Tool and upload its generated form if the portal requests it: https://declarations.elsevier.com/ . The prepared DOCX contains the author-confirmed disclosure; it is not represented as a tool-generated or signed form.
+- Recheck portal-specific requirements and pagination after inserting the address. A persistent archival release remains recommended; no archival DOI has been invented or claimed.
 
 Scientific limits remain: old datasets, label-conditioned synthetic missingness, illustrative thresholds/costs, simulated financial reviewers, no finance-field/causal-managerial/fairness/legal validation, and no newly tuned DeCCaF comparison. KBS novelty remains an editorial judgment. No acceptance or exhaustive originality certificate is made.
-
-Verified code/results/figure snapshot: `db2ab095608d7ebcd77f26309b7d92b7dec77d9c`. The manuscript links to this immutable version.
-
-## Minor finalization pass
-
-Completed: finalized public data/code availability and human-data licensing; added research-stage AI assistance to Methods; finalized the no-specific-funding statement after the author confirmed no funding; tightened prose to preserve ten pages. Experiments, numerical results, two figures, two tables and 39 references are unchanged.
-
-### Author information still needed
-
-1. Exact affiliation and full postal correspondence address intended for the manuscript. Keep Independent Researcher only if correct. Do not infer a university affiliation from enrollment.
-2. Competing financial or personal interests: declare none only if true, otherwise give details. No declaration has been submitted or signed for the author.
-3. Review the listed CRediT roles and confirm which are accurate. Confirm actual review/adoption of the manuscript, code and results and responsibility for the final work; AI-generated checks are not the author's personal verification.
-
-### Prepared competing-interest wording (UNCONFIRMED DRAFT)
-
-Use only if the author confirms it is true:
-
-The author declares that there are no known competing financial interests or personal relationships that could have appeared to influence the work reported in this paper.
-
-If interests exist, replace the draft with an accurate disclosure; do not use this candidate statement. After factual confirmation, complete the journal's official Declaration Tool and retain its generated declaration file for submission: https://declarations.elsevier.com/ . No personal facts, signature, approval or portal submission are inferred.
-
-### Prepared author-responsibility wording (UNCONFIRMED DRAFT)
-
-After using these tools, the author reviewed and edited the content as needed and takes full responsibility for the content of the published article.
-
-Adopt this wording only after the author has actually completed that review and accepts responsibility. Current CRediT roles remain a draft pending author verification. A full postal address and these declarations are the remaining factual blockers.
