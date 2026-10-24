@@ -18,8 +18,9 @@
 {\large\bfseries When does data quality help human deferral? Knowledge-based systems for AI governance and managerial decision-making\par}
 \vspace{2pt}
 Yeshwanth Reddy Kunam$^{a,*}$\\
-{\small $^a$Independent Researcher, USA\\
-$^*$Corresponding author. E-mail: \texttt{yeshwanth.kunam@gmail.com}}
+{\small $^a$Midwest University, 851 Parr Road, Wentzville, MO 63385, USA\\
+$^*$Correspondence: 1529 Gage St, Columbus, OH 43240, USA\\
+E-mail: \texttt{yeshwanth.kunam@gmail.com}}
 \end{center}
 \vspace{-8pt}
 \noindent\textit{Short communication.}
@@ -30,11 +31,11 @@ AI governance must allocate scarce review capacity when data-quality rules prohi
 \noindent\textbf{Keywords:} Knowledge-based systems; Learning to defer; Data quality; AI governance; Human--AI collaboration; Review capacity; Managerial decision-making
 
 \section{Introduction}
-Organizations divide decisions between models and reviewers. Governance assigns responsibilities and controls \cite{abraham,janssen,mikalefgov,wirtz}, but oversight alone does not establish effective control \cite{green}. Deteriorating data can increase mandatory review; managers must distinguish predictive benefit, rule coverage and service capacity.
+Organizations divide decisions between models and reviewers. Governance defines controls \cite{abraham,janssen,mikalefgov,wirtz}, but oversight alone does not establish effectiveness \cite{green}. Deterioration can increase mandatory review; predictive benefit, rule coverage and capacity differ.
 
-Rejection and learning to defer trade model error against abstention or reviewer error \cite{chow,zhangreject,mozannar,verma}; uncertainty methods offer simpler alternatives \cite{mena,abdar}. Triage separates model and human error \cite{raghu}. DeCCaF already combines costs, limited feedback and workload constraints \cite{alves}; related work addresses sparse expert predictions \cite{hemmer}, quality-aware cascades \cite{farinhas} and congestion \cite{congestion}. We test quality inputs under rules that prohibit automation and require holds under overload, claiming neither a new surrogate nor the first constrained deferral system.
+Rejection and learning to defer balance model error against abstention or reviewer error \cite{chow,zhangreject,mozannar,verma}; uncertainty methods offer simpler alternatives \cite{mena,abdar}. Triage separates model and human error \cite{raghu}. DeCCaF combines costs, limited feedback and workload constraints \cite{alves}; related work addresses sparse feedback \cite{hemmer}, quality-aware cascades \cite{farinhas} and congestion \cite{congestion}. We test quality under automation restrictions and mandatory holds, claiming no new surrogate or first constrained deferral system.
 
-Completeness and validity are measurable but incomplete proxies for quality \cite{chai,iot,mohammed}. Human-in-the-loop and knowledge-based decision systems connect predictions to action \cite{wuhitl,tariq,onari}; routing traces document decisions rather than explain the underlying model \cite{arrieta,adadi,artelt}. We ask: \emph{under what data-quality and feedback conditions does learned deferral improve on probability-only estimation and cost-aware heuristics under mandatory review rules?} We provide exact allocation, matched comparisons and planned cross-dataset validation.
+Completeness and validity incompletely measure quality \cite{chai,iot,mohammed}. Human-in-the-loop and knowledge-based systems connect predictions to action \cite{wuhitl,tariq,onari}; routing traces document decisions, not model explanations \cite{arrieta,adadi,artelt}. We ask: \emph{when does quality-aware deferral improve on probability-only estimation and cost-aware heuristics under mandatory review rules?} We provide exact allocation, matched comparisons and planned cross-dataset validation.
 
 \section{Method}
 \subsection{Rules and scarce review capacity}
@@ -61,7 +62,7 @@ Let $S$ indicate logging with known propensity $\pi(W)$ for observed covariates 
 
 \section{Experimental design}
 \subsection{Exploration and prospective validation}
-The exploratory credit grid uses German, Australian, Default and HMEQ \cite{lessmann,german,australian,default,hmeq}, simulated reviewers and nine quality conditions. Its published-surrogate adaptations are retained as exploratory evidence; they are not newly tuned state-of-the-art comparisons. No learned router beat the best heuristic when that grid was pooled, and its 18 quality-ablation tests did not survive Holm adjustment.
+The exploratory credit grid uses German, Australian, Default and HMEQ \cite{lessmann,german,australian,default,hmeq}, simulated reviewers and nine quality conditions. Adapted surrogate comparisons remain exploratory: no learned router beat the best pooled heuristic, and none of 18 quality ablations survived Holm adjustment.
 
 Before fetching new validation data, we committed the primary contrast, secondary family and complete design (plan \texttt{656f527}, implementation \texttt{da41f59}). Default supplies development evidence; Bank Marketing supplies a new business-domain validation \cite{bank} (45,211 rows). We remove post-call \texttt{duration}; categorical mappings use predictor-training rows only, with unknown or unseen categories treated as missing. Historical subscription labels are real, but review outcomes and costs remain simulated. This is cross-domain validation of the routing experiment, not a credit-deployment study.
 
@@ -82,12 +83,12 @@ The single primary test compares quality-in-automation-only with probability-onl
 \section{Results and discussion}
 \textbf{A conditional quality benefit was confirmed.} The planned contrast reduced cost by \PrimaryRelative\ (absolute reduction \PrimaryDiff; corrected 95\% interval \PrimaryCI; $p<.001$; 20/20 splits), meeting the 1\% practical criterion (Table~\ref{tab:inference}). Reviewer estimation and mandatory ordering are fixed; the fill-budget arm retains the same reduction. Figure~\ref{fig:quality} reports all condition/logging cells. Under mandatory overload, the automation-head effect is zero, as predicted. Confirmation concerns this synthetic mechanism on new data, not universal superiority.
 
-\textbf{Matched comparisons bound the claim.} Table~\ref{tab:main} uses a common matched policy. \MainResultSentence\ The original grid rules out universal superiority; lower means do not establish cross-setting significance.
+\textbf{Matched comparisons bound the claim.} Table~\ref{tab:main} uses a common policy. \MainResultSentence\ Lower means do not establish cross-setting significance.
 
-\textbf{Selective feedback did not make IPW uniformly useful.} None of six secondary contrasts survives Holm adjustment (Table~\ref{tab:inference}). Rule-prioritized logging selects approximately 89\% of mandatory gain rows versus 40\% under random logging at the same expected log budget. Weighting targets fitting risk, but variance and shift can offset benefits; changed losses need not change selected reviews. Human-transfer results are descriptive: \HumanResultSentence
+\textbf{Selective feedback did not make IPW uniformly useful.} None of six secondary contrasts survives Holm adjustment (Table~\ref{tab:inference}). Rule-prioritized logging selects approximately 89\% of mandatory gain rows versus 40\% under random logging at the same expected budget. Variance, shift and unchanged review selection can offset weighting benefits. Human-transfer results are descriptive: \HumanResultSentence
 
 \begin{table}[!htb]
-\centering\small\renewcommand{\arraystretch}{1.5}
+\centering\small\renewcommand{\arraystretch}{2}
 \caption{Expected cost under random logging and 20\% capacity. Default/Bank average four conditions and two reviewers; CIFAR-10H uses clean images and empirical human error. Common mandatory ordering. Bold: lowest descriptive mean, not significance.}\label{tab:main}
 \TableOne
 \end{table}
@@ -98,12 +99,12 @@ The single primary test compares quality-in-automation-only with probability-onl
 \end{figure}
 
 \begin{table}[!htb]
-\centering\small\renewcommand{\arraystretch}{1.5}
+\centering\small\renewcommand{\arraystretch}{2}
 \caption{Absolute cost reduction (positive favors the change), corrected 95\% interval and $p$-value. The primary test stands alone; secondary $p$-values are Holm-adjusted across six contrasts.}\label{tab:inference}
 \TableTwo
 \end{table}
 
-\textbf{Knowledge rules have costs and blind spots.} Rules-only routing, no-rule learned routing and their combination separate policy enforcement from predictive benefit. \RuleResultSentence\ A rule can be perfectly obeyed while missing stale but plausible values. These metrics concern the declared corruption and policy assumptions, not legal compliance or complete data-quality assurance.
+\textbf{Knowledge rules have costs and blind spots.} \RuleResultSentence\ Zero violations do not establish defect coverage or legal sufficiency; stale but plausible values can escape the rules.
 
 \textbf{Capacity results require their assumptions.} The 40-day simulation introduces severe defects on days 11--20 and carries holds forward. Service counts all eligible mandatory arrivals, with unresolved cases unmet; quantiles account for censoring \cite{kaplan}. Cost ordering leaves 21.7\% open at 20\% capacity, none at 40\%. At 40\%, FIFO lowers the 95th-percentile delay from 13.9 to 7.1 days despite identical backlog counts (Fig.~\ref{fig:service}). This depends on unit service and fixed flags.
 
@@ -112,15 +113,15 @@ The single primary test compares quality-in-automation-only with probability-onl
 \caption{Credit simulation: (a) backlog, with dotted fluid approximation; (b,c) seven-/two-day resolution among eligible mandatory arrivals, unresolved cases unmet. Four datasets, two reviewers, ten seeds; unit service times. Programmatically generated from saved outputs.}\label{fig:service}
 \end{figure}
 
-Managers should validate quality features against a local cost-aware heuristic, document policy provenance, maintain exploration where review logs are selective, and monitor unresolved cohorts as well as rule violations. Organizational complementarity \cite{jarrahi} and AI capability \cite{capability} motivate these decisions, but firm-performance or causal managerial effects are not tested here.
+Managers should benchmark against local cost-aware heuristics, document rules, maintain exploration under selective logging and monitor unresolved cohorts. Organizational complementarity \cite{jarrahi} and AI capability \cite{capability} motivate these choices; causal firm benefits are untested.
 
 \section{Limitations and conclusion}
-Bank is new to this project but old and synthetically corrupted. Human images do not validate finance workflows, damaged stimuli or fatigue. Costs and thresholds need domain validation; gradual drift \cite{lu}, heterogeneous service, fairness and missing outcomes remain untested. IPW does not correct hidden selection. Published surrogate adaptations remain exploratory; no newly tuned DeCCaF comparison or new learning guarantee is claimed.
+Bank is old and synthetically corrupted. Human images do not validate finance workflows, damaged stimuli or fatigue. Costs and thresholds need domain validation; gradual drift \cite{lu}, heterogeneous service, fairness and missing outcomes remain untested. IPW does not correct hidden selection. Surrogate adaptations remain exploratory; no newly tuned DeCCaF comparison or new learning guarantee is claimed.
 
 A frozen validation supports a conditional quality benefit, null weighting results and no universal superiority. Separating estimation, rules and capacity makes these boundaries observable.
 
 \paragraph{Data and code availability}
-Code, seed-level outputs, the frozen plan and source hashes are publicly available in the \href{https://github.com/ykunam/data-quality-budgeted-deferral/tree/db2ab095608d7ebcd77f26309b7d92b7dec77d9c/budgeted_deferral}{versioned repository, snapshot \texttt{db2ab09}}. Original credit evidence is pinned to \texttt{03166e9}. Source data remain available from the cited providers. Human-derived outputs follow CC BY-NC-SA 4.0; participant-level records and original images are not redistributed here.
+Code, outputs, the frozen plan and source hashes: \href{https://github.com/ykunam/data-quality-budgeted-deferral/tree/db2ab095608d7ebcd77f26309b7d92b7dec77d9c/budgeted_deferral}{public snapshot \texttt{db2ab09}}. Original credit evidence: \texttt{03166e9}. Source data: cited providers. Human-derived outputs follow CC BY-NC-SA 4.0; original images and participant-level records are not redistributed here.
 
 \paragraph{Funding}
 This research did not receive any specific grant from funding agencies in the public, commercial, or not-for-profit sectors.
@@ -129,7 +130,7 @@ This research did not receive any specific grant from funding agencies in the pu
 Yeshwanth Reddy Kunam: Conceptualization, Methodology, Software, Validation, Formal analysis, Investigation, Writing -- original draft, Writing -- review and editing, Visualization.
 
 \paragraph{Declaration of generative AI and AI-assisted technologies in the manuscript preparation process}
-The author used ChatGPT (OpenAI) for study design, code, drafting, the core-revision experiments and verification, and Claude (Anthropic) for earlier experimental extensions, analysis and drafting. Figures were generated from numerical outputs using analysis code. After using these tools, the author reviewed and edited the content as needed and takes full responsibility for the content of the published article.
+ChatGPT (OpenAI) assisted study design, code, drafting, experiments and verification; Claude (Anthropic) assisted earlier experimental extensions, analysis and drafting. Figures were generated from saved outputs. After using these tools, the author reviewed and edited the content as needed and takes full responsibility for the content of the published article.
 
 \begingroup\small\raggedright
 \begin{thebibliography}{40}
