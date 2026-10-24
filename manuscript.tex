@@ -19,8 +19,7 @@
 \vspace{2pt}
 Yeshwanth Reddy Kunam$^{a,*}$\\
 {\small $^a$Midwest University, 851 Parr Road, Wentzville, MO 63385, USA\\
-$^*$Correspondence: 1529 Gage St, Columbus, OH 43240, USA\\
-E-mail: \texttt{yeshwanth.kunam@gmail.com}}
+$^*$Corresponding author. E-mail: \texttt{yeshwanth.kunam@gmail.com}}
 \end{center}
 \vspace{-8pt}
 \noindent\textit{Short communication.}
@@ -31,11 +30,11 @@ AI governance must allocate scarce review capacity when data-quality rules prohi
 \noindent\textbf{Keywords:} Knowledge-based systems; Learning to defer; Data quality; AI governance; Human--AI collaboration; Review capacity; Managerial decision-making
 
 \section{Introduction}
-Organizations divide decisions between models and reviewers. Governance defines controls \cite{abraham,janssen,mikalefgov,wirtz}, but oversight alone does not establish effectiveness \cite{green}. Deterioration can increase mandatory review; predictive benefit, rule coverage and capacity differ.
+Organizations divide decisions between models and reviewers. Governance defines controls \cite{abraham,janssen}, but oversight alone does not establish effectiveness \cite{green}. Deterioration can increase mandatory review; predictive benefit, rule coverage and capacity differ.
 
-Rejection and learning to defer balance model error against abstention or reviewer error \cite{chow,zhangreject,mozannar,verma}; uncertainty methods offer simpler alternatives \cite{mena,abdar}. Triage separates model and human error \cite{raghu}. DeCCaF combines costs, limited feedback and workload constraints \cite{alves}; related work addresses sparse feedback \cite{hemmer}, quality-aware cascades \cite{farinhas} and congestion \cite{congestion}. We test quality under automation restrictions and mandatory holds, claiming no new surrogate or first constrained deferral system.
+Rejection and learning to defer balance model error against abstention or reviewer error \cite{chow,mozannar,verma}, while confidence and cost-risk rules offer simpler alternatives. DeCCaF combines costs, limited feedback and workload constraints \cite{alves}; related work addresses quality-aware cascades \cite{farinhas} and congestion \cite{congestion}. We test quality under automation restrictions and mandatory holds, claiming no new surrogate or first constrained deferral system.
 
-Completeness and validity incompletely measure quality \cite{chai,iot,mohammed}. Human-in-the-loop and knowledge-based systems connect predictions to action \cite{wuhitl,tariq,onari}; routing traces document decisions, not model explanations \cite{arrieta,adadi,artelt}. We ask: \emph{when does quality-aware deferral improve on probability-only estimation and cost-aware heuristics under mandatory review rules?} We provide exact allocation, matched comparisons and planned cross-dataset validation.
+Completeness and validity incompletely measure quality \cite{chai,iot,mohammed}. Human-in-the-loop and knowledge-based systems connect predictions to action \cite{wuhitl,onari}; routing traces document decisions rather than explain models. We ask: \emph{when does quality-aware deferral improve on probability-only estimation and cost-aware heuristics under mandatory review rules?} We provide exact allocation, matched comparisons and planned cross-dataset validation.
 
 \section{Method}
 \subsection{Rules and scarce review capacity}
@@ -58,11 +57,11 @@ Under mandatory overload, changing only the automation-loss head cannot alter ro
 \subsection{Loss estimation and selective feedback}
 With $w(y)=5y+(1-y)$, targets are $L^A=w(y)\mathbf1[\hat y\ne y]$ and $L^H=w(y)\mathbf1[\mathrm{review}\ne y]$. All gain-fitting rows have outcome labels, but only logged rows have a reviewer decision. Two boosted regressors estimate the losses. Probability inputs are $(p,s)$, $s=\min(5p,1-p)$; quality inputs add $(u,v,pu,pv,\hat yu,\hat yv)$. The primary ablation changes only the automation head, retaining the same probability-only reviewer head, admission rule and allocator.
 
-Let $S$ indicate logging with known propensity $\pi(W)$ for observed covariates $W$. Unweighted fitting minimizes logged-row squared error; inverse-propensity weighting (IPW) uses weights $1/\pi(W)$, normalized to mean one among logged rows \cite{ipw}. Under $S\perp L^H\mid W$ and $\pi(W)>0$, $\mathbb E[SR_f/\pi(W)]=\mathbb E[R_f]$, $R_f=\{L^H-f(Z)\}^2$. This standard identity identifies fitting risk even if $Z$ omits logging covariates; it does not guarantee finite-sample benefit or correct hidden selection, missing outcomes or test shift. ChatGPT and Claude assisted code and analysis development; numerical results were computed with the released Python implementation.
+Let $S$ indicate logging with known propensity $\pi(W)$ for observed covariates $W$. Unweighted fitting minimizes logged-row squared error; inverse-propensity weighting (IPW) uses weights $1/\pi(W)$, normalized to mean one among logged rows \cite{ipw}. Under $S\perp L^H\mid W$ and $\pi(W)>0$, $\mathbb E[SR_f/\pi(W)]=\mathbb E[R_f]$, $R_f=\{L^H-f(Z)\}^2$. This standard identity identifies fitting risk even if $Z$ omits logging covariates; it does not guarantee finite-sample benefit or correct hidden selection, missing outcomes or test shift.
 
 \section{Experimental design}
 \subsection{Exploration and prospective validation}
-The exploratory credit grid uses German, Australian, Default and HMEQ \cite{lessmann,german,australian,default,hmeq}, simulated reviewers and nine quality conditions. Adapted surrogate comparisons remain exploratory: no learned router beat the best pooled heuristic, and none of 18 quality ablations survived Holm adjustment.
+The exploratory credit grid uses German, Australian, Default and HMEQ \cite{german,australian,default,hmeq}, simulated reviewers and nine quality conditions. Adapted surrogate comparisons remain exploratory: no learned router beat the best pooled heuristic, and none of 18 quality ablations survived Holm adjustment.
 
 Before fetching new validation data, we committed the primary contrast, secondary family and complete design (plan \texttt{656f527}, implementation \texttt{da41f59}). Default supplies development evidence; Bank Marketing supplies a new business-domain validation \cite{bank} (45,211 rows). We remove post-call \texttt{duration}; categorical mappings use predictor-training rows only, with unknown or unseen categories treated as missing. Historical subscription labels are real, but review outcomes and costs remain simulated. This is cross-domain validation of the routing experiment, not a credit-deployment study.
 
@@ -113,10 +112,10 @@ The single primary test compares quality-in-automation-only with probability-onl
 \caption{Credit simulation: (a) backlog, with dotted fluid approximation; (b,c) seven-/two-day resolution among eligible mandatory arrivals, unresolved cases unmet. Four datasets, two reviewers, ten seeds; unit service times. Programmatically generated from saved outputs.}\label{fig:service}
 \end{figure}
 
-Managers should benchmark against local cost-aware heuristics, document rules, maintain exploration under selective logging and monitor unresolved cohorts. Organizational complementarity \cite{jarrahi} and AI capability \cite{capability} motivate these choices; causal firm benefits are untested.
+Managers should benchmark against local cost-aware heuristics, document rules, maintain exploration under selective logging and monitor unresolved cohorts. Organizational complementarity \cite{jarrahi} motivates these choices; causal firm benefits are untested.
 
 \section{Limitations and conclusion}
-Bank is old and synthetically corrupted. Human images do not validate finance workflows, damaged stimuli or fatigue. Costs and thresholds need domain validation; gradual drift \cite{lu}, heterogeneous service, fairness and missing outcomes remain untested. IPW does not correct hidden selection. Surrogate adaptations remain exploratory; no newly tuned DeCCaF comparison or new learning guarantee is claimed.
+Bank is old and synthetically corrupted. Human images do not validate finance workflows, damaged stimuli or fatigue. Costs and thresholds need domain validation; gradual drift, heterogeneous service, fairness and missing outcomes remain untested. IPW does not correct hidden selection. Surrogate adaptations remain exploratory; no newly tuned DeCCaF comparison or new learning guarantee is claimed.
 
 A frozen validation supports a conditional quality benefit, null weighting results and no universal superiority. Separating estimation, rules and capacity makes these boundaries observable.
 
@@ -133,34 +132,22 @@ Yeshwanth Reddy Kunam: Conceptualization, Methodology, Software, Validation, For
 ChatGPT (OpenAI) assisted study design, code, drafting, experiments and verification; Claude (Anthropic) assisted earlier experimental extensions, analysis and drafting. Figures were generated from saved outputs. After using these tools, the author reviewed and edited the content as needed and takes full responsibility for the content of the published article.
 
 \begingroup\small\raggedright
-\begin{thebibliography}{40}
+\begin{thebibliography}{25}
 \bibitem{abraham} R. Abraham, J. Schneider, J. vom Brocke, Data governance: A conceptual framework, structured review, and research agenda, Int. J. Inf. Manag. 49 (2019) 424--438. \href{https://doi.org/10.1016/j.ijinfomgt.2019.07.008}{doi:10.1016/j.ijinfomgt.2019.07.008}.
 \bibitem{janssen} M. Janssen, P. Brous, E. Estevez, L.S. Barbosa, T. Janowski, Data governance: Organizing data for trustworthy artificial intelligence, Gov. Inf. Q. 37 (2020) 101493. \href{https://doi.org/10.1016/j.giq.2020.101493}{doi:10.1016/j.giq.2020.101493}.
-\bibitem{mikalefgov} E. Papagiannidis, P. Mikalef, K. Conboy, Responsible artificial intelligence governance: A review and research framework, J. Strateg. Inf. Syst. 34 (2025) 101885. \href{https://doi.org/10.1016/j.jsis.2024.101885}{doi:10.1016/j.jsis.2024.101885}.
-\bibitem{wirtz} B.W. Wirtz, J.C. Weyerer, I. Kehl, Governance of artificial intelligence: A risk and guideline-based integrative framework, Gov. Inf. Q. 39 (2022) 101685. \href{https://doi.org/10.1016/j.giq.2022.101685}{doi:10.1016/j.giq.2022.101685}.
 \bibitem{green} B. Green, The flaws of policies requiring human oversight of government algorithms, Comput. Law Secur. Rev. 45 (2022) 105681. \href{https://doi.org/10.1016/j.clsr.2022.105681}{doi:10.1016/j.clsr.2022.105681}.
 \bibitem{chow} C. Chow, On optimum recognition error and reject tradeoff, IEEE Trans. Inf. Theory 16 (1970) 41--46. \href{https://doi.org/10.1109/TIT.1970.1054406}{doi:10.1109/TIT.1970.1054406}.
-\bibitem{zhangreject} X.Y. Zhang, G.S. Xie, X. Li, T. Mei, C.L. Liu, A survey on learning to reject, Proc. IEEE 111 (2023) 185--215. \href{https://doi.org/10.1109/JPROC.2023.3238024}{doi:10.1109/JPROC.2023.3238024}.
 \bibitem{mozannar} H. Mozannar, D. Sontag, Consistent estimators for learning to defer to an expert, in: Proc. 37th Int. Conf. Mach. Learn., PMLR 119 (2020) 7076--7087.
 \bibitem{verma} R. Verma, E. Nalisnick, Calibrated learning to defer with one-vs-all classifiers, in: Proc. 39th Int. Conf. Mach. Learn., PMLR 162 (2022) 22184--22202.
-\bibitem{mena} J. Mena, O. Pujol, J. Vitrià, Uncertainty-based rejection wrappers for black-box classifiers, IEEE Access 8 (2020) 101721--101746. \href{https://doi.org/10.1109/ACCESS.2020.2996495}{doi:10.1109/ACCESS.2020.2996495}.
-\bibitem{abdar} M. Abdar, F. Pourpanah, S. Hussain, et al., A review of uncertainty quantification in deep learning: Techniques, applications and challenges, Inf. Fusion 76 (2021) 243--297. \href{https://doi.org/10.1016/j.inffus.2021.05.008}{doi:10.1016/j.inffus.2021.05.008}.
-\bibitem{raghu} M. Raghu, K. Blumer, G. Corrado, J. Kleinberg, Z. Obermeyer, S. Mullainathan, The algorithmic automation problem: Prediction, triage, and human effort, arXiv preprint (2019). \url{https://doi.org/10.48550/arXiv.1903.12220}.
 \bibitem{alves} J.V. Alves, D. Leitão, S. Jesus, M.O.P. Sampaio, J. Liébana, P. Saleiro, M.A.T. Figueiredo, P. Bizarro, Cost-sensitive learning to defer to multiple experts with workload constraints, Trans. Mach. Learn. Res. (2024). \url{https://openreview.net/forum?id=TAvGZm2Rqb}.
-\bibitem{hemmer} P. Hemmer, L. Thede, M. Vössing, J. Jakubik, N. Kühl, Learning to defer with limited expert predictions, Proc. AAAI Conf. Artif. Intell. 37 (2023) 6002--6011. \href{https://doi.org/10.1609/aaai.v37i5.25742}{doi:10.1609/aaai.v37i5.25742}.
 \bibitem{farinhas} A. Farinhas, N.M. Guerreiro, S. Agrawal, R. Rei, A. Martins, Translate smart, not hard: Cascaded translation systems with quality-aware deferral, in: Proc. 2025 Conf. Empirical Methods Nat. Lang. Process. (2025) 26742--26756. \href{https://doi.org/10.18653/v1/2025.emnlp-main.1358}{doi:10.18653/v1/2025.emnlp-main.1358}.
 \bibitem{congestion} V. Saketos, W. Reveillard, A. Proutiere, S. Dalleiger, M. Xiao, To defer or not to defer? Online learning with LLMs and congested experts, arXiv preprint (2026). \url{https://doi.org/10.48550/arXiv.2610.15128}.
 \bibitem{chai} C. Chai, J. Wang, Y. Luo, Z. Niu, G. Li, Data management for machine learning: A survey, IEEE Trans. Knowl. Data Eng. 35 (2023) 4646--4667. \href{https://doi.org/10.1109/TKDE.2022.3148237}{doi:10.1109/TKDE.2022.3148237}.
 \bibitem{iot} L. Zhang, D. Jeong, S. Lee, Data quality management in the Internet of Things, Sensors 21 (2021) 5834. \href{https://doi.org/10.3390/s21175834}{doi:10.3390/s21175834}.
 \bibitem{mohammed} S. Mohammed, L. Budach, M. Feuerpfeil, N. Ihde, A. Nathansen, N. Noack, H. Patzlaff, F. Naumann, H. Harmouch, The effects of data quality on machine learning performance on tabular data, Inf. Syst. 132 (2025) 102549. \href{https://doi.org/10.1016/j.is.2025.102549}{doi:10.1016/j.is.2025.102549}.
 \bibitem{wuhitl} X. Wu, L. Xiao, Y. Sun, J. Zhang, T. Ma, L. He, A survey of human-in-the-loop for machine learning, Future Gener. Comput. Syst. 135 (2022) 364--381. \href{https://doi.org/10.1016/j.future.2022.05.014}{doi:10.1016/j.future.2022.05.014}.
-\bibitem{tariq} S. Tariq, M. Baruwal Chhetri, S. Nepal, C. Paris, A$^2$C: A modular multi-stage collaborative decision framework for human--AI teams, Expert Syst. Appl. 282 (2025) 127318. \href{https://doi.org/10.1016/j.eswa.2025.127318}{doi:10.1016/j.eswa.2025.127318}.
 \bibitem{onari} M. Abbaspour Onari, M. Jahangoshai Rezaee, M. Saberi, M.S. Nobile, An explainable data-driven decision support framework for strategic customer development, Knowl.-Based Syst. 295 (2024) 111761. \href{https://doi.org/10.1016/j.knosys.2024.111761}{doi:10.1016/j.knosys.2024.111761}.
-\bibitem{arrieta} A. Barredo Arrieta, N. Díaz-Rodríguez, J. Del Ser, et al., Explainable artificial intelligence (XAI): Concepts, taxonomies, opportunities and challenges toward responsible AI, Inf. Fusion 58 (2020) 82--115. \href{https://doi.org/10.1016/j.inffus.2019.12.012}{doi:10.1016/j.inffus.2019.12.012}.
-\bibitem{adadi} A. Adadi, M. Berrada, Peeking inside the black-box: A survey on explainable artificial intelligence (XAI), IEEE Access 6 (2018) 52138--52160. \href{https://doi.org/10.1109/ACCESS.2018.2870052}{doi:10.1109/ACCESS.2018.2870052}.
-\bibitem{artelt} A. Artelt, R. Visser, B. Hammer, ``I do not know! but why?'' --- Local model-agnostic example-based explanations of reject, Neurocomputing 558 (2023) 126722. \href{https://doi.org/10.1016/j.neucom.2023.126722}{doi:10.1016/j.neucom.2023.126722}.
 \bibitem{ipw} D.G. Horvitz, D.J. Thompson, A generalization of sampling without replacement from a finite universe, J. Am. Stat. Assoc. 47 (1952) 663--685. \href{https://doi.org/10.1080/01621459.1952.10483446}{doi:10.1080/01621459.1952.10483446}.
-\bibitem{lessmann} S. Lessmann, B. Baesens, H.V. Seow, L.C. Thomas, Benchmarking state-of-the-art classification algorithms for credit scoring: An update of research, Eur. J. Oper. Res. 247 (2015) 124--136. \href{https://doi.org/10.1016/j.ejor.2015.05.030}{doi:10.1016/j.ejor.2015.05.030}.
 \bibitem{german} [dataset] H. Hofmann, Statlog (German Credit Data), UCI Machine Learning Repository (1994). \url{https://doi.org/10.24432/C5NC77}.
 \bibitem{australian} [dataset] R. Quinlan, Statlog (Australian Credit Approval), UCI Machine Learning Repository (1987). \url{https://doi.org/10.24432/C59012}.
 \bibitem{default} [dataset] I. Yeh, Default of Credit Card Clients, UCI Machine Learning Repository (2009). \url{https://doi.org/10.24432/C55S3H}.
@@ -171,8 +158,6 @@ ChatGPT (OpenAI) assisted study design, code, drafting, experiments and verifica
 \bibitem{holm} S. Holm, A simple sequentially rejective multiple test procedure, Scand. J. Stat. 6 (1979) 65--70.
 \bibitem{kaplan} E.L. Kaplan, P. Meier, Nonparametric estimation from incomplete observations, J. Am. Stat. Assoc. 53 (1958) 457--481. \href{https://doi.org/10.1080/01621459.1958.10501452}{doi:10.1080/01621459.1958.10501452}.
 \bibitem{jarrahi} M.H. Jarrahi, Artificial intelligence and the future of work: Human-AI symbiosis in organizational decision making, Bus. Horiz. 61 (2018) 577--586. \href{https://doi.org/10.1016/j.bushor.2018.03.007}{doi:10.1016/j.bushor.2018.03.007}.
-\bibitem{capability} P. Mikalef, M. Gupta, Artificial intelligence capability: Conceptualization, measurement calibration, and empirical study on its impact on organizational creativity and firm performance, Inf. Manag. 58 (2021) 103434. \href{https://doi.org/10.1016/j.im.2021.103434}{doi:10.1016/j.im.2021.103434}.
-\bibitem{lu} J. Lu, A. Liu, F. Dong, F. Gu, J. Gama, G. Zhang, Learning under concept drift: A review, IEEE Trans. Knowl. Data Eng. 31 (2019) 2346--2363. \href{https://doi.org/10.1109/TKDE.2018.2876857}{doi:10.1109/TKDE.2018.2876857}.
 \end{thebibliography}
 \endgroup
 \end{document}

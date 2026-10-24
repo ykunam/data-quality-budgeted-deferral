@@ -15,10 +15,10 @@
 ## Verification
 
 - Full new grid: 102,960 unique rows; 60 dataset/seed fits. All 40 tabular seed outputs match the initial run. Sixteen tests pass. An I/O-only atomic-write amendment leaves fitted calculations unchanged (AST check); one seed refit reproduces all outputs. Source/data hashes and fitted-source provenance are retained.
-- Two tables generated from raw outputs: 24 cost cells and 28 inference statistics; two programmatic vector figures. The final manuscript has 10 pages, a 178-word abstract, seven keywords and 39 ordered, fully cited references.
+- Two tables generated from raw outputs: 24 cost cells and 28 inference statistics; two programmatic vector figures. The final manuscript has 10 pages, a 178-word abstract, seven keywords and 25 references, numbered in order of first citation, each cited in the text (pruned from 39 on 24 Oct 2026).
 - The original 360,000-row credit grid is retained as exploratory evidence and was not fully refitted. Ambiguous older seven-/nine-test prose is retired; the new six-member family is explicit.
-- 22 requested-publisher journal references remain: Elsevier 15, IEEE 6, MDPI 1. Q1 means verified SJR 2025 best quartile, not every category, publication year, JCR or every reference. Three essential provenance/method references were added.
-- Body/captions/references are double-spaced; both tables now use 2x row stretch. The manuscript still fits ten pages after the affiliation/correspondence update and concise editorial edits.
+- 11 requested-publisher references remain: Elsevier 7 (Int. J. Inf. Manag., Gov. Inf. Q., Comput. Law Secur. Rev., Inf. Syst., Future Gener. Comput. Syst., Knowl.-Based Syst., Bus. Horiz.), IEEE 3 (Trans. Inf. Theory, TKDE, ICCV), MDPI 1 (Sensors). The other 14 are core learning-to-defer prior art (ICML/TMLR/EMNLP/arXiv), statistical methods actually used, and dataset citations. Dropped as non-essential: mikalefgov, wirtz, zhangreject, mena, abdar, raghu, hemmer, tariq, arrieta, adadi, artelt, lessmann, capability, lu.
+- Body/captions/references are double-spaced; both tables now use 2x row stretch. The manuscript now fits nine pages after the affiliation/correspondence update and concise editorial edits.
 
 ## Author-confirmed declarations
 
@@ -28,9 +28,9 @@
 - Human review and responsibility: the author confirmed personal review of the manuscript, code and results and acceptance of responsibility. The final AI-use statement records that confirmation. This is an author confirmation, not an independent certification of authorship eligibility.
 - Public code/data availability and licensing are finalized using immutable snapshot `db2ab095608d7ebcd77f26309b7d92b7dec77d9c`; human-derived outputs follow CC BY-NC-SA 4.0.
 
-## Affiliation and correspondence finalized
+## Affiliation and correspondence
 
-The author supplied Midwest University as the affiliation and a Columbus postal correspondence address. The manuscript lists the verified university main-campus address (851 Parr Road, Wentzville, MO 63385, USA) under affiliation and labels the author-supplied Columbus address separately as correspondence. This does not describe the Columbus address as a university campus. Official institutional source: https://www.midwest.edu/eng/01about/07-01stl.asp . All previously requested author facts have been supplied. This records the author-provided affiliation, not an institutional endorsement of the paper.
+Affiliation: Midwest University, 851 Parr Road, Wentzville, MO 63385, USA. The separate correspondence postal address was removed at the author's request; the corresponding author is identified by e-mail (yeshwanth.kunam@gmail.com).
 
 ## Submission steps still to perform
 
