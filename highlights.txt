@@ -1,5 +1,5 @@
-- Explicit data-quality rules restrict automated decisions under review budgets.
-- A compact gain model routes cases using probability and observable quality.
-- Mandatory cases are held when review capacity is exhausted.
-- Three credit benchmarks test costs, capacity, and simulated reviewer errors.
-- Quality signals do not guarantee improvement over simpler routing policies.
+- Quality-aware deferral is tested under mandatory review and selective feedback.
+- A frozen Bank validation finds a conditional 5.23% reduction in routing cost.
+- Matched allocation separates estimation, admission and rule enforcement.
+- Propensity weighting shows no adjusted-significant cost benefit in six tests.
+- Recorded human choices support a separate, clean-image transfer check.

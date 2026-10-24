@@ -1,9 +1,0 @@
-\usepackage{etoolbox}
-\AtBeginEnvironment{longtable}{\footnotesize}
-\usepackage{caption}
-\captionsetup{font=small,labelformat=empty}
-\setlength{\tabcolsep}{4pt}
-\usepackage{float}
-\let\origfigure\figure
-\let\endorigfigure\endfigure
-\renewenvironment{figure}[1][]{\origfigure[H]}{\endorigfigure}
