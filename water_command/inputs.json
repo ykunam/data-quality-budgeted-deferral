@@ -1,0 +1,10 @@
+{
+  "CTOWN.INP": {
+    "sha256": "9198b0bb43f551b29bfb550e206ff95f1df220118fc0068c7f130cec78d58d9e",
+    "source": "https://www.batadal.net/data/CTOWN.INP"
+  },
+  "Net3.inp": {
+    "sha256": "ea3e825c4fef0b5cba47fb06301bc85253f18b6364dc96c44d9fb492c40faa52",
+    "source": "WNTR 1.4.0 bundled library/networks/Net3.inp"
+  }
+}
